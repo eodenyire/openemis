@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_food_category_1" model="op.food.category">
+        <field name="name">Breakfast</field>
+    </record>
+    <record id="op_food_category_2" model="op.food.category">
+        <field name="name">Lunch</field>
+    </record>
+    <record id="op_food_category_3" model="op.food.category">
+        <field name="name">Dinner</field>
+    </record>
+    <record id="op_food_category_4" model="op.food.category">
+        <field name="name">Snacks</field>
+    </record>
+    <record id="op_food_category_5" model="op.food.category">
+        <field name="name">Beverages</field>
+    </record>
+    <record id="op_food_category_6" model="op.food.category">
+        <field name="name">Special Meal</field>
+    </record>
+    <record id="op_food_category_7" model="op.food.category">
+        <field name="name">Vegetarian</field>
+    </record>
+    <record id="op_food_category_8" model="op.food.category">
+        <field name="name">Vegan</field>
+    </record>
+</odoo>

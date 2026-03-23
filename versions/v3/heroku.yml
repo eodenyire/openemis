@@ -1,0 +1,34 @@
+# =============================================================================
+# openEMIS – Heroku Container (heroku.yml)
+# =============================================================================
+# Tells Heroku to build and deploy openEMIS from the repository Dockerfile
+# using the Heroku Container Registry.
+#
+# Deploy:
+#   heroku stack:set container --app <your-app-name>
+#   git push heroku main
+#
+# Required config vars (set via `heroku config:set`):
+#   DB_HOST        – PostgreSQL host (provided by Heroku Postgres add-on)
+#   DB_USER        – database user
+#   DB_PASSWORD    – database password
+#   DB_NAME        – database name (default: postgres)
+#   ADMIN_PASSWD   – Odoo master password
+# =============================================================================
+build:
+  docker:
+    web:
+      dockerfile: Dockerfile
+      target: ""
+
+run:
+  web: >-
+    odoo
+    --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
+    --db_host=$DB_HOST
+    --db_user=$DB_USER
+    --db_password=$DB_PASSWORD
+    --database=$DB_NAME
+    --http-port=$PORT
+    --proxy-mode
+    --log-level=info

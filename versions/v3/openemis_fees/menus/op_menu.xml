@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_op_fees_main"
+              name="Fees"
+              parent="openemis_core.menu_op_student_root"
+              sequence="50"
+              groups="openemis_fees.group_op_fees_admin,openemis_fees.group_openemis_fees_user"/>
+
+    <menuitem id="menu_op_student_fees_details"
+              name="Fees Invoices"
+              parent="openemis_fees.menu_op_fees_main"
+              sequence="10"
+              action="openemis_fees.act_open_op_student_fees_details_view"
+              groups="openemis_fees.group_op_fees_admin,openemis_fees.group_openemis_fees_user"/>
+
+    <menuitem id="menu_op_fees_analysis_report"
+              name="Fees Analysis Report"
+              parent="openemis_fees.menu_op_fees_main"
+              sequence="20"
+              action="openemis_fees.fees_detail_report_wizard_act"
+              groups="openemis_fees.group_op_fees_admin"/>
+
+    <menuitem id="menu_op_fees_config"
+              name="Fees Configuration"
+              parent="openemis_core.menu_op_school_config"
+              sequence="30"
+              groups="openemis_fees.group_op_fees_admin"/>
+
+    <menuitem id="menu_op_fees_terms_config"
+              name="Fees Terms"
+              parent="openemis_fees.menu_op_fees_config"
+              sequence="10"
+              action="openemis_fees.act_open_fees_terms_view"
+              groups="openemis_fees.group_op_fees_admin"/>
+
+    <menuitem id="menu_op_fees_element_config"
+              name="Fees Elements"
+              parent="openemis_fees.menu_op_fees_config"
+              sequence="20"
+              action="openemis_fees.act_op_fees_element_view"
+              groups="openemis_fees.group_op_fees_admin"/>
+</odoo>

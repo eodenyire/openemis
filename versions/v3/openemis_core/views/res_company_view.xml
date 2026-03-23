@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record model="res.groups" id="group_multi_department">
+            <field name="name">Multi Departments</field>
+            <field name="category_id" ref="base.module_category_usability"/>
+            <field name="users" eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"/>
+        </record>
+        <record id="view_company_form_openemis_core" model="ir.ui.view">
+            <field name="name">res.company.form.openemis.core</field>
+            <field name="model">res.company</field>
+            <field name="priority">99</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="signature" widget="image"/>
+
+                </xpath>
+                <notebook colspan="4" position="inside">
+                    <page name="institute_detail" string="Institute Detail">
+                        <group string="School Profile">
+                            <group>
+                                <field name="school_type"/>
+                                <field name="registration_number"/>
+                                <field name="establishment_date"/>
+                            </group>
+                            <group>
+                                <field name="school_motto"/>
+                            </group>
+                        </group>
+                        <group string="Principal / Head of Institution">
+                            <group>
+                                <field name="principal_name"/>
+                            </group>
+                            <group>
+                                <field name="principal_signature" widget="image"
+                                       options="{'size': [150, 80]}"/>
+                            </group>
+                        </group>
+                        <separator string="Accreditation" colspan="4"/>
+                        <field name="accreditation" colspan="4" nolabel="1"/>
+                        <separator string="Approval Authority" colspan="4"/>
+                        <field name="approval_authority" colspan="4" nolabel="1"/>
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+        <record id="view_inherit_user_form_openemis_core" model="ir.ui.view">
+            <field name="name">res.user.form.openemis.core</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="child_ids" widget="many2many_tags" readonly="1"/>
+                </xpath>
+
+                <xpath expr="//page[@name='access_rights']//group" position="after">
+                    <group>
+                        <group string="Multi Departments" name="Department"
+                               invisible = "'department_count' &lt;= 1">
+                            <field name="dept_id"/>
+                            <field name="department_ids" widget="many2many_tags"/>
+                            <field string="Departments count" name="department_count" invisible="1"/>
+                        </group>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+</odoo>

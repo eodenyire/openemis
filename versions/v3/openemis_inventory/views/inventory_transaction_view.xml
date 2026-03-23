@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inventory Transaction Views -->
+    <record id="view_op_inventory_transaction_list" model="ir.ui.view">
+        <field name="name">op.inventory.transaction.list</field>
+        <field name="model">op.inventory.transaction</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Inventory Transactions"
+                  decoration-success="transaction_type == 'in'"
+                  decoration-danger="transaction_type == 'out'">
+                <field name="date"/>
+                <field name="item_id"/>
+                <field name="transaction_type"/>
+                <field name="quantity"/>
+                <field name="department_id" optional="hide"/>
+                <field name="reference" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_transaction_form" model="ir.ui.view">
+        <field name="name">op.inventory.transaction.form</field>
+        <field name="model">op.inventory.transaction</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Inventory Transaction">
+                <header/>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <group>
+                        <group>
+                            <field name="item_id"/>
+                            <field name="transaction_type"/>
+                            <field name="quantity"/>
+                            <field name="date"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="reference"/>
+                        </group>
+                    </group>
+                    <div>
+                        <label for="notes" string="Notes" class="mt32"/>
+                        <field name="notes" nolabel="1"/>
+                    </div>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_transaction_search" model="ir.ui.view">
+        <field name="name">op.inventory.transaction.search</field>
+        <field name="model">op.inventory.transaction</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Inventory Transactions">
+                <field name="item_id"/>
+                <field name="reference"/>
+                <field name="department_id"/>
+                <filter string="Stock In" name="stock_in"
+                        domain="[('transaction_type', '=', 'in')]"/>
+                <filter string="Stock Out" name="stock_out"
+                        domain="[('transaction_type', '=', 'out')]"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Item" name="group_item"
+                            context="{'group_by': 'item_id'}"/>
+                    <filter string="Transaction Type" name="group_type"
+                            context="{'group_by': 'transaction_type'}"/>
+                    <filter string="Department" name="group_department"
+                            context="{'group_by': 'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_transaction_pivot" model="ir.ui.view">
+        <field name="name">op.inventory.transaction.pivot</field>
+        <field name="model">op.inventory.transaction</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Transactions Pivot">
+                <field name="item_id" type="row"/>
+                <field name="transaction_type" type="col"/>
+                <field name="quantity" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_op_inventory_transaction_view">
+        <field name="name">Inventory Transactions</field>
+        <field name="path">inventory-transactions</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.inventory.transaction</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="search_view_id" ref="view_op_inventory_transaction_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_op_inventory_transaction_view_form">
+        <field name="act_window_id" ref="act_open_op_inventory_transaction_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_inventory_transaction_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_op_inventory_transaction_view_list">
+        <field name="act_window_id" ref="act_open_op_inventory_transaction_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_inventory_transaction_list"/>
+    </record>
+</odoo>

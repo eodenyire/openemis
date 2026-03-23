@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cbc_learning_outcome_list" model="ir.ui.view">
+        <field name="name">cbc.learning.outcome.list</field>
+        <field name="model">cbc.learning.outcome</field>
+        <field name="arch" type="xml">
+            <list string="Learning Outcomes">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="strand_id"/>
+                <field name="substrand_id"/>
+                <field name="grade_level"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cbc_learning_outcome_form" model="ir.ui.view">
+        <field name="name">cbc.learning.outcome.form</field>
+        <field name="model">cbc.learning.outcome</field>
+        <field name="arch" type="xml">
+            <form string="Learning Outcome">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Learning Outcome"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="grade_level"/>
+                            <field name="substrand_id"/>
+                            <field name="strand_id"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                    <notebook>
+                        <page string="Rubric Levels">
+                            <field name="rubric_ids">
+                                <list editable="bottom">
+                                    <field name="level"/>
+                                    <field name="level_code"/>
+                                    <field name="score"/>
+                                    <field name="descriptor"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cbc_learning_outcome_search" model="ir.ui.view">
+        <field name="name">cbc.learning.outcome.search</field>
+        <field name="model">cbc.learning.outcome</field>
+        <field name="arch" type="xml">
+            <search string="Learning Outcomes">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="strand_id"/>
+                <field name="grade_level"/>
+                <group expand="0" string="Group By">
+                    <filter string="Grade Level" name="grade_level"
+                            context="{'group_by': 'grade_level'}"/>
+                    <filter string="Strand" name="strand"
+                            context="{'group_by': 'strand_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_cbc_learning_outcome_view">
+        <field name="name">Learning Outcomes</field>
+        <field name="path">cbc-outcomes</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cbc.learning.outcome</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cbc_learning_outcome_search"/>
+    </record>
+</odoo>

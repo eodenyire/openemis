@@ -1,0 +1,21 @@
+# =============================================================================
+# openEMIS – Heroku Container (heroku.yml)
+# =============================================================================
+# Tells Heroku to build and deploy openEMIS from the repository Dockerfile
+# using the Heroku Container Registry.
+#
+# Deploy:
+#   heroku stack:set container --app <your-app-name>
+#   git push heroku main
+#
+# Required config vars (set via `heroku config:set`):
+#   DATABASE_URL   – PostgreSQL connection string (provided by Heroku Postgres add-on)
+#   SECRET_KEY     – JWT signing secret (generate a strong random value)
+# =============================================================================
+build:
+  docker:
+    web:
+      dockerfile: Dockerfile
+
+run:
+  web: uvicorn app.main:app --host 0.0.0.0 --port $PORT

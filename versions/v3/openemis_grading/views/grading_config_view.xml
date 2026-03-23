@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_op_grading_config_list" model="ir.ui.view">
+        <field name="name">op.grading.config.list</field>
+        <field name="model">op.grading.config</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Grade Scales">
+                <field name="name"/>
+                <field name="active"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_op_grading_config_form" model="ir.ui.view">
+        <field name="name">op.grading.config.form</field>
+        <field name="model">op.grading.config</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Grade Scale">
+                <header/>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Grade Scale Name"/>
+                        </h1>
+                    </div>
+                    <notebook>
+                        <page string="Grading Rules">
+                            <field name="grading_rule_ids">
+                                <list editable="bottom">
+                                    <field name="name"/>
+                                    <field name="min_marks"/>
+                                    <field name="max_marks"/>
+                                    <field name="gpa_point"/>
+                                    <field name="description"/>
+                                    <field name="active" optional="hide"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_op_grading_config_search" model="ir.ui.view">
+        <field name="name">op.grading.config.search</field>
+        <field name="model">op.grading.config</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Grade Scales">
+                <field name="name"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_op_grading_config_view">
+        <field name="name">Grade Scales</field>
+        <field name="path">grading-scales</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.grading.config</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_grading_config_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_grading_config_view_form">
+        <field name="act_window_id" ref="act_open_op_grading_config_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_grading_config_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_grading_config_view_list">
+        <field name="act_window_id" ref="act_open_op_grading_config_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_grading_config_list"/>
+    </record>
+</odoo>

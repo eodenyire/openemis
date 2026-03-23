@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_scholarship_demo_1" model="op.scholarship">
+            <field name="name">Merit Scholarship 2024 - Student 1</field>
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="scholarship_type_id" ref="openemis_scholarship.op_scholarship_type_merit"/>
+            <field name="academic_year_id" ref="openemis_core.academic_year_1"/>
+            <field name="amount">5000.0</field>
+            <field name="start_date" eval="(DateTime.today()).strftime('%Y-01-01')"/>
+            <field name="end_date" eval="(DateTime.today()).strftime('%Y-12-31')"/>
+            <field name="state">approved</field>
+            <field name="description">Awarded for outstanding academic performance.</field>
+        </record>
+
+        <record id="op_scholarship_demo_2" model="op.scholarship">
+            <field name="name">Need-Based Grant 2024 - Student 2</field>
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="scholarship_type_id" ref="openemis_scholarship.op_scholarship_type_need_based"/>
+            <field name="academic_year_id" ref="openemis_core.academic_year_1"/>
+            <field name="amount">4000.0</field>
+            <field name="start_date" eval="(DateTime.today()).strftime('%Y-01-01')"/>
+            <field name="end_date" eval="(DateTime.today()).strftime('%Y-12-31')"/>
+            <field name="state">applied</field>
+            <field name="description">Financial assistance application under review.</field>
+        </record>
+
+        <record id="op_scholarship_demo_3" model="op.scholarship">
+            <field name="name">Sports Scholarship 2024 - Student 3</field>
+            <field name="student_id" ref="openemis_core.op_student_3"/>
+            <field name="scholarship_type_id" ref="openemis_scholarship.op_scholarship_type_sports"/>
+            <field name="academic_year_id" ref="openemis_core.academic_year_1"/>
+            <field name="amount">3000.0</field>
+            <field name="start_date" eval="(DateTime.today()).strftime('%Y-01-01')"/>
+            <field name="end_date" eval="(DateTime.today()).strftime('%Y-12-31')"/>
+            <field name="state">draft</field>
+            <field name="description">Draft application for sports scholarship.</field>
+        </record>
+
+        <record model="res.users" id="openemis_core.op_user_faculty">
+            <field name="groups_id"
+                   eval="[(4, ref('openemis_scholarship.group_scholarship_user'))]"/>
+        </record>
+</odoo>

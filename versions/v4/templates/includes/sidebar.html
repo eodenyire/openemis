@@ -1,0 +1,347 @@
+{% load static %}
+
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h5>{{ user.user_type|title }} Panel</h5>
+    </div>
+    
+    <ul class="sidebar-menu">
+        <!-- Dashboard -->
+        <li class="menu-item">
+            <a href="{% url 'dashboard' %}" class="menu-link">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+        
+        {% if user.user_type == 'admin' %}
+            <!-- Admin Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link" data-bs-toggle="collapse" data-bs-target="#userManagement">
+                    <i class="fas fa-users"></i>
+                    <span>User Management</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </a>
+                <ul class="collapse submenu" id="userManagement">
+                    <li><a href="#" class="submenu-link">Students</a></li>
+                    <li><a href="#" class="submenu-link">Teachers</a></li>
+                    <li><a href="#" class="submenu-link">Parents</a></li>
+                    <li><a href="#" class="submenu-link">Staff</a></li>
+                </ul>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link" data-bs-toggle="collapse" data-bs-target="#academicManagement">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Academic</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </a>
+                <ul class="collapse submenu" id="academicManagement">
+                    <li><a href="#" class="submenu-link">Classes</a></li>
+                    <li><a href="#" class="submenu-link">Subjects</a></li>
+                    <li><a href="#" class="submenu-link">Enrollment</a></li>
+                    <li><a href="#" class="submenu-link">Academic Year</a></li>
+                </ul>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link" data-bs-toggle="collapse" data-bs-target="#examManagement">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Examinations</span>
+                    <i class="fas fa-chevron-down ms-auto"></i>
+                </a>
+                <ul class="collapse submenu" id="examManagement">
+                    <li><a href="#" class="submenu-link">Manage Exams</a></li>
+                    <li><a href="#" class="submenu-link">Online Exams</a></li>
+                    <li><a href="#" class="submenu-link">Results</a></li>
+                    <li><a href="#" class="submenu-link">Grade System</a></li>
+                </ul>
+            </li>
+            
+        {% elif user.user_type == 'teacher' %}
+            <!-- Teacher Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-users"></i>
+                    <span>My Classes</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>Attendance</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-clipboard-list"></i>
+                    <span>Exams & Marks</span>
+                </a>
+            </li>
+            
+        {% elif user.user_type == 'student' %}
+            <!-- Student Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-book"></i>
+                    <span>My Subjects</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-chart-line"></i>
+                    <span>My Results</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-laptop"></i>
+                    <span>Online Exams</span>
+                </a>
+            </li>
+            
+        {% elif user.user_type == 'parent' %}
+            <!-- Parent Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-child"></i>
+                    <span>My Children</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Academic Progress</span>
+                </a>
+            </li>
+            
+        {% elif user.user_type == 'librarian' %}
+            <!-- Librarian Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-books"></i>
+                    <span>Book Management</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-hand-holding"></i>
+                    <span>Book Requests</span>
+                </a>
+            </li>
+            
+        {% elif user.user_type == 'accountant' %}
+            <!-- Accountant Menu Items -->
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-dollar-sign"></i>
+                    <span>Payments</span>
+                </a>
+            </li>
+            
+            <li class="menu-item">
+                <a href="#" class="menu-link">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Financial Reports</span>
+                </a>
+            </li>
+        {% endif %}
+        
+        <!-- Common Menu Items -->
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="fas fa-envelope"></i>
+                <span>Messages</span>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="fas fa-bell"></i>
+                <span>Notifications</span>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="fas fa-calendar"></i>
+                <span>Calendar</span>
+            </a>
+        </li>
+        
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="fas fa-user-circle"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- Sidebar Toggle Button -->
+<button class="sidebar-toggle" id="sidebarToggle">
+    <i class="fas fa-bars"></i>
+</button>
+
+<style>
+.sidebar {
+    position: fixed;
+    top: 56px; /* Height of navbar */
+    left: 0;
+    width: 250px;
+    height: calc(100vh - 56px);
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1020;
+}
+
+.sidebar.collapsed {
+    transform: translateX(-250px);
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.sidebar-header h5 {
+    margin: 0;
+    font-weight: 600;
+    color: #ecf0f1;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: #bdc3c7;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.menu-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.menu-link.active {
+    background-color: #3498db;
+    color: white;
+}
+
+.menu-link i {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.submenu {
+    background-color: rgba(0,0,0,0.2);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.submenu-link {
+    display: block;
+    padding: 10px 20px 10px 50px;
+    color: #95a5a6;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.submenu-link:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+.sidebar-toggle {
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    z-index: 1030;
+    background: #3498db;
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sidebar-toggle:hover {
+    background: #2980b9;
+}
+
+.main-content {
+    margin-left: 250px;
+    margin-top: 56px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content.expanded {
+    margin-left: 0;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-250px);
+    }
+    
+    .sidebar.show {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .sidebar-toggle {
+        display: block;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const mainContent = document.querySelector('.main-content');
+    
+    sidebarToggle.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+            sidebar.classList.toggle('show');
+        } else {
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        }
+    });
+    
+    // Close sidebar on mobile when clicking outside
+    document.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768 && 
+            !sidebar.contains(e.target) && 
+            !sidebarToggle.contains(e.target)) {
+            sidebar.classList.remove('show');
+        }
+    });
+});
+</script>

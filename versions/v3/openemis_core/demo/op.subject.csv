@@ -1,0 +1,154 @@
+id,code,department_id/id,name,subject_type,type
+openemis_core.op_subject_1,FDPC-T,openemis_core.op_department_1,Fundamentals of Programming using C (Theory),Compulsory,Both
+openemis_core.op_subject_2,FDPC-P,openemis_core.op_department_1,Fundamentals of Programming using C (Practical),Compulsory,Practical
+openemis_core.op_subject_3,DMM,openemis_core.op_department_1,Digital and Mobile Media Marketing,Elective,Theory
+openemis_core.op_subject_4,MA,openemis_core.op_department_1,Mathematical Aptitude,Compulsory,Theory
+openemis_core.op_subject_5,DBMS-T,openemis_core.op_department_1,Database Management Systems (Theory),Compulsory,Both
+openemis_core.op_subject_6,PSY-1,openemis_core.op_department_4,Developmental Psychology-1,Compulsory,Theory
+openemis_core.op_subject_7,DVBI-T,openemis_core.op_department_1,Data Visualization for Business Intelligence,Compulsory,Theory
+openemis_core.op_subject_8,ISC-T,openemis_core.op_department_4,Indian Society and culture,Compulsory,Theory
+openemis_core.op_subject_9,SF,openemis_core.op_department_4,Soft Skills,Compulsory,Theory
+openemis_core.op_subject_10,ELM-CE,openemis_core.op_department_3,Elements of Civil Engineering,Compulsory,Theory
+openemis_core.op_subject_11,CCSE,openemis_core.op_department_4,Climate Change & Sustainable Environment,Compulsory,Theory
+openemis_core.op_subject_12,CE-DRW,openemis_core.op_department_3,Civil Engineering Drawings,Compulsory,Theory
+openemis_core.op_subject_13,PSY-2,openemis_core.op_department_4,Developmental Psychology-2,Compulsory,Theory
+openemis_core.op_subject_14,DH,openemis_core.op_department_4,Digital Health,Compulsory,Theory
+openemis_core.op_subject_15,CHE-CH,openemis_core.op_department_3,Chemistry,Compulsory,Both
+openemis_core.op_subject_16,MA-T,openemis_core.op_department_4,Mathematical,Compulsory,Theory
+openemis_core.op_subject_17,EG-CH,openemis_core.op_department_3,Engineering Graphics,Compulsory,Theory
+openemis_core.op_subject_18,FOA-1,openemis_core.op_department_2,Fundamentals of Accounting-1,Compulsory,Theory
+openemis_core.op_subject_19,ME,openemis_core.op_department_2,Micro Economics,Compulsory,Theory
+openemis_core.op_subject_20,MTH-1-T,openemis_core.op_department_3,Mathematics - I,Compulsory,Theory
+openemis_core.op_subject_21,POM,openemis_core.op_department_2,Principles of Marketing,Compulsory,Theory
+openemis_core.op_subject_22,BC,openemis_core.op_department_2,Business Communication,Compulsory,Theory
+openemis_core.op_subject_23,FA-2,openemis_core.op_department_2,Financial Accounting-2,Compulsory,Theory
+openemis_core.op_subject_24,CB,openemis_core.op_department_2,Consumer Behaviour,Compulsory,Theory
+openemis_core.op_subject_25,CEBM,openemis_core.op_department_2,Creativity Event and Brand Management,Compulsory,Theory
+openemis_core.op_subject_26,SE,openemis_core.op_department_1,Software Engineering,Compulsory,Theory
+openemis_core.op_subject_27,DS,openemis_core.op_department_1,Data Structures,Compulsory,Both
+openemis_core.op_subject_28,JP,openemis_core.op_department_1,Java Programming,Compulsory,Both
+openemis_core.op_subject_29,ADMS,openemis_core.op_department_1,Advanced Database Management Systems,Compulsory,Theory
+openemis_core.op_subject_30,AJP,openemis_core.op_department_1,Advanced Java Programming,Compulsory,Theory
+openemis_core.op_subject_31,CA,openemis_core.op_department_1,Comprehensive Assessment,Compulsory,Theory
+openemis_core.op_subject_32,CG,openemis_core.op_department_1,Computer Graphics,Compulsory,Theory
+openemis_core.op_subject_33,OODJ-T,openemis_core.op_department_1,Object Oriented Development with JAVA (Theory),Compulsory,Theory
+openemis_core.op_subject_34,DS-T,openemis_core.op_department_3,Data Structure (Theory),Compulsory,Theory
+openemis_core.op_subject_35,SS-AE,openemis_core.op_department_3,Soil Science & Agriculture for Engineers,Compulsory,Theory
+openemis_core.op_subject_37,OST-IM,openemis_core.op_department_3,Open-Source Tool,Compulsory,Theory
+openemis_core.op_subject_38,CACED-CE,openemis_core.op_department_3,Computer Aided Civil Engineering Drawing,Compulsory,Theory
+openemis_core.op_subject_39,MS-CE,openemis_core.op_department_3,Mechanics of Solids,Compulsory,Theory
+openemis_core.op_subject_40,CT-CE,openemis_core.op_department_3,Construction Technology,Compulsory,Theory
+openemis_core.op_subject_41,IFM-CE,openemis_core.op_department_3,Introduction to Fluid Mechanics,Compulsory,Theory
+openemis_core.op_subject_42,PR-CE,openemis_core.op_department_3,Product Realization,Compulsory,Theory
+openemis_core.op_subject_43,MM-CE,openemis_core.op_department_3,Mechanics of Materials,Compulsory,Theory
+openemis_core.op_subject_44,GTE-CE,openemis_core.op_department_3,Geo-Technical Engineering,Compulsory,Theory
+openemis_core.op_subject_45,TE-CE,openemis_core.op_department_3,Transportation Engineering,Compulsory,Theory
+openemis_core.op_subject_46,DRCS-CE,openemis_core.op_department_3,Design of Reinforced Concrete Structures,Compulsory,Theory
+openemis_core.op_subject_47,SI1-CE,openemis_core.op_department_3,Summer Internship-1,Compulsory,Both
+openemis_core.op_subject_48,DSS-CE,openemis_core.op_department_3,Design of Steel Structures,Compulsory,Theory
+openemis_core.op_subject_49,ESV-CE,openemis_core.op_department_3,Estimation - Costing and Valuation,Compulsory,Theory
+openemis_core.op_subject_50,MTS-CE,openemis_core.op_department_3,Model Testing & Simulation,Compulsory,Theory
+openemis_core.op_subject_51,CPME-CE,openemis_core.op_department_3,Construction Project Management and Economics,Compulsory,Theory
+openemis_core.op_subject_52,PRJ1-CE,openemis_core.op_department_3,PROJECT-1,Compulsory,Practical
+openemis_core.op_subject_53,SI2-CE,openemis_core.op_department_3,Summer Internship-2,Compulsory,Both
+openemis_core.op_subject_54,PPE-CE,openemis_core.op_department_3,Project Planning & Economics,Compulsory,Theory
+openemis_core.op_subject_55,PRJ2-CE,openemis_core.op_department_3,Project-2,Compulsory,Practical
+openemis_core.op_subject_56,CS-IM,openemis_core.op_department_3,Communication Skills,Compulsory,Theory
+openemis_core.op_subject_57,ES-IM,openemis_core.op_department_3,Environmental Science,Compulsory,Theory
+openemis_core.op_subject_58,DT-IM,openemis_core.op_department_3,Design Thinking,Compulsory,Theory
+openemis_core.op_subject_59,ICTW-IM,openemis_core.op_department_3,ICT workshop,Compulsory,Theory
+openemis_core.op_subject_60,ACTW-IM,openemis_core.op_department_3,Advanced Communication & Technical Writing,Compulsory,Theory
+openemis_core.op_subject_61,DDS-IM,openemis_core.op_department_3,Design of Data Structures,Compulsory,Theory
+openemis_core.op_subject_62,DMS-IM,openemis_core.op_department_3,Database Management System,Compulsory,Theory
+openemis_core.op_subject_63,DM-IM,openemis_core.op_department_3,Discrete Mathematics,Compulsory,Theory
+openemis_core.op_subject_64,OSL-IM,openemis_core.op_department_3,Operating System Laboratory,Compulsory,Theory
+openemis_core.op_subject_65,CNL-IM,openemis_core.op_department_3,Computer Network Laboratory,Compulsory,Theory
+openemis_core.op_subject_66,PPD-IM,openemis_core.op_department_3,Programming in Python with Full Stack Development,Compulsory,Theory
+openemis_core.op_subject_67,DAA-IM,openemis_core.op_department_3,Design and Analysis of Algorithms,Compulsory,Theory
+openemis_core.op_subject_68,PCE-IM,openemis_core.op_department_3,Professionalism & Corporate Ethics,Compulsory,Theory
+openemis_core.op_subject_69,SEL-IM,openemis_core.op_department_3,Software Engineering Laboratory,Compulsory,Theory
+openemis_core.op_subject_70,DVDA-IM,openemis_core.op_department_3,Data visualization and Data Analytics,Compulsory,Theory
+openemis_core.op_subject_71,CD-IM,openemis_core.op_department_3,Compiler Design,Compulsory,Theory
+openemis_core.op_subject_72,MEAD-IM,openemis_core.op_department_3,MEA(R)N Stack Web Development,Compulsory,Theory
+openemis_core.op_subject_73,INS-IM,openemis_core.op_department_3,Information and Network Security,Compulsory,Theory
+openemis_core.op_subject_74,DSL-IM,openemis_core.op_department_3,Data Science Laboratory,Compulsory,Theory
+openemis_core.op_subject_75,INT-IM,openemis_core.op_department_3,Internship,Compulsory,Both
+openemis_core.op_subject_76,MSOL-CH,openemis_core.op_department_3,Mechanics of Solid,Compulsory,Theory
+openemis_core.op_subject_77,PPSO-CH,openemis_core.op_department_3,Programming for Problem Solving,Compulsory,Theory
+openemis_core.op_subject_78,PFPP-CH,openemis_core.op_department_3,Particle and Fluid Particle Processing,Compulsory,Theory
+openemis_core.op_subject_79,FML-CH,openemis_core.op_department_3,Fluid Mechanics Lab,Compulsory,Theory
+openemis_core.op_subject_81,HT-CH,openemis_core.op_department_3,Heat Transfer,Compulsory,Theory
+openemis_core.op_subject_82,MT1-CH,openemis_core.op_department_3,Mass Transfer-I,Compulsory,Theory
+openemis_core.op_subject_83,MT2-CH,openemis_core.op_department_3,Mass Transfer -II,Compulsory,Theory
+openemis_core.op_subject_84,CRE1-CH,openemis_core.op_department_3,Chemical Reaction Engineering-I,Compulsory,Theory
+openemis_core.op_subject_85,SI1-CH,openemis_core.op_department_3,Summer Internship-I,Compulsory,Both
+openemis_core.op_subject_86,CRE2-CH,openemis_core.op_department_3,Chemical Reaction Engineering- II,Compulsory,Theory
+openemis_core.op_subject_87,PED-CH,openemis_core.op_department_3,Process Equipment Design,Compulsory,Theory
+openemis_core.op_subject_88,PRJ1-CH,openemis_core.op_department_3,Project-I,Compulsory,Practical
+openemis_core.op_subject_89,SI2-CH,openemis_core.op_department_3,Summer Internship-II,Compulsory,Both
+openemis_core.op_subject_90,PRJ2-CH,openemis_core.op_department_3,Project II,Compulsory,Practical
+openemis_core.op_subject_91,CEPDE-CH,openemis_core.op_department_3,Chemical Engineering Plant Design & Economics,Compulsory,Theory
+openemis_core.op_subject_92,EM-EE,openemis_core.op_department_3,Engineering Mechanics,Compulsory,Theory
+openemis_core.op_subject_93,FE-EE,openemis_core.op_department_3,Fundamentals of Electrical and Electronics Engineering,Compulsory,Theory
+openemis_core.op_subject_94,EWPL-EE,openemis_core.op_department_3,Electrical Workshop Practice Lab,Compulsory,Theory
+openemis_core.op_subject_95,EDC-EE,openemis_core.op_department_3,Electronics devices and circuits,Compulsory,Theory
+openemis_core.op_subject_96,EGL-EE,openemis_core.op_department_3,Engineering Graphics Lab,Compulsory,Theory
+openemis_core.op_subject_97,DE-EE,openemis_core.op_department_3,Digital Electronics,Compulsory,Theory
+openemis_core.op_subject_98,EEM-EE,openemis_core.op_department_3,Electronics Equipment and Maintenance,Compulsory,Theory
+openemis_core.op_subject_99,ECN-EE,openemis_core.op_department_3,Electronic Circuits and Network,Compulsory,Theory
+openemis_core.op_subject_100,PE-EE,openemis_core.op_department_3,Power Electronics,Compulsory,Theory
+openemis_core.op_subject_101,DCS-EE,openemis_core.op_department_3,Digital Communication Systems,Compulsory,Theory
+openemis_core.op_subject_102,LIC-EE,openemis_core.op_department_3,Linear Integrated Circuits,Compulsory,Theory
+openemis_core.op_subject_103,MWCL-EE,openemis_core.op_department_3,Mobile and Wireless Communication Lab,Compulsory,Theory
+openemis_core.op_subject_104,EMS-EE,openemis_core.op_department_3,Embedded Systems,Compulsory,Theory
+openemis_core.op_subject_105,IA-EE,openemis_core.op_department_3,Industrial Automation,Compulsory,Theory
+openemis_core.op_subject_106,IC-EE,openemis_core.op_department_3,Indian Constitution,Compulsory,Theory
+openemis_core.op_subject_107,SS-EE,openemis_core.op_department_3,Signal and Systems,Compulsory,Theory
+openemis_core.op_subject_108,CNDC-EE,openemis_core.op_department_3,Computer Networking and Data Communication,Compulsory,Theory
+openemis_core.op_subject_109,DCN-CC-T,openemis_core.op_department_1,Data Communication and Networking (Theory),Compulsory,Theory
+openemis_core.op_subject_110,CC1-CC-T,openemis_core.op_department_1,Cloud Computing -I (T),Compulsory,Theory
+openemis_core.op_subject_111,FED-CC-T,openemis_core.op_department_1,Front End Development with .NET (Theory),Compulsory,Theory
+openemis_core.op_subject_112,DIGIL-CC-T,openemis_core.op_department_1,Digital Literacy,Compulsory,Theory
+openemis_core.op_subject_113,CC2-CC-T,openemis_core.op_department_1,Cloud Computing -II (T),Compulsory,Theory
+openemis_core.op_subject_114,INTMP1-T,openemis_core.op_department_1,Internship/Mini Project-1,Compulsory,Practical
+openemis_core.op_subject_115,EN-CC-T,openemis_core.op_department_1,Software Engineering (Theory),Compulsory,Theory
+openemis_core.op_subject_116,MAP-BD,openemis_core.op_department_1,Mobile Apps Development,Compulsory,Theory
+openemis_core.op_subject_117,WAD-BD,openemis_core.op_department_1,Big Data Analytics- II,Compulsory,Theory
+openemis_core.op_subject_118,MIPRJ-BB,openemis_core.op_department_1,Minor Project,Compulsory,Practical
+openemis_core.op_subject_119,MAJ-PRJ-BD,openemis_core.op_department_1,Major Project,Compulsory,Practical
+openemis_core.op_subject_120,SS-AEL,openemis_core.op_department_3,Soil Science & Agriculture for Engineers Lab,Compulsory,Theory
+openemis_core.op_subject_122,EP-AE,openemis_core.op_department_3,Engineering Physics,Compulsory,Theory
+openemis_core.op_subject_123,EC-AE,openemis_core.op_department_3,Engineering Chemistry,Compulsory,Theory
+openemis_core.op_subject_124,EM-AE,openemis_core.op_department_3,Engineering Mechanics in Agriculture,Compulsory,Theory
+openemis_core.op_subject_125,AWCE-AE,openemis_core.op_department_3,Soil and Water Conservation Engineering,Compulsory,Theory
+openemis_core.op_subject_126,FE-AE,openemis_core.op_department_3,Food Engineering,Compulsory,Theory
+openemis_core.op_subject_127,EPE-AE,openemis_core.op_department_3,Farm Power Engineering,Compulsory,Theory
+openemis_core.op_subject_128,FMI-AE,openemis_core.op_department_3,Farm Machinery and Implements,Compulsory,Theory
+openemis_core.op_subject_129,PHT-AE,openemis_core.op_department_3,Post Harvest Technology,Compulsory,Theory
+openemis_core.op_subject_130,SM-AE,openemis_core.op_department_3,Strength of Material,Compulsory,Theory
+openemis_core.op_subject_131,FTSC-AE,openemis_core.op_department_3,Farm Tractor Systems and Controls,Compulsory,Theory
+openemis_core.op_subject_132,APE-AE,openemis_core.op_department_3,Agricultural Process Engineering,Compulsory,Theory
+openemis_core.op_subject_133,AS-AE,openemis_core.op_department_3,Agricultural Structures,Compulsory,Theory
+openemis_core.op_subject_134,IFT-AE,openemis_core.op_department_3,Industrial and Field Training cum Project Work,Compulsory,Both
+openemis_core.op_subject_135,CP-CS-DSI,openemis_core.op_department_1,Digital Securities Introduction,Compulsory,Theory
+openemis_core.op_subject_136,CP-CS-CSC,openemis_core.op_department_1,Cryptography and Secure communication,Compulsory,Theory
+openemis_core.op_subject_137,CP-CS-AKC,openemis_core.op_department_1,Asymmetric Key Cryptography,Compulsory,Both
+openemis_core.op_subject_138,CP-CS-SKC,openemis_core.op_department_1,Symmetric Key Cryptography,Compulsory,Both
+openemis_core.op_subject_139,CP-CS-PKC,openemis_core.op_department_1,Public Key Cryptography,Compulsory,Both
+openemis_core.op_subject_140,CP-CS-CCLI,openemis_core.op_department_1,Computer crime and legal issues,Compulsory,Theory
+openemis_core.op_subject_141,AF-BM,openemis_core.op_department_2,Business Mathematics,Compulsory,Theory
+openemis_core.op_subject_142,AF-IFS,openemis_core.op_department_2,Indian Financial System,Compulsory,Theory
+openemis_core.op_subject_143,AF-SB,openemis_core.op_department_2,Statistics for Business,Compulsory,Theory
+openemis_core.op_subject_144,AF-CC,openemis_core.op_department_2,Cost accounting,Compulsory,Theory
+openemis_core.op_subject_145,AF-TGST,openemis_core.op_department_2,Fundamentals of Indirect Taxation & GST,Compulsory,Theory
+openemis_core.op_subject_146,AF-BL,openemis_core.op_department_2,Business Law,Compulsory,Theory
+openemis_core.op_subject_147,AF-MA,openemis_core.op_department_2,Management Accounting,Compulsory,Theory
+openemis_core.op_subject_148,AF-BE,openemis_core.op_department_2,Business Environment,Compulsory,Theory
+openemis_core.op_subject_149,SY-PY,openemis_core.op_department_4,Social Psychology,Compulsory,Theory
+openemis_core.op_subject_150,ES-PY,openemis_core.op_department_4,Educational Psychology,Compulsory,Theory
+openemis_core.op_subject_151,POP-PY,openemis_core.op_department_4,Psychology of Personality,Compulsory,Theory
+openemis_core.op_subject_152,PMH-PY,openemis_core.op_department_4,Positive Mental Health,Compulsory,Theory
+openemis_core.op_subject_153,IP-PY,openemis_core.op_department_4,Indian Psychology,Compulsory,Theory
+openemis_core.op_subject_154,PD-PY,openemis_core.op_department_4,Psychological Disorders,Compulsory,Theory
+openemis_core.op_subject_155,RP-PY,openemis_core.op_department_4,Rehabilitation Psychology,Compulsory,Theory
+openemis_core.op_subject_156,IDCS-PY,openemis_core.op_department_4,Introduction to Diagnostics and Counselling Skills,Compulsory,Theory

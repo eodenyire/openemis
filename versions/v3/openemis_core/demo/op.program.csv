@@ -1,0 +1,11 @@
+id,code,department_id/id,name,program_level_id/id
+openemis_core.program_1,BCA-CC,openemis_core.op_department_1,BCA - Cloud Computing,openemis_core.program_level_2
+openemis_core.program_2,MCA-AI,openemis_core.op_department_1,MCA - Big Data Analytics,openemis_core.program_level_1
+openemis_core.program_3,BCOM-AF,openemis_core.op_department_2,B.Com - Accounting and Finance,openemis_core.program_level_2
+openemis_core.program_4,BA-PSC,openemis_core.op_department_4,BA - Psychology,openemis_core.program_level_2
+openemis_core.program_5,BT-CIE,openemis_core.op_department_3,B.Tech - Civil Engineering,openemis_core.program_level_2
+openemis_core.program_6,BT-CHE,openemis_core.op_department_3,B.Tech - Chemical Engineering,openemis_core.program_level_2
+openemis_core.program_7,Diploma-AE,openemis_core.op_department_3,Diploma - Agricultural Engineering,openemis_core.program_level_4
+openemis_core.program_8,DIP-EE,openemis_core.op_department_3,Diploma - Electrical Engineering,openemis_core.program_level_4
+openemis_core.program_9,CTP-CS,openemis_core.op_department_1,Certificate Program - Cyber Security,openemis_core.program_level_3
+openemis_core.program_10,IE-CSE-M,openemis_core.op_department_3,Industry Embedded - B.Tech CSE with Microsoft,openemis_core.program_level_8

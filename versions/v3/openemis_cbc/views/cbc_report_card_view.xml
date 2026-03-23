@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cbc_report_card_list" model="ir.ui.view">
+        <field name="name">cbc.report.card.list</field>
+        <field name="model">cbc.report.card</field>
+        <field name="arch" type="xml">
+            <list string="CBC Report Cards" decoration-success="state == 'acknowledged'"
+                  decoration-info="state == 'published'">
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="grade_level"/>
+                <field name="academic_year_id"/>
+                <field name="term"/>
+                <field name="total_score"/>
+                <field name="average_score"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cbc_report_card_form" model="ir.ui.view">
+        <field name="name">cbc.report.card.form</field>
+        <field name="model">cbc.report.card</field>
+        <field name="arch" type="xml">
+            <form string="CBC Report Card">
+                <header>
+                    <button name="action_publish" string="Publish"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_acknowledge" string="Acknowledge"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'published'"/>
+                    <button name="action_reset_draft" string="Reset to Draft"
+                            type="object"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,published,acknowledged"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="grade_level"/>
+                            <field name="academic_year_id"/>
+                            <field name="term"/>
+                        </group>
+                        <group>
+                            <field name="teacher_id"/>
+                            <field name="total_score"/>
+                            <field name="average_score"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Competency Results">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="strand_id"/>
+                                    <field name="outcome_id"
+                                           domain="[('strand_id', '=', strand_id)]"/>
+                                    <field name="performance_level"/>
+                                    <field name="score"/>
+                                    <field name="teacher_remark"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Comments">
+                            <group>
+                                <field name="class_teacher_comment"
+                                       placeholder="Class Teacher comment…"/>
+                                <field name="principal_comment"
+                                       placeholder="Principal's comment…"/>
+                                <field name="parent_comment"
+                                       placeholder="Parent / Guardian acknowledgement…"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cbc_report_card_search" model="ir.ui.view">
+        <field name="name">cbc.report.card.search</field>
+        <field name="model">cbc.report.card</field>
+        <field name="arch" type="xml">
+            <search string="CBC Report Cards">
+                <field name="student_id"/>
+                <field name="academic_year_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Published" name="published" domain="[('state','=','published')]"/>
+                <filter string="Acknowledged" name="acknowledged" domain="[('state','=','acknowledged')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Student" name="student"
+                            context="{'group_by': 'student_id'}"/>
+                    <filter string="Grade Level" name="grade_level"
+                            context="{'group_by': 'grade_level'}"/>
+                    <filter string="Term" name="term"
+                            context="{'group_by': 'term'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_cbc_report_card_view">
+        <field name="name">CBC Report Cards</field>
+        <field name="path">cbc-report-cards</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cbc.report.card</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cbc_report_card_search"/>
+    </record>
+</odoo>

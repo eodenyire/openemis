@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_op_transportation_main"
+              name="Transportation"
+              parent="openemis_core.menu_op_general_main"
+              sequence="25"/>
+
+    <menuitem id="menu_op_transport_vehicle"
+              name="Vehicles"
+              parent="menu_op_transportation_main"
+              sequence="10"
+              action="act_open_op_transport_vehicle_view"
+              groups="openemis_transportation.group_transportation_manager,openemis_transportation.group_transportation_user"/>
+
+    <menuitem id="menu_op_transport_route"
+              name="Routes"
+              parent="menu_op_transportation_main"
+              sequence="20"
+              action="act_open_op_transport_route_view"
+              groups="openemis_transportation.group_transportation_manager,openemis_transportation.group_transportation_user"/>
+
+    <menuitem id="menu_op_student_transport"
+              name="Student Transport"
+              parent="menu_op_transportation_main"
+              sequence="30"
+              action="act_open_op_student_transport_view"
+              groups="openemis_transportation.group_transportation_manager,openemis_transportation.group_transportation_user"/>
+
+    <menuitem id="menu_op_transport_config"
+              name="Transportation"
+              parent="openemis_core.menu_op_school_config"
+              sequence="45"/>
+
+    <menuitem id="menu_op_transport_route_stop"
+              name="Route Stops"
+              parent="menu_op_transport_config"
+              sequence="10"
+              action="act_open_op_transport_route_stop_view"
+              groups="openemis_transportation.group_transportation_manager"/>
+</odoo>

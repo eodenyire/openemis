@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_scholarship_sub"
+                  name="Scholarships"
+                  parent="openemis_core.menu_op_general_student"
+                  sequence="20"
+                  action="act_open_op_scholarship_view"
+                  groups="openemis_scholarship.group_scholarship_manager,openemis_scholarship.group_scholarship_user"/>
+
+        <menuitem id="menu_op_scholarship_type_sub"
+                  name="Scholarship Types"
+                  parent="openemis_core.menu_op_school_config"
+                  sequence="20"
+                  action="act_open_op_scholarship_type_view"
+                  groups="openemis_scholarship.group_scholarship_manager"/>
+</odoo>

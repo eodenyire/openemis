@@ -1,0 +1,128 @@
+# =============================================================================
+# openEMIS – Kubernetes Smoke Tests
+# =============================================================================
+# Deploys the openEMIS stack to a local kind (Kubernetes-in-Docker) cluster,
+# waits for all pods to become ready, and verifies the Odoo health endpoint.
+#
+# Runs on pushes to main/master to validate Kubernetes manifests.
+# =============================================================================
+name: Kubernetes – Smoke Tests
+
+on:
+  push:
+    branches: ["main", "master"]
+    paths:
+      - "kubernetes/**"
+      - ".github/workflows/kubernetes.yml"
+      - "Dockerfile"
+  pull_request:
+    branches: ["main", "master"]
+    paths:
+      - "kubernetes/**"
+      - ".github/workflows/kubernetes.yml"
+      - "Dockerfile"
+  workflow_dispatch: {}
+
+jobs:
+  k8s-smoke:
+    name: kind Cluster Smoke Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # -----------------------------------------------------------------------
+      # Provision a local Kubernetes cluster using kind
+      # -----------------------------------------------------------------------
+      - name: Create kind cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: openemis-ci
+          config: |
+            kind: Cluster
+            apiVersion: kind.x-k8s.io/v1alpha4
+            nodes:
+              - role: control-plane
+                extraPortMappings:
+                  - containerPort: 30069
+                    hostPort: 8069
+                    protocol: TCP
+
+      # -----------------------------------------------------------------------
+      # Build the openEMIS image directly into the kind cluster
+      # -----------------------------------------------------------------------
+      - name: Build Docker image
+        run: docker build -t openemis:latest .
+
+      - name: Load image into kind
+        run: kind load docker-image openemis:latest --name openemis-ci
+
+      # -----------------------------------------------------------------------
+      # Deploy Kubernetes manifests
+      # -----------------------------------------------------------------------
+      - name: Apply Kubernetes manifests
+        run: |
+          kubectl apply -k kubernetes/
+          echo "Manifests applied successfully."
+
+      # Patch the Service to use NodePort so we can reach Odoo from the host
+      - name: Patch openEMIS service to NodePort
+        run: |
+          kubectl -n openemis patch svc openemis \
+            --type='json' \
+            -p='[
+              {"op":"replace","path":"/spec/type","value":"NodePort"},
+              {"op":"add","path":"/spec/ports/0/nodePort","value":30069}
+            ]' || true
+
+      # -----------------------------------------------------------------------
+      # Wait for pods
+      # -----------------------------------------------------------------------
+      - name: Wait for PostgreSQL pod
+        run: |
+          kubectl -n openemis rollout status deployment/postgres \
+            --timeout=120s
+
+      - name: Wait for openEMIS pod
+        run: |
+          kubectl -n openemis rollout status deployment/openemis \
+            --timeout=300s
+
+      # -----------------------------------------------------------------------
+      # Health check
+      # -----------------------------------------------------------------------
+      - name: Odoo health check
+        run: |
+          echo "Waiting for Odoo health endpoint..."
+          for i in $(seq 1 30); do
+            HTTP=$(curl -s -o /dev/null -w "%{http_code}" \
+              http://localhost:8069/web/health 2>/dev/null || echo "000")
+            if [ "$HTTP" = "200" ]; then
+              echo "✓ Odoo responded with HTTP $HTTP"
+              break
+            fi
+            echo "  Attempt $i/30 – HTTP $HTTP – sleeping 10s..."
+            sleep 10
+          done
+          HTTP=$(curl -s -o /dev/null -w "%{http_code}" \
+            http://localhost:8069/web/health 2>/dev/null || echo "000")
+          if [ "$HTTP" != "200" ]; then
+            echo "::error::Odoo health check failed (HTTP=$HTTP)"
+            kubectl -n openemis get pods
+            kubectl -n openemis logs -l app=openemis --tail=50 || true
+            exit 1
+          fi
+
+      # -----------------------------------------------------------------------
+      # Collect logs on failure
+      # -----------------------------------------------------------------------
+      - name: Collect pod logs on failure
+        if: failure()
+        run: |
+          kubectl -n openemis get all
+          kubectl -n openemis describe pods || true
+          kubectl -n openemis logs -l app=openemis --tail=100 || true
+          kubectl -n openemis logs -l app=postgres --tail=50 || true

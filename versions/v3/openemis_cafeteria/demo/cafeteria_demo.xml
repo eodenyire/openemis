@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_menu_item_1" model="op.menu.item">
+        <field name="name">Scrambled Eggs</field>
+        <field name="food_category_id" ref="op_food_category_1"/>
+        <field name="price">2.50</field>
+        <field name="is_vegetarian" eval="True"/>
+        <field name="calories">200</field>
+    </record>
+    <record id="op_menu_item_2" model="op.menu.item">
+        <field name="name">Grilled Chicken Rice</field>
+        <field name="food_category_id" ref="op_food_category_2"/>
+        <field name="price">4.50</field>
+        <field name="calories">550</field>
+    </record>
+    <record id="op_menu_item_3" model="op.menu.item">
+        <field name="name">Fresh Orange Juice</field>
+        <field name="food_category_id" ref="op_food_category_5"/>
+        <field name="price">1.50</field>
+        <field name="is_vegan" eval="True"/>
+        <field name="is_vegetarian" eval="True"/>
+        <field name="calories">90</field>
+    </record>
+    <record id="op_daily_menu_1" model="op.daily.menu">
+        <field name="name">Monday Breakfast Menu</field>
+        <field name="date" eval="fields.Date.today()"/>
+        <field name="meal_type">breakfast</field>
+        <field name="menu_item_ids" eval="[(4, ref('op_menu_item_1')), (4, ref('op_menu_item_3'))]"/>
+    </record>
+    <record id="op_daily_menu_2" model="op.daily.menu">
+        <field name="name">Monday Lunch Menu</field>
+        <field name="date" eval="fields.Date.today()"/>
+        <field name="meal_type">lunch</field>
+        <field name="menu_item_ids" eval="[(4, ref('op_menu_item_2'))]"/>
+    </record>
+</odoo>

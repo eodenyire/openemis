@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_achievement_type_1" model="op.achievement.type">
+            <field name="name">Academic Excellence</field>
+            <field name="description">Awards for outstanding academic performance and scholastic achievement.</field>
+        </record>
+        <record id="op_achievement_type_2" model="op.achievement.type">
+            <field name="name">Sports Achievement</field>
+            <field name="description">Awards for excellence in sports and athletic activities.</field>
+        </record>
+        <record id="op_achievement_type_3" model="op.achievement.type">
+            <field name="name">Arts &amp; Culture</field>
+            <field name="description">Awards for creative accomplishments in arts and cultural activities.</field>
+        </record>
+        <record id="op_achievement_type_4" model="op.achievement.type">
+            <field name="name">Community Service</field>
+            <field name="description">Awards for outstanding contribution to community and social service.</field>
+        </record>
+        <record id="op_achievement_type_5" model="op.achievement.type">
+            <field name="name">Science &amp; Technology</field>
+            <field name="description">Awards for innovation and excellence in science and technology.</field>
+        </record>
+        <record id="op_achievement_type_6" model="op.achievement.type">
+            <field name="name">Leadership</field>
+            <field name="description">Awards for exceptional leadership and organizational skills.</field>
+        </record>
+        <record id="op_achievement_type_7" model="op.achievement.type">
+            <field name="name">Literary Achievement</field>
+            <field name="description">Awards for excellence in writing, poetry, and literary activities.</field>
+        </record>
+        <record id="op_achievement_type_8" model="op.achievement.type">
+            <field name="name">Music Achievement</field>
+            <field name="description">Awards for outstanding performance and accomplishment in music.</field>
+        </record>
+        <record id="op_achievement_type_9" model="op.achievement.type">
+            <field name="name">Environmental Awareness</field>
+            <field name="description">Awards for promoting environmental sustainability and awareness.</field>
+        </record>
+</odoo>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_inventory_item_1" model="op.inventory.item">
+        <field name="name">A4 Paper Ream</field>
+        <field name="code">STAT-001</field>
+        <field name="category_id" ref="op_inventory_category_1"/>
+        <field name="unit_of_measure">reams</field>
+        <field name="min_stock_level">10</field>
+        <field name="unit_price">5.50</field>
+    </record>
+    <record id="op_inventory_item_2" model="op.inventory.item">
+        <field name="name">Ballpoint Pen (Box)</field>
+        <field name="code">STAT-002</field>
+        <field name="category_id" ref="op_inventory_category_1"/>
+        <field name="unit_of_measure">boxes</field>
+        <field name="min_stock_level">5</field>
+        <field name="unit_price">3.00</field>
+    </record>
+    <record id="op_inventory_item_3" model="op.inventory.item">
+        <field name="name">Football</field>
+        <field name="code">SPORT-001</field>
+        <field name="category_id" ref="op_inventory_category_2"/>
+        <field name="unit_of_measure">pieces</field>
+        <field name="min_stock_level">2</field>
+        <field name="unit_price">25.00</field>
+    </record>
+    <record id="op_inventory_transaction_1" model="op.inventory.transaction">
+        <field name="item_id" ref="op_inventory_item_1"/>
+        <field name="transaction_type">in</field>
+        <field name="quantity">50</field>
+        <field name="date" eval="fields.Date.today()"/>
+        <field name="reference">PO-2024-001</field>
+    </record>
+    <record id="op_inventory_transaction_2" model="op.inventory.transaction">
+        <field name="item_id" ref="op_inventory_item_2"/>
+        <field name="transaction_type">in</field>
+        <field name="quantity">20</field>
+        <field name="date" eval="fields.Date.today()"/>
+        <field name="reference">PO-2024-002</field>
+    </record>
+</odoo>

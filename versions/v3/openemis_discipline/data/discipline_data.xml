@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <!-- Misbehaviour Categories -->
+        <record id="op_misbehaviour_category_1" model="op.misbehaviour.category">
+            <field name="name">Late Arrival</field>
+        </record>
+        <record id="op_misbehaviour_category_2" model="op.misbehaviour.category">
+            <field name="name">Absenteeism</field>
+        </record>
+        <record id="op_misbehaviour_category_3" model="op.misbehaviour.category">
+            <field name="name">Disruptive Behaviour</field>
+        </record>
+        <record id="op_misbehaviour_category_4" model="op.misbehaviour.category">
+            <field name="name">Cheating</field>
+        </record>
+        <record id="op_misbehaviour_category_5" model="op.misbehaviour.category">
+            <field name="name">Bullying</field>
+        </record>
+        <record id="op_misbehaviour_category_6" model="op.misbehaviour.category">
+            <field name="name">Property Damage</field>
+        </record>
+        <record id="op_misbehaviour_category_7" model="op.misbehaviour.category">
+            <field name="name">Disrespect</field>
+        </record>
+        <record id="op_misbehaviour_category_8" model="op.misbehaviour.category">
+            <field name="name">Use of Unauthorized Device</field>
+        </record>
+
+        <!-- Discipline Actions -->
+        <record id="op_discipline_action_1" model="op.discipline.action">
+            <field name="name">Verbal Warning</field>
+        </record>
+        <record id="op_discipline_action_2" model="op.discipline.action">
+            <field name="name">Written Warning</field>
+        </record>
+        <record id="op_discipline_action_3" model="op.discipline.action">
+            <field name="name">Detention</field>
+        </record>
+        <record id="op_discipline_action_4" model="op.discipline.action">
+            <field name="name">Suspension</field>
+        </record>
+        <record id="op_discipline_action_5" model="op.discipline.action">
+            <field name="name">Parent Meeting</field>
+        </record>
+        <record id="op_discipline_action_6" model="op.discipline.action">
+            <field name="name">Community Service</field>
+        </record>
+        <record id="op_discipline_action_7" model="op.discipline.action">
+            <field name="name">Expulsion</field>
+        </record>
+</odoo>

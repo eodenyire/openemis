@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="hostel_room_type_single" model="op.hostel.room.type">
+        <field name="name">Single Room</field>
+        <field name="capacity">1</field>
+        <field name="monthly_fee">5000.0</field>
+        <field name="description">Private room for one student.</field>
+    </record>
+
+    <record id="hostel_room_type_double" model="op.hostel.room.type">
+        <field name="name">Double Room</field>
+        <field name="capacity">2</field>
+        <field name="monthly_fee">3500.0</field>
+        <field name="description">Shared room for two students.</field>
+    </record>
+
+    <record id="hostel_room_type_triple" model="op.hostel.room.type">
+        <field name="name">Triple Room</field>
+        <field name="capacity">3</field>
+        <field name="monthly_fee">2500.0</field>
+        <field name="description">Shared room for three students.</field>
+    </record>
+
+    <record id="hostel_room_type_dormitory" model="op.hostel.room.type">
+        <field name="name">Dormitory</field>
+        <field name="capacity">8</field>
+        <field name="monthly_fee">1500.0</field>
+        <field name="description">Large dormitory room for up to eight students.</field>
+    </record>
+</odoo>

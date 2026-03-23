@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Hostel main menu under SIS root -->
+    <menuitem id="menu_op_hostel_main"
+              name="Hostel"
+              parent="openemis_core.menu_op_school_root"
+              sequence="25"/>
+
+    <!-- Operational sub-menus -->
+    <menuitem id="menu_op_hostel_allocation"
+              name="Allocations"
+              parent="openemis_hostel.menu_op_hostel_main"
+              sequence="10"
+              action="act_open_op_hostel_allocation_view"
+              groups="openemis_hostel.group_hostel_manager,openemis_hostel.group_hostel_user"/>
+
+    <menuitem id="menu_op_hostel_room"
+              name="Rooms"
+              parent="openemis_hostel.menu_op_hostel_main"
+              sequence="20"
+              action="act_open_op_hostel_room_view"
+              groups="openemis_hostel.group_hostel_manager,openemis_hostel.group_hostel_user"/>
+
+    <!-- Configuration sub-menus -->
+    <menuitem id="menu_op_hostel_block_config"
+              name="Hostel Blocks"
+              parent="openemis_core.menu_op_school_config"
+              sequence="45"
+              action="act_open_op_hostel_block_view"
+              groups="openemis_hostel.group_hostel_manager"/>
+
+    <menuitem id="menu_op_hostel_room_type_config"
+              name="Room Types"
+              parent="openemis_core.menu_op_school_config"
+              sequence="46"
+              action="act_open_op_hostel_room_type_view"
+              groups="openemis_hostel.group_hostel_manager"/>
+</odoo>

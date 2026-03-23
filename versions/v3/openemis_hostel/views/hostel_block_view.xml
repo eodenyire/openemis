@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_op_hostel_block_list" model="ir.ui.view">
+        <field name="name">op.hostel.block.list</field>
+        <field name="model">op.hostel.block</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Hostel Blocks">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="capacity"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_op_hostel_block_form" model="ir.ui.view">
+        <field name="name">op.hostel.block.form</field>
+        <field name="model">op.hostel.block</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Hostel Block">
+                <header/>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1>
+                            <field name="name" placeholder="Block Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="capacity"/>
+                        </group>
+                    </group>
+                    <div>
+                        <label for="description" string="Description" class="mt32"/>
+                        <field name="description" nolabel="1"/>
+                    </div>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_op_hostel_block_search" model="ir.ui.view">
+        <field name="name">op.hostel.block.search</field>
+        <field name="model">op.hostel.block</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Hostel Blocks">
+                <field name="name"/>
+                <field name="code"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_op_hostel_block_view">
+        <field name="name">Hostel Blocks</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.hostel.block</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_hostel_block_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_hostel_block_view_list">
+        <field name="act_window_id" ref="act_open_op_hostel_block_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_hostel_block_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_hostel_block_view_form">
+        <field name="act_window_id" ref="act_open_op_hostel_block_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_hostel_block_form"/>
+    </record>
+</odoo>

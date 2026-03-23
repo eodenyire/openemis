@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_event_root"
+                  name="Events"
+                  parent="openemis_core.menu_op_school_root"
+                  sequence="25"/>
+
+        <menuitem id="menu_op_event_sub"
+                  name="Events"
+                  parent="menu_op_event_root"
+                  sequence="10"
+                  action="act_open_op_event_view"
+                  groups="openemis_event.group_event_manager,openemis_event.group_event_user"/>
+
+        <menuitem id="menu_op_event_registration_sub"
+                  name="Registrations"
+                  parent="menu_op_event_root"
+                  sequence="20"
+                  action="act_open_op_event_registration_view"
+                  groups="openemis_event.group_event_manager,openemis_event.group_event_user"/>
+
+        <menuitem id="menu_op_event_type_config"
+                  name="Event Types"
+                  parent="openemis_core.menu_op_school_config"
+                  sequence="45"
+                  action="act_open_op_event_type_view"
+                  groups="openemis_event.group_event_manager"/>
+</odoo>

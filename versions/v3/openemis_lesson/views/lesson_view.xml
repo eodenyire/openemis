@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <!-- List View -->
+        <record id="view_op_lesson_list" model="ir.ui.view">
+            <field name="name">op.lesson.list</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Lesson Plans" decoration-info="state == 'draft'"
+                      decoration-primary="state == 'planned'"
+                      decoration-success="state == 'completed'">
+                    <field name="lesson_date"/>
+                    <field name="lesson_number" optional="hide"/>
+                    <field name="name"/>
+                    <field name="topic"/>
+                    <field name="faculty_id"/>
+                    <field name="course_id"/>
+                    <field name="batch_id" optional="hide"/>
+                    <field name="subject_id"/>
+                    <field name="academic_term_id" optional="hide"/>
+                    <field name="teaching_method" optional="hide"/>
+                    <field name="duration" optional="hide"/>
+                    <field name="state"
+                           decoration-info="state == 'draft'"
+                           decoration-primary="state == 'planned'"
+                           decoration-success="state == 'completed'"
+                           widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_op_lesson_form" model="ir.ui.view">
+            <field name="name">op.lesson.form</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Lesson Plan">
+                    <header>
+                        <button name="action_plan" string="Set to Planned"
+                                type="object" class="oe_highlight"
+                                invisible="state != 'draft'"/>
+                        <button name="action_complete" string="Mark Completed"
+                                type="object" class="oe_highlight"
+                                invisible="state != 'planned'"/>
+                        <button name="action_reset_draft" string="Reset to Draft"
+                                type="object"
+                                invisible="state == 'draft'"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,planned,completed"/>
+                    </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                invisible="active == True"/>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name" placeholder="Lesson Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Lesson Details">
+                                <field name="faculty_id"/>
+                                <field name="course_id"/>
+                                <field name="batch_id"/>
+                                <field name="subject_id"/>
+                                <field name="academic_term_id"/>
+                            </group>
+                            <group string="Schedule">
+                                <field name="lesson_date"/>
+                                <field name="duration"/>
+                                <field name="lesson_number"/>
+                                <field name="teaching_method"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="topic"/>
+                        </group>
+                        <notebook>
+                            <page string="Learning Objectives">
+                                <field name="learning_objectives"
+                                       placeholder="What students will learn by the end of this lesson..."/>
+                            </page>
+                            <page string="Lesson Content">
+                                <field name="content" widget="html"/>
+                            </page>
+                            <page string="Materials &amp; Method">
+                                <group>
+                                    <field name="teaching_materials"
+                                           placeholder="Materials, resources and equipment needed..."/>
+                                </group>
+                            </page>
+                            <page string="Homework">
+                                <field name="homework"
+                                       placeholder="Assignment or homework given to students..."/>
+                            </page>
+                            <page string="Notes">
+                                <field name="notes"
+                                       placeholder="Additional notes..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="view_op_lesson_search" model="ir.ui.view">
+            <field name="name">op.lesson.search</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Lesson Plans">
+                    <field name="name"/>
+                    <field name="topic"/>
+                    <field name="faculty_id"/>
+                    <field name="course_id"/>
+                    <field name="subject_id"/>
+                    <field name="academic_term_id"/>
+                    <filter string="Draft" name="draft"
+                            domain="[('state', '=', 'draft')]"/>
+                    <filter string="Planned" name="planned"
+                            domain="[('state', '=', 'planned')]"/>
+                    <filter string="Completed" name="completed"
+                            domain="[('state', '=', 'completed')]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Faculty" name="group_faculty"
+                                context="{'group_by': 'faculty_id'}"/>
+                        <filter string="Course" name="group_course"
+                                context="{'group_by': 'course_id'}"/>
+                        <filter string="Subject" name="group_subject"
+                                context="{'group_by': 'subject_id'}"/>
+                        <filter string="Status" name="group_state"
+                                context="{'group_by': 'state'}"/>
+                        <filter string="Lesson Date" name="group_date"
+                                context="{'group_by': 'lesson_date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Calendar View -->
+        <record id="view_op_lesson_calendar" model="ir.ui.view">
+            <field name="name">op.lesson.calendar</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <calendar string="Lesson Plans" date_start="lesson_date"
+                          color="faculty_id" quick_create="False">
+                    <field name="name"/>
+                    <field name="topic"/>
+                    <field name="faculty_id"/>
+                    <field name="subject_id"/>
+                    <field name="state"/>
+                </calendar>
+            </field>
+        </record>
+
+        <!-- Graph View -->
+        <record id="view_op_lesson_graph" model="ir.ui.view">
+            <field name="name">op.lesson.graph</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <graph string="Lesson Plans" type="bar">
+                    <field name="subject_id" type="row"/>
+                    <field name="faculty_id" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Pivot View -->
+        <record id="view_op_lesson_pivot" model="ir.ui.view">
+            <field name="name">op.lesson.pivot</field>
+            <field name="model">op.lesson</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Lesson Plans">
+                    <field name="faculty_id" type="row"/>
+                    <field name="subject_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <!-- Window Action -->
+        <record model="ir.actions.act_window" id="act_open_op_lesson_view">
+            <field name="name">Lesson Plans</field>
+            <field name="path">lesson-plans</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.lesson</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">list,form,calendar,graph,pivot</field>
+            <field name="search_view_id" ref="view_op_lesson_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_lesson_view_list">
+            <field name="act_window_id" ref="act_open_op_lesson_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_op_lesson_list"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_lesson_view_form">
+            <field name="act_window_id" ref="act_open_op_lesson_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_lesson_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_lesson_view_calendar">
+            <field name="act_window_id" ref="act_open_op_lesson_view"/>
+            <field name="sequence" eval="30"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="view_op_lesson_calendar"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_lesson_view_graph">
+            <field name="act_window_id" ref="act_open_op_lesson_view"/>
+            <field name="sequence" eval="40"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="view_op_lesson_graph"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_lesson_view_pivot">
+            <field name="act_window_id" ref="act_open_op_lesson_view"/>
+            <field name="sequence" eval="50"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="view_op_lesson_pivot"/>
+        </record>
+</odoo>

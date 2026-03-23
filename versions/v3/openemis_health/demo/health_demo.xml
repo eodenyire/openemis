@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_student_health_1" model="op.student.health">
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="blood_group">A+</field>
+            <field name="height">165.0</field>
+            <field name="weight">60.0</field>
+            <field name="last_checkup_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+            <field name="emergency_contact_name">John Doe</field>
+            <field name="emergency_contact_phone">+1-555-0100</field>
+            <field name="emergency_contact_relation">Parent</field>
+            <field name="doctor_name">Dr. Smith</field>
+            <field name="doctor_phone">+1-555-0200</field>
+        </record>
+
+        <record id="op_student_health_2" model="op.student.health">
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="blood_group">B+</field>
+            <field name="height">170.0</field>
+            <field name="weight">65.0</field>
+            <field name="last_checkup_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+            <field name="emergency_contact_name">Jane Doe</field>
+            <field name="emergency_contact_phone">+1-555-0101</field>
+            <field name="emergency_contact_relation">Parent</field>
+            <field name="doctor_name">Dr. Johnson</field>
+            <field name="doctor_phone">+1-555-0201</field>
+        </record>
+
+        <record id="openemis_core.op_user_faculty" model="res.users">
+            <field name="groups_id"
+            eval="[(4, ref('openemis_health.group_health_user'))]"/>
+        </record>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Top-level CBC menu item -->
+    <menuitem id="menu_openemis_cbc_root"
+              name="CBC Curriculum"
+              web_icon="openemis_cbc,static/description/icon.png"
+              sequence="6"/>
+
+    <!-- Curriculum Setup -->
+    <menuitem id="menu_cbc_curriculum"
+              name="Curriculum Setup"
+              parent="openemis_cbc.menu_openemis_cbc_root"
+              sequence="10"/>
+
+    <menuitem id="menu_cbc_strands"
+              name="Competency Strands"
+              parent="openemis_cbc.menu_cbc_curriculum"
+              sequence="10"
+              action="act_cbc_strand_view"
+              groups="openemis_cbc.group_cbc_manager"/>
+
+    <menuitem id="menu_cbc_substrands"
+              name="Sub-strands"
+              parent="openemis_cbc.menu_cbc_curriculum"
+              sequence="20"
+              action="act_cbc_substrand_view"
+              groups="openemis_cbc.group_cbc_manager"/>
+
+    <menuitem id="menu_cbc_outcomes"
+              name="Learning Outcomes"
+              parent="openemis_cbc.menu_cbc_curriculum"
+              sequence="30"
+              action="act_cbc_learning_outcome_view"
+              groups="openemis_cbc.group_cbc_manager,openemis_cbc.group_cbc_teacher"/>
+
+    <menuitem id="menu_cbc_rubrics"
+              name="Rubric Levels"
+              parent="openemis_cbc.menu_cbc_curriculum"
+              sequence="40"
+              action="act_cbc_rubric_view"
+              groups="openemis_cbc.group_cbc_manager"/>
+
+    <!-- Assessment -->
+    <menuitem id="menu_cbc_assessment"
+              name="Assessment"
+              parent="openemis_cbc.menu_openemis_cbc_root"
+              sequence="20"/>
+
+    <menuitem id="menu_cbc_formative_assessments"
+              name="Formative Assessments"
+              parent="openemis_cbc.menu_cbc_assessment"
+              sequence="10"
+              action="act_cbc_fa_view"
+              groups="openemis_cbc.group_cbc_manager,openemis_cbc.group_cbc_teacher"/>
+
+    <menuitem id="menu_cbc_portfolios"
+              name="Student Portfolios"
+              parent="openemis_cbc.menu_cbc_assessment"
+              sequence="20"
+              action="act_cbc_portfolio_view"
+              groups="openemis_cbc.group_cbc_manager,openemis_cbc.group_cbc_teacher"/>
+
+    <menuitem id="menu_cbc_report_cards"
+              name="CBC Report Cards"
+              parent="openemis_cbc.menu_cbc_assessment"
+              sequence="30"
+              action="act_cbc_report_card_view"
+              groups="openemis_cbc.group_cbc_manager,openemis_cbc.group_cbc_teacher"/>
+</odoo>

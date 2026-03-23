@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_scholarship_type_merit" model="op.scholarship.type">
+            <field name="name">Merit Scholarship</field>
+            <field name="description">Awarded for outstanding academic excellence.</field>
+            <field name="criteria">Minimum GPA of 3.8 or equivalent top academic standing.</field>
+            <field name="amount">5000.0</field>
+        </record>
+
+        <record id="op_scholarship_type_sports" model="op.scholarship.type">
+            <field name="name">Sports Scholarship</field>
+            <field name="description">Awarded to students excelling in sports activities.</field>
+            <field name="criteria">Participation and achievement in recognised sporting events.</field>
+            <field name="amount">3000.0</field>
+        </record>
+
+        <record id="op_scholarship_type_need_based" model="op.scholarship.type">
+            <field name="name">Need-Based Grant</field>
+            <field name="description">Financial assistance for students from low-income families.</field>
+            <field name="criteria">Demonstrated financial need based on family income assessment.</field>
+            <field name="amount">4000.0</field>
+        </record>
+
+        <record id="op_scholarship_type_government" model="op.scholarship.type">
+            <field name="name">Government Scholarship</field>
+            <field name="description">Scholarship funded and administered by government bodies.</field>
+            <field name="criteria">Eligibility as per respective government scholarship guidelines.</field>
+            <field name="amount">6000.0</field>
+        </record>
+
+        <record id="op_scholarship_type_research" model="op.scholarship.type">
+            <field name="name">Research Scholarship</field>
+            <field name="description">Supports students engaged in research projects.</field>
+            <field name="criteria">Enrolled in a recognised research programme with faculty endorsement.</field>
+            <field name="amount">7000.0</field>
+        </record>
+
+        <record id="op_scholarship_type_arts" model="op.scholarship.type">
+            <field name="name">Arts Scholarship</field>
+            <field name="description">Awarded to students demonstrating exceptional talent in the arts.</field>
+            <field name="criteria">Portfolio submission and jury evaluation required.</field>
+            <field name="amount">2500.0</field>
+        </record>
+
+        <record id="op_scholarship_type_technology" model="op.scholarship.type">
+            <field name="name">Technology Scholarship</field>
+            <field name="description">Supports students pursuing technology and STEM disciplines.</field>
+            <field name="criteria">Enrolled in a technology-related programme with strong academic record.</field>
+            <field name="amount">5500.0</field>
+        </record>
+
+        <record id="op_scholarship_type_community" model="op.scholarship.type">
+            <field name="name">Community Leadership Award</field>
+            <field name="description">Recognises students who show outstanding community leadership.</field>
+            <field name="criteria">Evidence of community service and leadership roles.</field>
+            <field name="amount">2000.0</field>
+        </record>
+</odoo>

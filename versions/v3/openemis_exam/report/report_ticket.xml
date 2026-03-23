@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <template id="report_ticket">
+            <style>
+                .font{
+                font-size:14px;
+                font-family:"Helvetica"
+                }
+                @page{
+                margin-top:1%;
+                size: A4;
+                }
+            </style>
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <div class="page"  style="font-family: 'Odoo Unicode Support Noto';">
+                        <br/>
+                        <br/>
+                        <br/>
+                        <div class="oe_structure" id="report_ticket_structure"/>
+                        <t t-foreach="get_data" t-as="ticket_data">
+                            <div class="font">
+                                <div class="page">
+                                    <br></br>
+                                    <br></br>
+                                    <br></br>
+                                    <div class="text-center" style="margin-bottom: 8px;">
+                                        <t t-if="res_company.logo">
+                                            <img t-att-src="image_data_uri(res_company.logo)"
+                                                 style="height: 60px; margin-bottom: 4px;"/><br/>
+                                        </t>
+                                        <strong style="font-size: 16px;">
+                                            <span t-out="res_company.name or ''"/>
+                                        </strong>
+                                        <t t-if="res_company.school_motto">
+                                            <br/>
+                                            <em style="font-size: 11px;">
+                                                <span t-out="res_company.school_motto"/>
+                                            </em>
+                                        </t>
+                                    </div>
+                                    <div class="text-center">
+                                        <h3>
+                                            <b>Hall Ticket</b>
+                                        </h3>
+                                        (
+                                        <span t-out="ticket_data['exam'] if ticket_data['exam'] else ''"/>
+                                        <span t-out="ticket_data['exam_code'] if ticket_data['exam_code'] else ''"/>
+                                        )
+                                    </div>
+                                    <br></br>
+
+                                    <table width="100%" style="font-size:14px;">
+                                        <tbody>
+                                            <tr>
+                                                <td class="py-2">
+                                                    <table width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <b>Student Name :</b>
+                                                                    <span t-esc="ticket_data['student']"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <b>Roll No :</b>
+                                                                    <span t-out="ticket_data['roll_number']  if  ticket_data['roll_number']  else ''"/>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <b>Course :</b>
+                                                                    <span t-out="ticket_data['course']  if  ticket_data['course']  else ''"/>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+
+                                                <td>
+                                                    <table width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right" style="text-align: center;">
+                                                                    <img t-if="ticket_data['image']" alt="Student Image"
+                                                                         style="padding-top: 16px; padding-bottom: 16px; "
+                                                                         t-att-src="image_data_uri(ticket_data['image'])"
+                                                                         width="75"/>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br></br>
+                                    <br></br>
+                                    <table class="table table-bordered">
+                                        <thead class="text-center"
+                                               style="background-color:#eeeeee; font-size:14px; font-weight:600;">
+                                            <th class="text-center">Subject</th>
+                                            <th class="text-center">Date</th>
+                                            <th class="text-center">Time</th>
+                                            <th class="text-center">Supervisor Sign</th>
+                                        </thead>
+                                        <tbody class="text-center" style="font-size:12px;">
+                                            <tr t-foreach="ticket_data['line']" t-as='s'>
+                                                <td>
+                                                    <span t-out="s['subject'] if  s['subject']  else ''"/>
+                                                </td>
+                                                <td>
+                                                    <span t-out="s['date'] if  s['date'] else ''" t-options="{'widget':'date'}"/>
+                                                </td>
+                                                <td>
+                                                    <span t-esc="s['time']"/>
+                                                </td>
+                                                <td>
+                                                    <span t-out="s['sup_sign']  if  s['sup_sign']  else ''"/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div style="width: 100%; margin-top: 20px; display: flex; justify-content: flex-end;">
+                                        <div class="text-center">
+                                            <t t-if="res_company.principal_signature">
+                                                <img t-att-src="image_data_uri(res_company.principal_signature)"
+                                                     style="height: 50px; margin-bottom: 4px;"/><br/>
+                                            </t>
+                                            <b><span t-out="res_company.principal_name or '_____________'"/></b><br/>
+                                            Principal / Head of Institution
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="page-break-after:always"></p>
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+</odoo>

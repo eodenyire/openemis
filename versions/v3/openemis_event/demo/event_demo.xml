@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_event_demo_1" model="op.event">
+            <field name="name">Annual Sports Day</field>
+            <field name="event_type_id" ref="op_event_type_2"/>
+            <field name="start_date"
+                eval="(DateTime.today() + relativedelta(days=7)).strftime('%Y-%m-%d 09:00:00')"/>
+            <field name="end_date"
+                eval="(DateTime.today() + relativedelta(days=7)).strftime('%Y-%m-%d 17:00:00')"/>
+            <field name="venue">School Sports Ground</field>
+            <field name="target_audience">students</field>
+            <field name="max_attendees">500</field>
+            <field name="state">published</field>
+        </record>
+
+        <record id="op_event_demo_2" model="op.event">
+            <field name="name">Science &amp; Technology Seminar</field>
+            <field name="event_type_id" ref="op_event_type_1"/>
+            <field name="start_date"
+                eval="(DateTime.today() + relativedelta(days=14)).strftime('%Y-%m-%d 10:00:00')"/>
+            <field name="end_date"
+                eval="(DateTime.today() + relativedelta(days=14)).strftime('%Y-%m-%d 13:00:00')"/>
+            <field name="venue">Main Auditorium</field>
+            <field name="target_audience">all</field>
+            <field name="max_attendees">200</field>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="op_event_demo_3" model="op.event">
+            <field name="name">Annual Cultural Fest</field>
+            <field name="event_type_id" ref="op_event_type_3"/>
+            <field name="start_date"
+                eval="(DateTime.today() + relativedelta(days=30)).strftime('%Y-%m-%d 11:00:00')"/>
+            <field name="end_date"
+                eval="(DateTime.today() + relativedelta(days=31)).strftime('%Y-%m-%d 20:00:00')"/>
+            <field name="venue">School Campus</field>
+            <field name="target_audience">all</field>
+            <field name="max_attendees">0</field>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="op_event_reg_demo_1" model="op.event.registration">
+            <field name="event_id" ref="op_event_demo_1"/>
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="state">registered</field>
+        </record>
+
+        <record id="op_event_reg_demo_2" model="op.event.registration">
+            <field name="event_id" ref="op_event_demo_1"/>
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="state">registered</field>
+        </record>
+
+        <record id="op_event_demo_user_group" model="res.users">
+            <field name="id" ref="openemis_core.op_user_faculty"/>
+            <field name="groups_id"
+                eval="[(4, ref('openemis_event.group_event_user'))]"/>
+        </record>
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="view_op_achievement_tree" model="ir.ui.view">
+            <field name="name">op.achievement.list</field>
+            <field name="model">op.achievement</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Achievements">
+                    <field name="name"/>
+                    <field name="student_id"/>
+                    <field name="achievement_type_id"/>
+                    <field name="date"/>
+                    <field name="faculty_id" optional="hide"/>
+                    <field name="award_by" optional="hide"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_op_achievement_form" model="ir.ui.view">
+            <field name="name">op.achievement.form</field>
+            <field name="model">op.achievement</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Achievement">
+                    <header/>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                invisible="active == True"/>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="student_id"/>
+                                <field name="achievement_type_id"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="faculty_id"/>
+                                <field name="award_by"/>
+                            </group>
+                        </group>
+                        <group string="Certificate / Attachment">
+                            <field name="attachment" filename="attachment_name"/>
+                            <field name="attachment_name" invisible="1"/>
+                        </group>
+                        <div>
+                            <label for="description" string="Description" class="mt32"/>
+                            <field name="description" nolabel="1"/>
+                        </div>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_achievement_search" model="ir.ui.view">
+            <field name="name">op.achievement.search</field>
+            <field name="model">op.achievement</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Achievements">
+                    <field name="name"/>
+                    <field name="student_id"/>
+                    <field name="achievement_type_id"/>
+                    <field name="faculty_id"/>
+                    <field name="date"/>
+                    <filter string="Archived" name="inactive"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Achievement Type" name="group_by_type"
+                                context="{'group_by': 'achievement_type_id'}"/>
+                        <filter string="Student" name="group_by_student"
+                                context="{'group_by': 'student_id'}"/>
+                        <filter string="Date" name="group_by_date"
+                                context="{'group_by': 'date'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_op_achievement_pivot" model="ir.ui.view">
+            <field name="name">op.achievement.pivot</field>
+            <field name="model">op.achievement</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Achievement Pivot">
+                    <field name="student_id" type="row"/>
+                    <field name="achievement_type_id" type="col"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_op_achievement_graph">
+            <field name="name">op.achievement.graph</field>
+            <field name="model">op.achievement</field>
+            <field name="arch" type="xml">
+                <graph string="Achievement Graph View" type="bar">
+                    <field name="achievement_type_id"/>
+                    <field name="student_id"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_achievement_view">
+            <field name="name">Achievements</field>
+            <field name="path">achievement</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.achievement</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">list,form,pivot,graph</field>
+            <field name="search_view_id" ref="view_op_achievement_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_achievement_view_form">
+            <field name="act_window_id" ref="act_open_op_achievement_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_achievement_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_achievement_view_tree">
+            <field name="act_window_id" ref="act_open_op_achievement_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_op_achievement_tree"/>
+        </record>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_alumni_1" model="op.alumni">
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="graduation_year">2022</field>
+            <field name="course_id" ref="openemis_core.op_course_1"/>
+            <field name="batch_id" ref="openemis_core.op_batch_1"/>
+            <field name="employment_status">employed</field>
+            <field name="employer_name">Tech Solutions Inc.</field>
+            <field name="job_title">Software Engineer</field>
+            <field name="industry">Information Technology</field>
+            <field name="current_city">New York</field>
+            <field name="current_country_id" ref="base.us"/>
+        </record>
+
+        <record id="op_alumni_2" model="op.alumni">
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="graduation_year">2021</field>
+            <field name="course_id" ref="openemis_core.op_course_1"/>
+            <field name="batch_id" ref="openemis_core.op_batch_1"/>
+            <field name="employment_status">further_studies</field>
+            <field name="employer_name"/>
+            <field name="job_title"/>
+            <field name="industry">Education</field>
+            <field name="current_city">Berlin</field>
+            <field name="current_country_id" ref="base.de"/>
+        </record>
+
+        <record id="openemis_core.op_user_student" model="res.users">
+            <field name="groups_id"
+                   eval="[(4, ref('openemis_alumni.group_alumni_user'))]"/>
+        </record>
+</odoo>

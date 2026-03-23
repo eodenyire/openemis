@@ -1,0 +1,1392 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* openemis_admission
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-29 10:21+0000\n"
+"PO-Revision-Date: 2025-04-29 10:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "<b>Course:</b>"
+msgstr "<b> دوره: </b>"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "<b>From Date:</b>"
+msgstr "<b> از تاریخ: </b>"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "<b>To Date:</b>"
+msgstr "<b> تا به امروز: </b>"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid ""
+"<br/>\n"
+"                            <b>Total Number of Students :</b>"
+msgstr ""
+"<br/>\n"
+"                            <b> تعداد کل دانش آموزان: </b>"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.res_config_settings_view_user
+msgid "<span class=\"fa fa-info-circle\" title=\"Openeducat Enterprise Module\"/>"
+msgstr "<span class = \"fa fa-info-circle\" عنوان = \"ماژول OpenEMIS Enterprise\"/>"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "<strong>Admission Analysis</strong>"
+msgstr "<strong> تجزیه و تحلیل پذیرش </strong>"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_11
+msgid "Aarav"
+msgstr "هارا"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_11
+msgid "Aarav M Sharma"
+msgstr "Aarav M Sharma"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__academic_years_id
+msgid "Academic Year"
+msgstr "سال تحصیلی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_needaction
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_needaction
+msgid "Action Needed"
+msgstr "عمل مورد نیاز"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__active
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__active
+msgid "Active"
+msgstr "فعال"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_ids
+msgid "Activities"
+msgstr "فعالیت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "دکوراسیون استثناء فعالیت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_state
+msgid "Activity State"
+msgstr "حالت فعالیت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "نماد نوع فعالیت"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_12
+msgid "Adams"
+msgstr "آدم"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Address"
+msgstr "خطاب"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_op_admission
+#: model:ir.module.category,name:openemis_admission.module_category_all_op_admission
+#: model:ir.module.category,name:openemis_admission.module_category_openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission_register
+msgid "Admission"
+msgstr "پذیرش"
+
+#. module: openemis_admission
+#: model:ir.actions.report,name:openemis_admission.action_report_report_admission_analysis
+#: model_terms:ir.ui.view,arch_db:openemis_admission.admission_analysis_form
+msgid "Admission Analysis"
+msgstr "تجزیه و تحلیل پذیرش"
+
+#. module: openemis_admission
+#: model:ir.actions.act_window,name:openemis_admission.admission_analysis_act
+#: model:ir.model,name:openemis_admission.model_report_openemis_admission_report_admission_analysis
+msgid "Admission Analysis Report"
+msgstr "گزارش تجزیه و تحلیل پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_admission_analysis
+msgid "Admission Analysis Wizard"
+msgstr "جادوگر تجزیه و تحلیل پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__admission_base
+msgid "Admission Base"
+msgstr "پایگاه پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Admission Confirm"
+msgstr "پذیرش تأیید کنید"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__admission_date
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Admission Date"
+msgstr "تاریخ پذیرش"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Admission Detail"
+msgstr "جزئیات پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__admission_fees_line_ids
+msgid "Admission Fees Configuration"
+msgstr "پیکربندی هزینه های پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_op_admission_fees_line
+msgid "Admission Fees Line"
+msgstr "خط هزینه پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__admission
+msgid "Admission Process"
+msgstr "روند پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_op_admission_register
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__register_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__register_id
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_graph
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_pivot
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_tree
+msgid "Admission Register"
+msgstr "ثبت پذیرش"
+
+#. module: openemis_admission
+#: model:ir.actions.act_window,name:openemis_admission.act_open_op_admission_register_view
+msgid "Admission Registers"
+msgstr "ثبت نام پذیرش"
+
+#. module: openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission_analysis
+msgid "Admission Report"
+msgstr "گزارش پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__admission_ids
+#: model:ir.ui.menu,name:openemis_admission.menu_op_admission_root
+#: model:ir.ui.menu,name:openemis_admission.menu_op_admission_submenu
+msgid "Admissions"
+msgstr "پذیرش"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_4
+msgid "Alex"
+msgstr "الکس"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_4
+msgid "Alex J Parker"
+msgstr "الکس جی پارکر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__application_date
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Application Date"
+msgstr "تاریخ درخواست"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid ""
+"Application Date should be between Start Date & End Date of Admission "
+"Register."
+msgstr "تاریخ درخواست باید بین تاریخ شروع و تاریخ پایان ثبت پذیرش باشد."
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__application
+msgid "Application Gathering"
+msgstr "تجمع درخواست"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "Application No."
+msgstr "شماره درخواست"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__application_number
+msgid "Application Number"
+msgstr "شماره درخواست"
+
+#. module: openemis_admission
+#: model:ir.model.constraint,message:openemis_admission.constraint_op_admission_unique_application_number
+msgid "Application Number must be unique per Application!"
+msgstr "شماره برنامه باید در هر برنامه منحصر به فرد باشد!"
+
+#. module: openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Applications"
+msgstr "برنامه"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Archived"
+msgstr "بایگانی شده"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_attachment_count
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_attachment_count
+msgid "Attachment Count"
+msgstr "تعداد پیوست"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_25
+msgid "Bassam"
+msgstr "باسم"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__batch_id
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Batch"
+msgstr "دسته"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_18
+msgid "Bella"
+msgstr "قله"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_18
+msgid "Bella L Carter"
+msgstr "بلا ل کارتر"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_21
+msgid "Ben"
+msgstr "سعادت"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_21
+msgid "Ben T Wood"
+msgstr "بن تی چوب"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__birth_date
+msgid "Birth Date"
+msgstr "تاریخ تولد"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid "Birth Date can't be greater than current date!"
+msgstr "تاریخ تولد نمی تواند بیشتر از تاریخ فعلی باشد!"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_16
+msgid "Brooks"
+msgstr "بروکس"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_16
+msgid "Camila"
+msgstr "عیار"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_16
+msgid "Camila M Brooks"
+msgstr "Camila M Brooks"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.admission_analysis_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Cancel"
+msgstr "لغو کردن"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__cancel
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__cancel
+msgid "Cancelled"
+msgstr "لغو شده"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_18
+msgid "Carter"
+msgstr "کارتر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__city
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "City"
+msgstr "شهر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__company_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__company_id
+msgid "Company"
+msgstr "شرکت"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_res_config_settings
+msgid "Config Settings"
+msgstr "تنظیمات پیکربندی"
+
+#. module: openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission_config
+msgid "Configuration"
+msgstr "پیکربندی"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Configure Course Fees"
+msgstr "هزینه های دوره را پیکربندی کنید"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Confirm"
+msgstr "تأیید کردن"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__confirm_count
+msgid "Confirm Count"
+msgstr "تعداد را تأیید کنید"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__confirm
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__confirm
+msgid "Confirmed"
+msgstr "تأیید شده"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__country_id
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Country"
+msgstr "کشور"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__course_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__course_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__course_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__course_id
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__admission_base__course
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Course"
+msgstr "دوره"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_graph
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_pivot
+msgid "Course By Admission"
+msgstr "دوره با پذیرش"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_registration_graph
+msgid "Course By Admission Register"
+msgstr "دوره با ثبت پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__course_fees_product_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__product_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_student_course__product_id
+msgid "Course Fees"
+msgstr "هزینه دوره"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__course_ids
+msgid "Courses"
+msgstr "دوره"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_res_config_settings__enable_create_student_user
+msgid "Create Student User"
+msgstr "کاربر دانشجویی ایجاد کنید"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__create_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__create_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__create_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__create_uid
+msgid "Created by"
+msgstr "ایجاد شده توسط"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__create_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__create_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__create_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__create_date
+msgid "Created on"
+msgstr "ایجاد شده در"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_14
+msgid "Daniel"
+msgstr "دانیل"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_14
+msgid "Daniel V King"
+msgstr "دانیل - کینگ"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_12
+msgid "David"
+msgstr "داود"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_12
+msgid "David L Adams"
+msgstr "دیوید ال آدامز"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__discount
+msgid "Discount (%)"
+msgstr "تخفیف (٪)"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__display_name
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__display_name
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__display_name
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__display_name
+msgid "Display Name"
+msgstr "نام"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__done
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__done
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Done"
+msgstr "انجام شده"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__done_count
+msgid "Done Count"
+msgstr "شمارش"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__draft
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__state__draft
+msgid "Draft"
+msgstr "پیش نویس"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__draft_count
+msgid "Draft Count"
+msgstr "شمارش پیش نویس"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__due_date
+msgid "Due Date"
+msgstr "دو تاریخ"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Educational Detail"
+msgstr "جزئیات تحصیلی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__email
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Email"
+msgstr "ایمیل"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_1
+msgid "Emma"
+msgstr "امات"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_1
+msgid "Emma J Parker"
+msgstr "اما جی پارکر"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.res_config_settings_view_user
+msgid ""
+"Enable this option to create a student\n"
+"                            user"
+msgstr ""
+"این گزینه را برای ایجاد دانش آموز فعال کنید\n"
+"                            کاربر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__end_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__end_date
+msgid "End Date"
+msgstr "تاریخ پایان"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission_register.py:0
+#: code:addons/openemis_admission/wizard/admission_analysis_wizard.py:0
+msgid "End Date cannot be set before Start Date."
+msgstr "تاریخ پایان را نمی توان قبل از تاریخ شروع تنظیم کرد."
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Enroll"
+msgstr "ثبت نام کردن"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Enrolled"
+msgstr "ثبت نام شده"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__family_business
+msgid "Family Business"
+msgstr "تجارت خانوادگی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__family_income
+msgid "Family Income"
+msgstr "درآمد خانواده"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+msgid "Favorites"
+msgstr "نفع"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__fees
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+msgid "Fees"
+msgstr "هزینه"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__fees_start_date
+msgid "Fees Start Date"
+msgstr "تاریخ شروع هزینه ها"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__fees_term_id
+msgid "Fees Term"
+msgstr "دوره هزینه"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__gender__f
+msgid "Female"
+msgstr "زن"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__first_name
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "First Name"
+msgstr "نام"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_follower_ids
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_follower_ids
+msgid "Followers"
+msgstr "پیروان"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_partner_ids
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "پیروان (شرکا)"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "آیکون عالی فونت به عنوان مثال دست و پا زدن"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_2
+msgid "Garcia"
+msgstr "گارسیا"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__gender
+msgid "Gender"
+msgstr "جنس"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Group By..."
+msgstr "گروه توسط ..."
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__has_message
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__has_message
+msgid "Has Message"
+msgstr "پیام دارد"
+
+#. module: openemis_admission
+#: model:ir.module.category,description:openemis_admission.module_category_all_op_admission
+#: model:ir.module.category,description:openemis_admission.module_category_openemis_admission
+msgid "Helps you manage your institutes different-different users."
+msgstr "به شما کمک می کند تا مؤسسات خود را مدیریت کنید."
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_15
+msgid "Henry"
+msgstr "هانری"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_15
+msgid "Henry S Lee"
+msgstr "هنری اس لی"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_23
+msgid "Hill"
+msgstr "تپه"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__id
+msgid "ID"
+msgstr "شناسه"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_exception_icon
+msgid "Icon"
+msgstr "نماد"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "نماد برای نشان دادن یک فعالیت استثنا."
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__message_needaction
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "در صورت بررسی ، پیام های جدید به توجه شما نیاز دارند."
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__message_has_error
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__message_has_sms_error
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__message_has_error
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "در صورت بررسی ، برخی از پیام ها خطای تحویل دارند."
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_13
+msgid "Imani"
+msgstr "امانی"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_13
+msgid "Imani J Jengo"
+msgstr "Faith J Building"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid "Import Template for Admission"
+msgstr "الگوی واردات برای پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__is_student
+msgid "Is Already Student"
+msgstr "در حال حاضر دانشجو است"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__is_favorite
+msgid "Is Favorite"
+msgstr "مورد علاقه است"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_is_follower
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_is_follower
+msgid "Is Follower"
+msgstr "پیرو است"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__duration_tracking
+msgid "JSON that maps ids from a many2one field to seconds spent"
+msgstr "json که شناسه ها را از یک زمینه many2one تا چند ثانیه صرف می کند"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_2
+msgid "James"
+msgstr "جیمز"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_2
+msgid "James M Garcia"
+msgstr "جیمز ام گارسیا"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_13
+msgid "Jengo"
+msgstr "ساختمان"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_17
+msgid "Johnson"
+msgstr "جانسون"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_10
+msgid "Joon"
+msgstr "جون"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_10
+msgid "Joon H Kim"
+msgstr "جون ح کیم"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_24
+msgid "Jun"
+msgstr "جون جون"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_24
+msgid "Jun W Wu"
+msgstr "جون دبلیو وو"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_5
+msgid "Kamau"
+msgstr "کمائو"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_10
+msgid "Kim"
+msgstr "کیم"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_14
+msgid "King"
+msgstr "پادشاه"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__last_name
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Last Name"
+msgstr "نام خانوادگی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__write_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__write_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__write_uid
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__write_uid
+msgid "Last Updated by"
+msgstr "آخرین به روز شده توسط"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__write_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__write_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_fees_line__write_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__write_date
+msgid "Last Updated on"
+msgstr "آخرین به روز شده در"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_15
+msgid "Lee"
+msgstr "لیز"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_8
+msgid "Lewis"
+msgstr "لوئیس"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_23
+msgid "Lily"
+msgstr "سوسن"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_23
+msgid "Lily G Hill"
+msgstr "لیلی ج هیل"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_8
+msgid "Lucas"
+msgstr "لواس"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_8
+msgid "Lucas D Lewis"
+msgstr "لوکاس دی لوئیس"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__gender__m
+msgid "Male"
+msgstr "مرد"
+
+#. module: openemis_admission
+#: model:res.groups,name:openemis_admission.group_op_admission_admin
+msgid "Manager"
+msgstr "مدیر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__max_count
+msgid "Maximum No. of Admission"
+msgstr "حداکثر تعداد پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_has_error
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_has_error
+msgid "Message Delivery error"
+msgstr "خطای تحویل پیام"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_ids
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_ids
+msgid "Messages"
+msgstr "پیام"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_9
+msgid "Michael"
+msgstr "میشل"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_9
+msgid "Michael H Young"
+msgstr "مایکل H یا جوان"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__middle_name
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Middle Name"
+msgstr "نام میانی"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission_register.py:0
+msgid "Min Admission can't be greater than Max Admission"
+msgstr "حداقل پذیرش نمی تواند از حداکثر پذیرش بیشتر باشد"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__min_count
+msgid "Minimum No. of Admission"
+msgstr "حداقل تعداد پذیرش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__minimum_age_criteria
+msgid "Minimum Required Age(Years)"
+msgstr "حداقل سن مورد نیاز (سال)"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_6
+msgid "Mitchell"
+msgstr "میچل"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__mobile
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Mobile"
+msgstr "متحرک"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "مهلت فعالیت من"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__name
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__name
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Name"
+msgstr "نام"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "مهلت فعالیت بعدی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_summary
+msgid "Next Activity Summary"
+msgstr "خلاصه فعالیت بعدی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع فعالیت بعدی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__nbr
+msgid "No of Admission"
+msgstr "عدم پذیرش"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission_register.py:0
+msgid "No of Admission should be positive!"
+msgstr "هیچ پذیرش نباید مثبت باشد!"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid "Not Eligible for Admission minimum required age is : %s "
+msgstr "واجد شرایط برای حداقل پذیرش حداقل سن مورد نیاز: ٪ s است"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_needaction_counter
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_needaction_counter
+msgid "Number of Actions"
+msgstr "تعداد اقدامات"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_has_error_counter
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_has_error_counter
+msgid "Number of errors"
+msgstr "تعداد خطاها"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__message_needaction_counter
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "تعداد پیام هایی که نیاز به اقدام دارند"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__message_has_error_counter
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "تعداد پیام ها با خطای تحویل"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_19
+msgid "Omari"
+msgstr "اماری"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__online_count
+msgid "Online Count"
+msgstr "شمارش آنلاین"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Open Student Profile"
+msgstr "مشخصات دانشجویی باز"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_22
+msgid "Oren"
+msgstr "معترض"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_22
+msgid "Oren H Shimon"
+msgstr "oren h Shimon"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_1
+#: model:op.admission,last_name:openemis_admission.op_admission_4
+msgid "Parker"
+msgstr "پارکر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__partner_id
+msgid "Partner"
+msgstr "شریک"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__pending
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Pending"
+msgstr "درنده"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Personal Detail"
+msgstr "جزئیات شخصی"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_20
+msgid "Phillips"
+msgstr "فیلیپس"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__phone
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Phone"
+msgstr "تلفن"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__prev_course_id
+msgid "Previous Course"
+msgstr "دوره قبلی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__prev_institute_id
+msgid "Previous Institute"
+msgstr "موسسه قبلی"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__prev_result
+msgid "Previous Result"
+msgstr "نتیجه قبلی"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.admission_analysis_form
+msgid "Print"
+msgstr "چاپ"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_3
+msgid "Priya"
+msgstr "پریا"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_3
+msgid "Priya R Reddy"
+msgstr "Priya r Reddy"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__program_id
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__program_id
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission_register__admission_base__program
+msgid "Program"
+msgstr "برنامه"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_3
+msgid "Reddy"
+msgstr "قرمز"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+msgid "Register"
+msgstr "ثبت نام"
+
+#. module: openemis_admission
+#: model:ir.actions.act_window,name:openemis_admission.act_open_op_admission_view
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_tree
+msgid "Registration"
+msgstr "ثبت"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Reject"
+msgstr "رد کردن"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__reject
+msgid "Rejected"
+msgstr "رد شده"
+
+#. module: openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission_report_root
+msgid "Reporting"
+msgstr "گزارش"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__activity_user_id
+msgid "Responsible User"
+msgstr "کاربر مسئول"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_7
+msgid "Rossi"
+msgstr "سعادت"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_17
+msgid "Ruby"
+msgstr "یاقوت"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_17
+msgid "Ruby N Johnson"
+msgstr "روبی ن جانسون"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__message_has_sms_error
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطای تحویل پیام کوتاه"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_20
+msgid "Sam"
+msgstr "سام"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_20
+msgid "Sam A Phillips"
+msgstr "سام فیلیپس"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_25
+msgid "Samira"
+msgstr "سمیرا"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_25
+msgid "Samira B Bassam"
+msgstr "Samira B Bassam"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_19
+msgid "Sekou"
+msgstr "مسکن"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_19
+msgid "Sekou O Omari"
+msgstr "Sekou O Omari"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Set to Draft"
+msgstr "تنظیم پیش نویس"
+
+#. module: openemis_admission
+#: model:ir.ui.menu,name:openemis_admission.menu_admission_config_settings
+msgid "Settings"
+msgstr "تنظیمات"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_11
+msgid "Sharma"
+msgstr "شرما"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_22
+msgid "Shimon"
+msgstr "شیمون"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_7
+msgid "Sofia"
+msgstr "صوفیان"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_7
+msgid "Sofia M Rossi"
+msgstr "صوفیا م روسی"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Start Admission"
+msgstr "پذیرش را شروع کنید"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_form
+msgid "Start Application"
+msgstr "برنامه شروع"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_admission_analysis__start_date
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__start_date
+msgid "Start Date"
+msgstr "تاریخ شروع"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__state
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "State"
+msgstr "حالت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__state_id
+msgid "States"
+msgstr "ایالات متحده"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__state
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_register_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_search
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_tree
+msgid "Status"
+msgstr "وضعیت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"وضعیت مبتنی بر فعالیتها\n"
+"تأخیر: موعد مقرر در حال حاضر تصویب شده است\n"
+"امروز: تاریخ فعالیت امروز است\n"
+"برنامه ریزی شده: فعالیت های آینده."
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__duration_tracking
+msgid "Status time"
+msgstr "زمان وضعیت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__street
+msgid "Street"
+msgstr "خیابان"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Street 2..."
+msgstr "خیابان 2 ..."
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Street..."
+msgstr "خیابان ..."
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__street2
+msgid "Street2"
+msgstr "خیابان 2"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__student_id
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Student"
+msgstr "دانشجوی"
+
+#. module: openemis_admission
+#: model:ir.model,name:openemis_admission.model_op_student_course
+msgid "Student Course Details"
+msgstr "جزئیات دوره دانشجویی"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.report_admission_analysis
+msgid "Student Name"
+msgstr "نام دانشجویی"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Submit"
+msgstr "ارسال کردن"
+
+#. module: openemis_admission
+#: model:ir.model.fields.selection,name:openemis_admission.selection__op_admission__state__submit
+msgid "Submitted"
+msgstr "مطلق"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_5
+msgid "Taye"
+msgstr "تراشه"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_5
+msgid "Taye K Kamau"
+msgstr "Taye K Kamau"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__academic_term_id
+msgid "Terms"
+msgstr "عناصر"
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid "The value of the deposit amount must be positive."
+msgstr "مقدار مبلغ سپرده باید مثبت باشد."
+
+#. module: openemis_admission
+#. odoo-python
+#: code:addons/openemis_admission/models/admission.py:0
+msgid ""
+"There is no income account defined for this product: \"%s\"."
+"                    You may have to install a chart of account from "
+"Accounting                    app, settings menu."
+msgstr ""
+"هیچ حساب درآمدی برای این محصول تعریف نشده است: \"٪ s\".                    "
+"ممکن است مجبور شوید نمودار حساب را از برنامه حسابداری ، منوی تنظیمات نصب "
+"کنید."
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__title
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "Title"
+msgstr "عنوان"
+
+#. module: openemis_admission
+#: model:op.admission,first_name:openemis_admission.op_admission_6
+msgid "Tony"
+msgstr "تونی"
+
+#. module: openemis_admission
+#: model:op.admission,name:openemis_admission.op_admission_6
+msgid "Tony J Mitchell"
+msgstr "تونی جی میچل"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__application_count
+msgid "Total_record"
+msgstr "total_record"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع فعالیت استثناء در ضبط."
+
+#. module: openemis_admission
+#: model:res.groups,name:openemis_admission.group_op_admission_user
+msgid "User"
+msgstr "کاربر"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__website_message_ids
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission_register__website_message_ids
+msgid "Website Messages"
+msgstr "پیام های وب سایت"
+
+#. module: openemis_admission
+#: model:ir.model.fields,help:openemis_admission.field_op_admission__website_message_ids
+#: model:ir.model.fields,help:openemis_admission.field_op_admission_register__website_message_ids
+msgid "Website communication history"
+msgstr "تاریخچه ارتباطات وب سایت"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_21
+msgid "Wood"
+msgstr "چوب"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_24
+msgid "Wu"
+msgstr "وو"
+
+#. module: openemis_admission
+#: model:op.admission,last_name:openemis_admission.op_admission_9
+msgid "Young"
+msgstr "جوان"
+
+#. module: openemis_admission
+#: model_terms:ir.ui.view,arch_db:openemis_admission.view_op_admission_form
+msgid "ZIP"
+msgstr "زیپ"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__zip
+msgid "Zip"
+msgstr "زیپ"
+
+#. module: openemis_admission
+#: model:ir.model.fields,field_description:openemis_admission.field_op_admission__image
+msgid "image"
+msgstr "تصویر"

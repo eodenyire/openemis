@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_student_health_sub"
+                  name="Health Records"
+                  parent="openemis_core.menu_op_general_student"
+                  sequence="20"
+                  action="act_open_op_student_health_view"
+                  groups="openemis_health.group_health_manager,openemis_health.group_health_user"/>
+
+        <menuitem id="menu_op_medical_condition_config"
+                  name="Medical Conditions"
+                  parent="openemis_core.menu_op_school_config"
+                  sequence="20"
+                  action="act_open_op_medical_condition_view"
+                  groups="openemis_health.group_health_manager"/>
+
+        <menuitem id="menu_op_vaccination_config"
+                  name="Vaccinations"
+                  parent="openemis_core.menu_op_school_config"
+                  sequence="21"
+                  action="act_open_op_vaccination_view"
+                  groups="openemis_health.group_health_manager"/>
+</odoo>

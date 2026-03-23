@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cbc_substrand_list" model="ir.ui.view">
+        <field name="name">cbc.substrand.list</field>
+        <field name="model">cbc.substrand</field>
+        <field name="arch" type="xml">
+            <list string="CBC Sub-strands">
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="strand_id"/>
+                <field name="outcome_count" string="Outcomes"/>
+                <field name="active" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cbc_substrand_form" model="ir.ui.view">
+        <field name="name">cbc.substrand.form</field>
+        <field name="model">cbc.substrand</field>
+        <field name="arch" type="xml">
+            <form string="CBC Sub-strand">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Sub-strand Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="sequence"/>
+                        </group>
+                        <group>
+                            <field name="strand_id"/>
+                        </group>
+                    </group>
+                    <field name="description"/>
+                    <notebook>
+                        <page string="Learning Outcomes">
+                            <field name="outcome_ids">
+                                <list editable="bottom">
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="grade_level"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_cbc_substrand_view">
+        <field name="name">CBC Sub-strands</field>
+        <field name="path">cbc-substrands</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cbc.substrand</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

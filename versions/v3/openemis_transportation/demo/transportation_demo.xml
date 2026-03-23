@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_transport_vehicle_1" model="op.transport.vehicle">
+        <field name="name">Bus 01</field>
+        <field name="registration_number">SCH-BUS-001</field>
+        <field name="vehicle_type">bus</field>
+        <field name="capacity">40</field>
+        <field name="driver_name">John Driver</field>
+        <field name="driver_phone">+1234567890</field>
+    </record>
+
+    <record id="op_transport_vehicle_2" model="op.transport.vehicle">
+        <field name="name">Van 01</field>
+        <field name="registration_number">SCH-VAN-001</field>
+        <field name="vehicle_type">van</field>
+        <field name="capacity">12</field>
+        <field name="driver_name">Jane Driver</field>
+        <field name="driver_phone">+0987654321</field>
+    </record>
+
+    <record id="op_transport_route_1" model="op.transport.route">
+        <field name="name">North Route</field>
+        <field name="code">NORTH-01</field>
+        <field name="vehicle_id" ref="op_transport_vehicle_1"/>
+        <field name="departure_time">7.5</field>
+        <field name="return_time">15.0</field>
+    </record>
+
+    <record id="op_transport_route_stop_1" model="op.transport.route.stop">
+        <field name="name">Main Street</field>
+        <field name="route_id" ref="op_transport_route_1"/>
+        <field name="sequence">10</field>
+        <field name="arrival_time">5</field>
+        <field name="landmark">Near Post Office</field>
+    </record>
+
+    <record id="op_transport_route_stop_2" model="op.transport.route.stop">
+        <field name="name">Park Avenue</field>
+        <field name="route_id" ref="op_transport_route_1"/>
+        <field name="sequence">20</field>
+        <field name="arrival_time">12</field>
+        <field name="landmark">Near City Park</field>
+    </record>
+</odoo>

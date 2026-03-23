@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_lms_course_1" model="op.lms.course">
+        <field name="name">Introduction to Python Programming</field>
+        <field name="code">LMS-PY-001</field>
+        <field name="description">&lt;p&gt;Learn Python programming from scratch. This course covers the fundamentals of Python including data types, control structures, functions, and object-oriented programming.&lt;/p&gt;</field>
+        <field name="faculty_id" ref="openemis_core.op_faculty_1"/>
+        <field name="state">published</field>
+    </record>
+
+    <record id="op_lms_course_2" model="op.lms.course">
+        <field name="name">Web Development Fundamentals</field>
+        <field name="code">LMS-WD-001</field>
+        <field name="description">&lt;p&gt;An introduction to web development covering HTML, CSS, and JavaScript basics. Students will build responsive web pages by the end of the course.&lt;/p&gt;</field>
+        <field name="faculty_id" ref="openemis_core.op_faculty_2"/>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="op_lms_section_1" model="op.lms.section">
+        <field name="name">Getting Started with Python</field>
+        <field name="lms_course_id" ref="op_lms_course_1"/>
+        <field name="sequence">10</field>
+        <field name="description">An overview of the Python environment and your first program.</field>
+    </record>
+
+    <record id="op_lms_section_2" model="op.lms.section">
+        <field name="name">Data Types and Variables</field>
+        <field name="lms_course_id" ref="op_lms_course_1"/>
+        <field name="sequence">20</field>
+        <field name="description">Understanding Python's built-in data types and how to use variables.</field>
+    </record>
+
+    <record id="op_lms_content_1" model="op.lms.content">
+        <field name="name">Course Introduction Video</field>
+        <field name="lms_section_id" ref="op_lms_section_1"/>
+        <field name="sequence">10</field>
+        <field name="content_type">video</field>
+        <field name="url">https://www.example.com/intro-python</field>
+        <field name="duration">10.0</field>
+        <field name="description">A brief introduction to the Python course.</field>
+    </record>
+
+    <record id="op_lms_content_2" model="op.lms.content">
+        <field name="name">Installing Python and Setup Guide</field>
+        <field name="lms_section_id" ref="op_lms_section_1"/>
+        <field name="sequence">20</field>
+        <field name="content_type">document</field>
+        <field name="duration">15.0</field>
+        <field name="description">Step-by-step guide to install Python and configure your development environment.</field>
+    </record>
+
+    <record id="op_lms_enrollment_1" model="op.lms.enrollment">
+        <field name="student_id" ref="openemis_core.op_student_1"/>
+        <field name="lms_course_id" ref="op_lms_course_1"/>
+        <field name="enrollment_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+        <field name="completion_percentage">35.0</field>
+        <field name="status">in_progress</field>
+    </record>
+
+    <record id="op_lms_enrollment_2" model="op.lms.enrollment">
+        <field name="student_id" ref="openemis_core.op_student_2"/>
+        <field name="lms_course_id" ref="op_lms_course_1"/>
+        <field name="enrollment_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+        <field name="completion_percentage">0.0</field>
+        <field name="status">enrolled</field>
+    </record>
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_lesson_sub"
+                  name="Lesson Plans"
+                  parent="openemis_core.menu_op_general_main"
+                  sequence="20"
+                  action="openemis_lesson.act_open_op_lesson_view"
+                  groups="openemis_lesson.group_lesson_manager,openemis_lesson.group_lesson_user"/>
+</odoo>

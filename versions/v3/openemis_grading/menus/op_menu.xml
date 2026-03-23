@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_op_grading_config"
+              name="Grading"
+              parent="openemis_core.menu_op_school_config"
+              sequence="20"/>
+
+    <menuitem id="menu_op_grading_config_sub"
+              name="Grade Scales"
+              parent="openemis_grading.menu_op_grading_config"
+              sequence="10"
+              action="act_open_op_grading_config_view"
+              groups="openemis_grading.group_grading_manager,openemis_grading.group_grading_user"/>
+
+    <menuitem id="menu_op_grading_rule_sub"
+              name="Grading Rules"
+              parent="openemis_grading.menu_op_grading_config"
+              sequence="20"
+              action="act_open_op_grading_rule_view"
+              groups="openemis_grading.group_grading_manager"/>
+</odoo>

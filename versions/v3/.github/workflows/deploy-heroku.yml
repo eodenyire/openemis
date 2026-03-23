@@ -1,0 +1,95 @@
+# =============================================================================
+# openEMIS – Heroku Container Deployment
+# =============================================================================
+# Builds the openEMIS Docker image and deploys it to Heroku Container Registry
+# when a new version is tagged (v*.*.*) or when a push is made to the
+# production branch.
+#
+# Required GitHub secrets:
+#   HEROKU_API_KEY   – Heroku API key (from Account Settings → API Key)
+#   HEROKU_APP_NAME  – Name of your Heroku app
+#   HEROKU_EMAIL     – Email associated with your Heroku account
+# =============================================================================
+name: Deploy – Heroku
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      heroku_app:
+        description: "Heroku app name (overrides secret)"
+        required: false
+        default: ""
+
+jobs:
+  deploy-heroku:
+    name: Deploy to Heroku
+    runs-on: ubuntu-latest
+    environment: heroku
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Heroku app name
+        id: app
+        run: |
+          APP="${{ github.event.inputs.heroku_app }}"
+          if [ -z "$APP" ]; then
+            APP="${{ secrets.HEROKU_APP_NAME }}"
+          fi
+          echo "name=${APP}" >> "$GITHUB_OUTPUT"
+
+      - name: Log in to Heroku Container Registry
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          echo "$HEROKU_API_KEY" | docker login \
+            --username="${{ secrets.HEROKU_EMAIL }}" \
+            --password-stdin \
+            registry.heroku.com
+
+      - name: Build Docker image
+        run: |
+          docker build -t "registry.heroku.com/${{ steps.app.outputs.name }}/web" .
+
+      - name: Push to Heroku Container Registry
+        run: |
+          docker push "registry.heroku.com/${{ steps.app.outputs.name }}/web"
+
+      - name: Release on Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          # Install Heroku CLI if not already present
+          if ! command -v heroku >/dev/null 2>&1; then
+            curl -fsSL https://cli-assets.heroku.com/install.sh | sh
+          fi
+          heroku container:release web --app "${{ steps.app.outputs.name }}"
+
+      - name: Open app URL
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          APP_URL="https://${{ steps.app.outputs.name }}.herokuapp.com"
+          echo "Deployed to: ${APP_URL}"
+          echo "APP_URL=${APP_URL}" >> "$GITHUB_ENV"
+
+      - name: Smoke test Heroku deployment
+        run: |
+          echo "Waiting for Heroku dyno to start…"
+          for i in $(seq 1 12); do
+            HTTP=$(curl -s -o /dev/null -w "%{http_code}" \
+              --max-time 15 \
+              "${APP_URL}/web/health" 2>/dev/null || echo "000")
+            if [ "$HTTP" = "200" ]; then
+              echo "✓ Heroku deployment is live (HTTP $HTTP)"
+              exit 0
+            fi
+            echo "  Attempt $i/12 – HTTP $HTTP – sleeping 15s…"
+            sleep 15
+          done
+          echo "::warning::Heroku health check did not return HTTP 200 in time"

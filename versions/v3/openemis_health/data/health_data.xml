@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <!-- Medical Conditions -->
+        <record id="op_medical_condition_asthma" model="op.medical.condition">
+            <field name="name">Asthma</field>
+        </record>
+        <record id="op_medical_condition_diabetes" model="op.medical.condition">
+            <field name="name">Diabetes</field>
+        </record>
+        <record id="op_medical_condition_epilepsy" model="op.medical.condition">
+            <field name="name">Epilepsy</field>
+        </record>
+        <record id="op_medical_condition_heart" model="op.medical.condition">
+            <field name="name">Heart Condition</field>
+        </record>
+        <record id="op_medical_condition_hearing" model="op.medical.condition">
+            <field name="name">Hearing Impairment</field>
+        </record>
+        <record id="op_medical_condition_visual" model="op.medical.condition">
+            <field name="name">Visual Impairment</field>
+        </record>
+        <record id="op_medical_condition_nut_allergy" model="op.medical.condition">
+            <field name="name">Nut Allergy</field>
+        </record>
+        <record id="op_medical_condition_lactose" model="op.medical.condition">
+            <field name="name">Lactose Intolerance</field>
+        </record>
+        <record id="op_medical_condition_autism" model="op.medical.condition">
+            <field name="name">Autism Spectrum</field>
+        </record>
+        <record id="op_medical_condition_adhd" model="op.medical.condition">
+            <field name="name">ADHD</field>
+        </record>
+
+        <!-- Vaccinations -->
+        <record id="op_vaccination_bcg" model="op.vaccination">
+            <field name="name">BCG</field>
+        </record>
+        <record id="op_vaccination_polio" model="op.vaccination">
+            <field name="name">Polio</field>
+        </record>
+        <record id="op_vaccination_hepatitis_b" model="op.vaccination">
+            <field name="name">Hepatitis B</field>
+        </record>
+        <record id="op_vaccination_mmr" model="op.vaccination">
+            <field name="name">MMR (Measles/Mumps/Rubella)</field>
+        </record>
+        <record id="op_vaccination_typhoid" model="op.vaccination">
+            <field name="name">Typhoid</field>
+        </record>
+        <record id="op_vaccination_yellow_fever" model="op.vaccination">
+            <field name="name">Yellow Fever</field>
+        </record>
+        <record id="op_vaccination_tetanus" model="op.vaccination">
+            <field name="name">Tetanus</field>
+        </record>
+        <record id="op_vaccination_influenza" model="op.vaccination">
+            <field name="name">Influenza</field>
+        </record>
+</odoo>

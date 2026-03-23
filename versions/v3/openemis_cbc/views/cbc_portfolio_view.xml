@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cbc_portfolio_list" model="ir.ui.view">
+        <field name="name">cbc.portfolio.list</field>
+        <field name="model">cbc.portfolio</field>
+        <field name="arch" type="xml">
+            <list string="CBC Portfolios" decoration-success="state == 'reviewed'"
+                  decoration-info="state == 'submitted'">
+                <field name="name"/>
+                <field name="student_id"/>
+                <field name="grade_level"/>
+                <field name="academic_year_id"/>
+                <field name="term"/>
+                <field name="assessment_count" string="Assessments"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cbc_portfolio_form" model="ir.ui.view">
+        <field name="name">cbc.portfolio.form</field>
+        <field name="model">cbc.portfolio</field>
+        <field name="arch" type="xml">
+            <form string="Student Portfolio">
+                <header>
+                    <button name="action_submit" string="Submit"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_review" string="Mark Reviewed"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'submitted'"/>
+                    <button name="action_reset_draft" string="Reset to Draft"
+                            type="object"
+                            invisible="state == 'draft'"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,submitted,reviewed"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Portfolio Title"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="grade_level"/>
+                        </group>
+                        <group>
+                            <field name="academic_year_id"/>
+                            <field name="term"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description" placeholder="Portfolio description and student reflection…"/>
+                            <separator string="Teacher Comment"/>
+                            <field name="teacher_comment"/>
+                            <separator string="Parent / Guardian Comment"/>
+                            <field name="parent_comment"/>
+                        </page>
+                        <page string="Formative Assessments">
+                            <field name="assessment_ids">
+                                <list>
+                                    <field name="date"/>
+                                    <field name="name"/>
+                                    <field name="assessment_type"/>
+                                    <field name="outcome_id"/>
+                                    <field name="performance_level"/>
+                                    <field name="score"/>
+                                </list>
+                            </field>
+                        </page>
+                        <page string="Evidence Files">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_cbc_portfolio_search" model="ir.ui.view">
+        <field name="name">cbc.portfolio.search</field>
+        <field name="model">cbc.portfolio</field>
+        <field name="arch" type="xml">
+            <search string="CBC Portfolios">
+                <field name="name"/>
+                <field name="student_id"/>
+                <filter string="Draft" name="draft" domain="[('state','=','draft')]"/>
+                <filter string="Submitted" name="submitted" domain="[('state','=','submitted')]"/>
+                <filter string="Reviewed" name="reviewed" domain="[('state','=','reviewed')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Student" name="student"
+                            context="{'group_by': 'student_id'}"/>
+                    <filter string="Grade Level" name="grade_level"
+                            context="{'group_by': 'grade_level'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_cbc_portfolio_view">
+        <field name="name">Student Portfolios</field>
+        <field name="path">cbc-portfolios</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cbc.portfolio</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_cbc_portfolio_search"/>
+    </record>
+</odoo>

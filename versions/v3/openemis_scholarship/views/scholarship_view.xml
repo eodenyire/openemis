@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <record id="view_op_scholarship_list" model="ir.ui.view">
+            <field name="name">op.scholarship.list</field>
+            <field name="model">op.scholarship</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <list string="Scholarships">
+                    <field name="name"/>
+                    <field name="student_id"/>
+                    <field name="scholarship_type_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="amount"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="state"
+                           decoration-success="state == 'approved'"
+                           decoration-info="state == 'applied'"
+                           decoration-danger="state == 'rejected'"
+                           decoration-muted="state in ('expired', 'draft')"
+                           widget="badge"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_op_scholarship_form" model="ir.ui.view">
+            <field name="name">op.scholarship.form</field>
+            <field name="model">op.scholarship</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Scholarship">
+                    <header>
+                        <button name="action_apply" string="Apply"
+                                type="object" class="oe_highlight"
+                                invisible="state != 'draft'"
+                                groups="openemis_scholarship.group_scholarship_user"/>
+                        <button name="action_approve" string="Approve"
+                                type="object" class="oe_highlight"
+                                invisible="state != 'applied'"
+                                groups="openemis_scholarship.group_scholarship_manager"/>
+                        <button name="action_reject" string="Reject"
+                                type="object"
+                                invisible="state not in ('applied', 'approved')"
+                                groups="openemis_scholarship.group_scholarship_manager"/>
+                        <button name="action_expire" string="Mark as Expired"
+                                type="object"
+                                invisible="state != 'approved'"
+                                groups="openemis_scholarship.group_scholarship_manager"/>
+                        <button name="action_reset_draft" string="Reset to Draft"
+                                type="object"
+                                invisible="state != 'rejected'"
+                                groups="openemis_scholarship.group_scholarship_manager"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_visible="draft,applied,approved"/>
+                    </header>
+                    <sheet>
+                        <field name="active" invisible="1"/>
+                        <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                                invisible="active == True"/>
+                        <div class="oe_title">
+                            <label for="name" string="Scholarship Title"/>
+                            <h1>
+                                <field name="name" placeholder="Scholarship Title"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="student_id"/>
+                                <field name="scholarship_type_id"/>
+                                <field name="amount"/>
+                            </group>
+                            <group>
+                                <field name="academic_year_id"/>
+                                <field name="course_id"/>
+                                <field name="start_date"/>
+                                <field name="end_date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Description">
+                                <field name="description" placeholder="Add a description..."/>
+                            </page>
+                            <page string="Rejection Reason"
+                                  invisible="state != 'rejected'">
+                                <field name="rejection_reason"
+                                       placeholder="Enter the reason for rejection..."/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_op_scholarship_search" model="ir.ui.view">
+            <field name="name">op.scholarship.search</field>
+            <field name="model">op.scholarship</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Scholarships">
+                    <field name="name"/>
+                    <field name="student_id"/>
+                    <field name="scholarship_type_id"/>
+                    <field name="academic_year_id"/>
+                    <filter string="Draft" name="draft"
+                            domain="[('state', '=', 'draft')]"/>
+                    <filter string="Applied" name="applied"
+                            domain="[('state', '=', 'applied')]"/>
+                    <filter string="Approved" name="approved"
+                            domain="[('state', '=', 'approved')]"/>
+                    <filter string="Rejected" name="rejected"
+                            domain="[('state', '=', 'rejected')]"/>
+                    <filter string="Expired" name="expired"
+                            domain="[('state', '=', 'expired')]"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive"
+                            domain="[('active', '=', False)]"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Student" name="group_by_student"
+                                context="{'group_by': 'student_id'}"/>
+                        <filter string="Scholarship Type" name="group_by_type"
+                                context="{'group_by': 'scholarship_type_id'}"/>
+                        <filter string="Academic Year" name="group_by_year"
+                                context="{'group_by': 'academic_year_id'}"/>
+                        <filter string="State" name="group_by_state"
+                                context="{'group_by': 'state'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_op_scholarship_pivot" model="ir.ui.view">
+            <field name="name">op.scholarship.pivot</field>
+            <field name="model">op.scholarship</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <pivot string="Scholarship Pivot">
+                    <field name="scholarship_type_id" type="row"/>
+                    <field name="academic_year_id" type="col"/>
+                    <field name="amount" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_op_scholarship_graph">
+            <field name="name">op.scholarship.graph</field>
+            <field name="model">op.scholarship</field>
+            <field name="arch" type="xml">
+                <graph string="Scholarship Graph View" type="bar">
+                    <field name="scholarship_type_id"/>
+                    <field name="amount" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_scholarship_view">
+            <field name="name">Scholarships</field>
+            <field name="path">scholarship</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.scholarship</field>
+            <field name="binding_view_types">form</field>
+            <field name="view_mode">list,form,pivot,graph</field>
+            <field name="search_view_id" ref="view_op_scholarship_search"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_scholarship_view_form">
+            <field name="act_window_id" ref="act_open_op_scholarship_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_op_scholarship_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_op_scholarship_view_list">
+            <field name="act_window_id" ref="act_open_op_scholarship_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">list</field>
+            <field name="view_id" ref="view_op_scholarship_list"/>
+        </record>
+</odoo>

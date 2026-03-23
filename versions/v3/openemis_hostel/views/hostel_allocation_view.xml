@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_op_hostel_allocation_list" model="ir.ui.view">
+        <field name="name">op.hostel.allocation.list</field>
+        <field name="model">op.hostel.allocation</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Allocations">
+                <field name="student_id"/>
+                <field name="room_id"/>
+                <field name="academic_year_id"/>
+                <field name="check_in_date"/>
+                <field name="check_out_date" optional="show"/>
+                <field name="monthly_fee"/>
+                <field name="state"
+                       widget="badge"
+                       decoration-muted="state == 'draft'"
+                       decoration-success="state == 'confirmed'"
+                       decoration-info="state == 'checked_out'"
+                       decoration-danger="state == 'cancelled'"
+                       optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_op_hostel_allocation_form" model="ir.ui.view">
+        <field name="name">op.hostel.allocation.form</field>
+        <field name="model">op.hostel.allocation</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Hostel Allocation">
+                <header>
+                    <button string="Confirm"
+                            name="action_confirm"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button string="Check Out"
+                            name="action_checkout"
+                            type="object"
+                            class="oe_highlight"
+                            invisible="state != 'confirmed'"/>
+                    <button string="Cancel"
+                            name="action_cancel"
+                            type="object"
+                            invisible="state not in ('draft', 'confirmed')"/>
+                    <button string="Reset to Draft"
+                            name="action_draft"
+                            type="object"
+                            invisible="state not in ('cancelled', 'checked_out')"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,confirmed,checked_out"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <group>
+                        <group>
+                            <field name="student_id"
+                                   readonly="state not in ('draft',)"/>
+                            <field name="room_id"
+                                   readonly="state not in ('draft',)"/>
+                            <field name="academic_year_id"
+                                   readonly="state not in ('draft',)"/>
+                        </group>
+                        <group>
+                            <field name="check_in_date"
+                                   readonly="state not in ('draft',)"/>
+                            <field name="check_out_date"/>
+                            <field name="monthly_fee"/>
+                        </group>
+                    </group>
+                    <div>
+                        <label for="notes" string="Notes" class="mt32"/>
+                        <field name="notes" nolabel="1"/>
+                    </div>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_op_hostel_allocation_search" model="ir.ui.view">
+        <field name="name">op.hostel.allocation.search</field>
+        <field name="model">op.hostel.allocation</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Allocations">
+                <field name="student_id"/>
+                <field name="room_id"/>
+                <field name="academic_year_id"/>
+                <filter string="Draft" name="draft"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter string="Confirmed" name="confirmed"
+                        domain="[('state', '=', 'confirmed')]"/>
+                <filter string="Checked Out" name="checked_out"
+                        domain="[('state', '=', 'checked_out')]"/>
+                <filter string="Cancelled" name="cancelled"
+                        domain="[('state', '=', 'cancelled')]"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Student" name="group_student"
+                            context="{'group_by': 'student_id'}"/>
+                    <filter string="Room" name="group_room"
+                            context="{'group_by': 'room_id'}"/>
+                    <filter string="Academic Year" name="group_year"
+                            context="{'group_by': 'academic_year_id'}"/>
+                    <filter string="Status" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_op_hostel_allocation_view">
+        <field name="name">Hostel Allocations</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.hostel.allocation</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_hostel_allocation_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_hostel_allocation_view_list">
+        <field name="act_window_id" ref="act_open_op_hostel_allocation_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_hostel_allocation_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_hostel_allocation_view_form">
+        <field name="act_window_id" ref="act_open_op_hostel_allocation_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_hostel_allocation_form"/>
+    </record>
+</odoo>

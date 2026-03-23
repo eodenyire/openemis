@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_achievement_sub"
+                  name="Achievements"
+                  parent="openemis_core.menu_op_general_student"
+                  sequence="11"
+                  action="act_open_op_achievement_view"
+                  groups="openemis_achievement.group_achievement_manager,openemis_achievement.group_achievement_user"/>
+
+        <menuitem id="menu_op_achievement_type_sub"
+                  name="Achievement Types"
+                  parent="openemis_core.menu_op_school_config"
+                  sequence="11"
+                  action="act_open_op_achievement_type_view"
+                  groups="openemis_achievement.group_achievement_manager"/>
+</odoo>

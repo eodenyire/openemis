@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_achievement_1" model="op.achievement">
+            <field name="name">Best Student of the Year</field>
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="achievement_type_id" ref="op_achievement_type_1"/>
+            <field name="date" eval="(DateTime.today() - relativedelta(months=1)).strftime('%Y-%m-%d')"/>
+            <field name="faculty_id" ref="openemis_core.op_faculty_1"/>
+            <field name="description">Awarded for maintaining the highest GPA in the department.</field>
+            <field name="award_by">Department of Computer Science</field>
+        </record>
+
+        <record id="op_achievement_2" model="op.achievement">
+            <field name="name">Inter-College Football Champion</field>
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="achievement_type_id" ref="op_achievement_type_2"/>
+            <field name="date" eval="(DateTime.today() - relativedelta(months=2)).strftime('%Y-%m-%d')"/>
+            <field name="faculty_id" ref="openemis_core.op_faculty_2"/>
+            <field name="description">Led the college football team to victory in the inter-college championship.</field>
+            <field name="award_by">Sports Committee</field>
+        </record>
+
+        <record id="openemis_core.op_user_faculty" model="res.users">
+            <field name="groups_id"
+            eval="[(4,ref('openemis_achievement.group_achievement_user'))]"/>
+        </record>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+        <menuitem id="menu_op_activity_sub"
+                  name="Activity Logs"
+                  parent="openemis_core.menu_op_general_student"
+                  sequence="10"
+                  action="act_open_op_activity_view"
+                  groups="openemis_activity.group_activity_manager,openemis_activity.group_activity_user"/>
+
+        <menuitem id="menu_op_activity_type_sub"
+                  name="Activity Types"
+                  parent="openemis_core.menu_op_school_config_activity"
+                  sequence="10"
+                  action="act_open_op_activity_type_view"
+                  groups="openemis_activity.group_activity_manager"/>
+
+        <menuitem id="menu_student_migrate"
+                  name="Student Migration"
+                  parent="openemis_core.menu_op_general_main"
+                  sequence="30"
+                  action="act_open_student_migrate_view"
+                  groups="openemis_activity.group_activity_manager,openemis_activity.group_activity_user"/>
+</odoo>

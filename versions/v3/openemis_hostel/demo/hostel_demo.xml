@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="hostel_block_a" model="op.hostel.block">
+        <field name="name">Block A</field>
+        <field name="code">BLK-A</field>
+        <field name="capacity">50</field>
+        <field name="description">Main hostel block for boys.</field>
+    </record>
+
+    <record id="hostel_block_b" model="op.hostel.block">
+        <field name="name">Block B</field>
+        <field name="code">BLK-B</field>
+        <field name="capacity">50</field>
+        <field name="description">Main hostel block for girls.</field>
+    </record>
+
+    <record id="hostel_room_101" model="op.hostel.room">
+        <field name="name">101</field>
+        <field name="block_id" ref="hostel_block_a"/>
+        <field name="room_type_id" ref="openemis_hostel.hostel_room_type_double"/>
+    </record>
+
+    <record id="hostel_room_102" model="op.hostel.room">
+        <field name="name">102</field>
+        <field name="block_id" ref="hostel_block_a"/>
+        <field name="room_type_id" ref="openemis_hostel.hostel_room_type_single"/>
+    </record>
+
+    <record id="hostel_room_201" model="op.hostel.room">
+        <field name="name">201</field>
+        <field name="block_id" ref="hostel_block_b"/>
+        <field name="room_type_id" ref="openemis_hostel.hostel_room_type_dormitory"/>
+    </record>
+</odoo>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Inventory Item Views -->
+    <record id="view_op_inventory_item_list" model="ir.ui.view">
+        <field name="name">op.inventory.item.list</field>
+        <field name="model">op.inventory.item</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Inventory Items" decoration-danger="low_stock == True">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="unit_of_measure" optional="hide"/>
+                <field name="current_stock"/>
+                <field name="min_stock_level" optional="hide"/>
+                <field name="unit_price" optional="hide"/>
+                <field name="low_stock" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_item_form" model="ir.ui.view">
+        <field name="name">op.inventory.item.form</field>
+        <field name="model">op.inventory.item</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Inventory Item">
+                <header/>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <widget name="web_ribbon" title="Low Stock" bg_color="bg-warning"
+                            invisible="low_stock == False"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="Item Name"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="category_id"/>
+                            <field name="unit_of_measure"/>
+                        </group>
+                        <group>
+                            <field name="current_stock"/>
+                            <field name="min_stock_level"/>
+                            <field name="unit_price"/>
+                            <field name="low_stock"/>
+                        </group>
+                    </group>
+                    <div>
+                        <label for="description" string="Description" class="mt32"/>
+                        <field name="description" nolabel="1"/>
+                    </div>
+                    <field name="transaction_ids">
+                        <list string="Transactions" editable="bottom">
+                            <field name="date"/>
+                            <field name="transaction_type"/>
+                            <field name="quantity"/>
+                            <field name="department_id"/>
+                            <field name="reference"/>
+                        </list>
+                    </field>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_item_search" model="ir.ui.view">
+        <field name="name">op.inventory.item.search</field>
+        <field name="model">op.inventory.item</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Inventory Items">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="category_id"/>
+                <filter string="Low Stock" name="low_stock"
+                        domain="[('low_stock', '=', True)]"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Category" name="group_category"
+                            context="{'group_by': 'category_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_op_inventory_item_pivot" model="ir.ui.view">
+        <field name="name">op.inventory.item.pivot</field>
+        <field name="model">op.inventory.item</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <pivot string="Inventory Pivot">
+                <field name="category_id" type="row"/>
+                <field name="current_stock" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_open_op_inventory_item_view">
+        <field name="name">Inventory Items</field>
+        <field name="path">inventory-items</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.inventory.item</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form,pivot</field>
+        <field name="search_view_id" ref="view_op_inventory_item_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_op_inventory_item_view_form">
+        <field name="act_window_id" ref="act_open_op_inventory_item_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_inventory_item_form"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_op_inventory_item_view_list">
+        <field name="act_window_id" ref="act_open_op_inventory_item_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_inventory_item_list"/>
+    </record>
+</odoo>

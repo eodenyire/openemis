@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+        <record id="view_op_student_form_fees_inherit" model="ir.ui.view">
+            <field name="name">op.student.form.fees.inherit</field>
+            <field name="model">op.student</field>
+            <field name="inherit_id" ref="openemis_core.view_op_student_form"/>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button class="btn oe_stat_button" type="object"
+                            name="action_view_invoice"
+                            style="border-right: 1px solid;"
+                            icon="fa-pencil-square-o"
+                            groups="openemis_fees.group_op_fees_admin">
+                        <field name="company_currency_id" invisible="1"/>
+                        <field string="Invoiced" name="total_invoiced" widget="statinfo"/>
+                    </button>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="fees_details" string="Fees Details"
+                          groups="openemis_fees.group_op_fees_admin,openemis_fees.group_openemis_fees_user">
+                        <field name="fees_detail_ids">
+                            <list string="Fees Collection Details" editable="bottom">
+                                <field name="fees_line_id"/>
+                                <field name="product_id"/>
+                                <field name="amount"/>
+                                <field name="discount"/>
+                                <field name="after_discount_amount"/>
+                                <field name="date"/>
+                                <field name="state"/>
+                                <field name="invoice_state"/>
+                                <button name="get_invoice" type="object"
+                                        string="Create Invoice"
+                                        invisible="state != 'draft'"
+                                        title="Create Invoice"
+                                        class="btn-primary"/>
+                                <button name="action_get_invoice" type="object"
+                                        string="View Invoice"
+                                        invisible="state != 'invoice'"
+                                        title="View Invoice"
+                                        class="btn-secondary"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_op_student_fees_details_view">
+            <field name="name">Student Fees Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">op.student.fees.details</field>
+            <field name="path">student-fees-details</field>
+            <field name="view_mode">list,form</field>
+        </record>
+
+</odoo>

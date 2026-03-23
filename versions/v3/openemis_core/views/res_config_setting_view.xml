@@ -1,0 +1,442 @@
+<odoo>
+    <record id="res_config_settings_view_form_core" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.core</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="40" />
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="openEMIS" string="openEMIS"
+                    name="openemis_core"
+                    groups="openemis_core.group_op_back_office_admin"
+                    id="openemis_core_setting">
+                    <div name="openemis_core">
+                        <h2 id="openemis_sis">Student Information System (SIS)</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                name="openemis_activity">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_activity" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_activity" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/student-progression/student-progression.html#activity"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Specify different
+                                        activities which is held in an institute.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                name="openemis_facility">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_facility" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_facility" />
+                                    <a
+                                        href="https://docs.openemis.org/openemis/basic-openemis.html?highlight=facility#basic-configuration"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Specify different
+                                        facilities of an institute.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box"
+                                name="openemis_parent">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_parent" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_parent" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/parent/parent-details.html#parent"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">It allows you to store the
+                                        details of the Parents.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_admission_apps">Admission</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_admission" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_admission" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/enrollment/enrollment-admission-register.html#admission-registers"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">It facilitates the applicant admission
+                                        process.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_assignment_apps">Assignment</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_assignment" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_assignment" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/Assignments/assignment-type.html#assignments"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Enables configuration of assignment
+                                        types for streamlined academic administration.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_attendance_apps">Attendance</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_attendance" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_attendance" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/Attendance/attendance-register.html#attendance-register"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">It offers an attendance management
+                                        feature, creating registers for specific batches and courses
+                                        to track attendance.
+                                    </div>
+                                    <div class="content-group"
+                                        invisible="module_openemis_attendance == False">
+                                        <div class="mt16">
+                                            <div class="o_setting_right_pane">
+                                                <field name="attendance_subject_generic"
+                                                    widget="radio" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_classroom_apps">Classroom</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_classroom" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_classroom" />
+                                    <a
+                                        href="https://docs.openemis.org/openemis/class-room-openemis.html#class-room-management"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Configures the classroom setup.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_exam_apps">Exam</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_exam" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_exam" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/Exam/exam-type.html#exam"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">It provides the facility to configure
+                                        exam related details like exam types and exam rooms.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_fees_apps">Fees</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_fees" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_fees" />
+                                    <div class="text-muted">It helps to configure the fees
+                                        structure.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_library_apps">Library</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_library" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_library" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/library/library-book.html#library"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Manages the library system for an
+                                        institute.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_timetable_apps">Timetable</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_timetable" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_timetable" />
+                                    <a
+                                        href="https://docs.openemis.org/applications/Timetable/timetable-configure-subject.html#timetable"
+                                        title="Documentation" class="o_doc_link"
+                                        target="_blank" />
+                                    <div class="text-muted">Configure sessions and time table for
+                                        an institute.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_digital_tools">Digital Tools</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_blog" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_blog" />
+                                    <div class="text-muted">Educational blog where mentors,
+                                        teachers and parents share articles accessible to all
+                                        students.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_mentorship" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_mentorship" />
+                                    <div class="text-muted">Connect students with mentors via
+                                        direct messages and group discussion forums.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_digiguide" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_digiguide" />
+                                    <div class="text-muted">CBC academic performance tracking,
+                                        national exam prediction and KUCCPS career guidance
+                                        integration.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_lms" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_lms" />
+                                    <div class="text-muted">Online Learning Management System —
+                                        create courses, sections, and content for students to
+                                        enroll and track progress.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_lesson" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_lesson" />
+                                    <div class="text-muted">Faculty lesson planning tool —
+                                        record learning objectives, teaching methods, and
+                                        homework for each session.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_notice_board" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_notice_board" />
+                                    <div class="text-muted">School notice board — publish
+                                        announcements and notices to students, faculty and
+                                        parents.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_student_welfare">Student Welfare</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_achievement" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_achievement" />
+                                    <div class="text-muted">Track student achievements and
+                                        awards across academic, sports, arts, and other
+                                        categories.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_discipline" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_discipline" />
+                                    <div class="text-muted">Manage student disciplinary records,
+                                        misbehaviour categories, and disciplinary actions with
+                                        workflow.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_health" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_health" />
+                                    <div class="text-muted">Store student medical records,
+                                        vaccinations, allergies, and emergency contact details.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_scholarship" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_scholarship" />
+                                    <div class="text-muted">Manage scholarship types, criteria,
+                                        and student scholarship applications with approval
+                                        workflow.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_alumni" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_alumni" />
+                                    <div class="text-muted">Manage alumni records, track graduate
+                                        employment and career progression.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_transportation" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_transportation" />
+                                    <div class="text-muted">Manage school transport vehicles,
+                                        routes, stops, and student transport assignments.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_grading_section">Grading</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-12 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_grading" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_grading" />
+                                    <div class="text-muted">Configure letter grade scales and
+                                        GPA values for converting numerical marks to grades
+                                        (A+, A, B+, B, C, D, F).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h2 id="openemis_infrastructure">Infrastructure &amp; Operations</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_hostel" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_hostel" />
+                                    <div class="text-muted">Manage hostel blocks, rooms, and
+                                        student accommodation allocations with occupancy
+                                        tracking.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_inventory" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_inventory" />
+                                    <div class="text-muted">Manage school supplies, equipment
+                                        and inventory with stock-in/out tracking and
+                                        department allocation.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_cafeteria" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_cafeteria" />
+                                    <div class="text-muted">Manage school cafeteria menu items,
+                                        daily meal plans, and dietary information.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="module_openemis_event" />
+                                </div>
+                                <div class="o_setting_right_pane">
+                                    <label for="module_openemis_event" />
+                                    <div class="text-muted">Manage school events — sports days,
+                                        seminars, cultural fests — with registration and
+                                        calendar view.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

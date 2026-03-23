@@ -1,0 +1,109 @@
+# =============================================================================
+# openEMIS – Continuous Integration
+# =============================================================================
+# Runs on every push / pull-request and executes:
+#   1. Python linting (flake8)
+#   2. Odoo unit tests for every openEMIS module that ships tests
+#
+# The workflow starts a PostgreSQL service container and then launches the
+# Odoo test runner in the official odoo:18.0 Docker image via `docker run`.
+# =============================================================================
+name: CI – Lint & Unit Tests
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # 1. Linting
+  # ---------------------------------------------------------------------------
+  lint:
+    name: Flake8 Lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install flake8
+        run: pip install "flake8==6.1.0" "flake8-bugbear==23.9.16" "flake8-print==5.0.0" "importlib-metadata<6.0.0"
+
+      - name: Run flake8
+        run: flake8 --config=cfg_run_flake8.cfg .
+
+  # ---------------------------------------------------------------------------
+  # 2. Unit tests – runs Odoo's test runner for every module
+  # ---------------------------------------------------------------------------
+  unit-tests:
+    name: Odoo Unit Tests
+    runs-on: ubuntu-latest
+    needs: lint
+    permissions:
+      contents: read
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U odoo -d postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull Odoo image
+        run: docker pull odoo:18.0
+
+      - name: Run openEMIS unit tests
+        run: |
+          docker run --rm \
+            --network host \
+            -v "${{ github.workspace }}:/mnt/extra-addons" \
+            -e HOST=localhost \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            odoo:18.0 \
+            odoo \
+              --db_host=localhost \
+              --db_port=5432 \
+              --db_user=odoo \
+              --db_password=odoo \
+              --database=openemis_test \
+              --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons \
+              --init=openemis_core \
+              --load-language=en_US \
+              --without-demo=False \
+              --test-enable \
+              --stop-after-init \
+              --log-level=test \
+              2>&1 | tee /tmp/odoo_test.log || true
+          # Surface test failures
+          if grep -q "ERROR\|CRITICAL\|At least one test failed" /tmp/odoo_test.log 2>/dev/null; then
+            echo "::error::Odoo unit tests reported failures – see log above."
+            exit 1
+          fi
+          echo "All unit tests passed."
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: odoo-unit-test-log
+          path: /tmp/odoo_test.log
+          if-no-files-found: ignore

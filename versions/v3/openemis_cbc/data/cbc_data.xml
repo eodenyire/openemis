@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Kenya CBC Core Competency Strands (KICD defined) -->
+    <record id="strand_communication" model="cbc.strand">
+        <field name="name">Communication and Collaboration</field>
+        <field name="code">CC</field>
+        <field name="sequence">10</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Ability to convey ideas, information and feelings effectively
+            through listening, speaking, reading, writing, and using digital
+            tools; and to work cooperatively with others.
+        </field>
+    </record>
+
+    <record id="strand_critical_thinking" model="cbc.strand">
+        <field name="name">Critical Thinking and Problem Solving</field>
+        <field name="code">CT</field>
+        <field name="sequence">20</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Ability to analyse, evaluate and synthesise information to solve
+            problems and make sound decisions.
+        </field>
+    </record>
+
+    <record id="strand_creativity" model="cbc.strand">
+        <field name="name">Creativity and Imagination</field>
+        <field name="code">CI</field>
+        <field name="sequence">30</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Ability to think flexibly, generate new ideas, and produce
+            novel, original work.
+        </field>
+    </record>
+
+    <record id="strand_citizenship" model="cbc.strand">
+        <field name="name">Citizenship</field>
+        <field name="code">CZ</field>
+        <field name="sequence">40</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Understanding and exercising rights, responsibilities, values and
+            a sense of identity as a Kenyan and global citizen.
+        </field>
+    </record>
+
+    <record id="strand_digital_literacy" model="cbc.strand">
+        <field name="name">Digital Literacy</field>
+        <field name="code">DL</field>
+        <field name="sequence">50</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Ability to use ICT and digital tools safely, responsibly and
+            effectively for learning and daily life.
+        </field>
+    </record>
+
+    <record id="strand_learning_to_learn" model="cbc.strand">
+        <field name="name">Learning to Learn</field>
+        <field name="code">LL</field>
+        <field name="sequence">60</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Developing awareness of one's own learning process and acquiring
+            skills to plan, monitor and evaluate learning.
+        </field>
+    </record>
+
+    <record id="strand_self_efficacy" model="cbc.strand">
+        <field name="name">Self-Efficacy</field>
+        <field name="code">SE</field>
+        <field name="sequence">70</field>
+        <field name="grade_band">all</field>
+        <field name="description">
+            Belief in one's capacity to succeed; resilience, social
+            awareness and emotional regulation.
+        </field>
+    </record>
+</odoo>

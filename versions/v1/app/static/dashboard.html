@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>openEMIS – Dashboard</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f0f2f5; display: flex; min-height: 100vh; }
+    .sidebar { width: 240px; min-height: 100vh; background: linear-gradient(180deg,#1a237e,#0d47a1); color: #fff; display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top:0; left:0; bottom:0; z-index: 100; overflow-y:auto; }
+    .sidebar-logo { padding: 20px 20px 14px; border-bottom: 1px solid rgba(255,255,255,.15); flex-shrink:0; }
+    .sidebar-logo h2 { font-size: 18px; font-weight: 700; }
+    .sidebar-logo p  { font-size: 11px; opacity: .7; margin-top: 2px; }
+    .sidebar-nav { flex: 1; padding: 8px 0; }
+    .nav-section { padding: 8px 20px 3px; font-size: 10px; font-weight: 700; opacity: .5; text-transform: uppercase; letter-spacing: 1px; }
+    .nav-item { display: flex; align-items: center; gap: 10px; padding: 9px 20px; font-size: 13px; cursor: pointer; transition: background .15s; border-left: 3px solid transparent; }
+    .nav-item:hover  { background: rgba(255,255,255,.1); }
+    .nav-item.active { background: rgba(255,255,255,.15); border-left-color: #fff; font-weight: 600; }
+    .nav-item .icon  { font-size: 15px; width: 20px; text-align: center; }
+    .sidebar-footer { padding: 12px 20px; border-top: 1px solid rgba(255,255,255,.15); font-size: 11px; opacity: .6; flex-shrink:0; }
+    .main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+    .topbar { background: #fff; padding: 0 28px; height: 56px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 1px 4px rgba(0,0,0,.08); position: sticky; top: 0; z-index: 10; }
+    .topbar h1 { font-size: 17px; font-weight: 600; color: #1a237e; }
+    .topbar-right { display: flex; align-items: center; gap: 14px; }
+    .user-badge { display: flex; align-items: center; gap: 8px; background: #f0f2f5; border-radius: 20px; padding: 5px 12px 5px 6px; }
+    .avatar { width: 28px; height: 28px; border-radius: 50%; background: #1a237e; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+    .user-name { font-size: 13px; font-weight: 600; color: #333; }
+    .logout-btn { background: none; border: none; color: #c62828; font-size: 13px; cursor: pointer; font-weight: 600; }
+    .content { padding: 24px; flex: 1; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; margin-bottom: 24px; }
+    .stat-card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 1px 4px rgba(0,0,0,.06); display: flex; align-items: center; gap: 14px; }
+    .stat-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .stat-info h3 { font-size: 22px; font-weight: 700; color: #1a237e; }
+    .stat-info p  { font-size: 11px; color: #888; margin-top: 2px; }
+    .section-title { font-size: 15px; font-weight: 700; color: #333; margin-bottom: 14px; }
+    .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .module-card { background: #fff; border-radius: 12px; padding: 18px 14px; box-shadow: 0 1px 4px rgba(0,0,0,.06); text-align: center; cursor: pointer; transition: transform .15s, box-shadow .15s; border: 2px solid transparent; }
+    .module-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.1); border-color: #0d47a1; }
+    .module-card .m-icon { font-size: 28px; margin-bottom: 7px; }
+    .module-card .m-name { font-size: 12px; font-weight: 600; color: #333; }
+    .module-card .m-desc { font-size: 10px; color: #888; margin-top: 2px; }
+    .panel { background: #fff; border-radius: 12px; padding: 22px; box-shadow: 0 1px 4px rgba(0,0,0,.06); }
+    .panel + .panel { margin-top: 16px; }
+    .panel-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; flex-wrap:wrap; gap:8px; }
+    .panel-title { font-size: 14px; font-weight: 700; color: #333; }
+    .btn { padding: 7px 16px; background: #0d47a1; color: #fff; border: none; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; text-decoration:none; display:inline-flex; align-items:center; gap:5px; }
+    .btn:hover { opacity: .88; }
+    .btn-sm { padding: 5px 12px; font-size: 11px; }
+    .btn-green { background: #2e7d32; }
+    .btn-orange { background: #e65100; }
+    .btn-danger { background: #c62828; }
+    .btn-outline { background: none; border: 1.5px solid #0d47a1; color: #0d47a1; }
+    .btn-group { display:flex; gap:6px; flex-wrap:wrap; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th { text-align: left; padding: 9px 11px; background: #f8f9fa; color: #555; font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; }
+    td { padding: 10px 11px; border-bottom: 1px solid #f0f0f0; color: #333; vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafbff; }
+    .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+    .badge-green  { background: #e8f5e9; color: #2e7d32; }
+    .badge-blue   { background: #e3f2fd; color: #1565c0; }
+    .badge-orange { background: #fff3e0; color: #e65100; }
+    .badge-red    { background: #fdecea; color: #c62828; }
+    .badge-purple { background: #f3e5f5; color: #6a1b9a; }
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:1000; align-items:center; justify-content:center; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:#fff; border-radius:14px; padding:26px; width:580px; max-width:95vw; max-height:90vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,.2); }
+    .modal h2 { font-size:16px; font-weight:700; color:#1a237e; margin-bottom:18px; }
+    .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .form-grid .full { grid-column: 1/-1; }
+    .form-group { display:flex; flex-direction:column; gap:4px; }
+    .form-group label { font-size:11px; font-weight:600; color:#555; text-transform:uppercase; letter-spacing:.4px; }
+    .form-group input, .form-group select, .form-group textarea { padding: 8px 11px; border: 1.5px solid #ddd; border-radius: 7px; font-size: 13px; outline: none; transition: border-color .15s; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #0d47a1; }
+    .form-group textarea { resize: vertical; min-height: 65px; }
+    .modal-footer { display:flex; gap:10px; justify-content:flex-end; margin-top:20px; }
+    .empty-state { text-align:center; padding:44px 20px; color:#aaa; font-size:13px; }
+    .empty-state .e-icon { font-size:44px; margin-bottom:10px; }
+    .action-btn { background:none; border:none; cursor:pointer; font-size:14px; padding:3px 5px; border-radius:4px; }
+    .action-btn:hover { background:#f0f2f5; }
+    #loading { text-align:center; padding:60px; color:#888; font-size:14px; }
+    .alert { padding:11px 15px; border-radius:8px; font-size:13px; margin-bottom:14px; }
+    .alert-error { background:#fdecea; color:#c62828; }
+    .alert-success { background:#e8f5e9; color:#2e7d32; }
+    .report-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:14px; }
+    .report-card { background:#fff; border-radius:10px; padding:18px; box-shadow:0 1px 4px rgba(0,0,0,.06); border-left:4px solid #0d47a1; }
+    .report-card h4 { font-size:13px; font-weight:700; color:#333; margin-bottom:6px; }
+    .report-card p { font-size:11px; color:#888; margin-bottom:12px; }
+    .tabs { display:flex; gap:4px; margin-bottom:18px; border-bottom:2px solid #f0f0f0; }
+    .tab { padding:8px 16px; font-size:13px; font-weight:600; cursor:pointer; color:#888; border-bottom:2px solid transparent; margin-bottom:-2px; }
+    .tab.active { color:#0d47a1; border-bottom-color:#0d47a1; }
+    .kpi-row { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin-bottom:18px; }
+    .kpi { background:#f8f9fa; border-radius:8px; padding:14px; text-align:center; }
+    .kpi .kv { font-size:22px; font-weight:700; color:#1a237e; }
+    .kpi .kl { font-size:11px; color:#888; margin-top:3px; }
+  </style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><h2>🎓 openEMIS</h2><p>Educational Management System</p></div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Main</div>
+    <div class="nav-item active" onclick="showPage('dashboard',this)"><span class="icon">🏠</span> Dashboard</div>
+    <div class="nav-section">Academic</div>
+    <div class="nav-item" onclick="showPage('students',this)"><span class="icon">👨‍🎓</span> Students</div>
+    <div class="nav-item" onclick="showPage('teachers',this)"><span class="icon">👩‍🏫</span> Teachers</div>
+    <div class="nav-item" onclick="showPage('courses',this)"><span class="icon">📚</span> Courses</div>
+    <div class="nav-item" onclick="showPage('subjects',this)"><span class="icon">📖</span> Subjects</div>
+    <div class="nav-item" onclick="showPage('batches',this)"><span class="icon">🏫</span> Batches</div>
+    <div class="nav-item" onclick="showPage('timetable',this)"><span class="icon">📅</span> Timetable</div>
+    <div class="nav-item" onclick="showPage('attendance',this)"><span class="icon">✅</span> Attendance</div>
+    <div class="nav-item" onclick="showPage('exams',this)"><span class="icon">📝</span> Exams</div>
+    <div class="nav-item" onclick="showPage('assignments',this)"><span class="icon">📋</span> Assignments</div>
+    <div class="nav-item" onclick="showPage('cbc',this)"><span class="icon">🎯</span> CBC</div>
+    <div class="nav-item" onclick="showPage('lms',this)"><span class="icon">💻</span> LMS</div>
+    <div class="nav-section">Admissions</div>
+    <div class="nav-item" onclick="showPage('admissions',this)"><span class="icon">🎟️</span> Admissions</div>
+    <div class="nav-section">Finance</div>
+    <div class="nav-item" onclick="showPage('fees',this)"><span class="icon">💰</span> Fees</div>
+    <div class="nav-item" onclick="showPage('scholarships',this)"><span class="icon">🏆</span> Scholarships</div>
+    <div class="nav-section">HR</div>
+    <div class="nav-item" onclick="showPage('hr',this)"><span class="icon">👔</span> HR / Staff</div>
+    <div class="nav-section">Services</div>
+    <div class="nav-item" onclick="showPage('library',this)"><span class="icon">📗</span> Library</div>
+    <div class="nav-item" onclick="showPage('hostel',this)"><span class="icon">🏠</span> Hostel</div>
+    <div class="nav-item" onclick="showPage('transport',this)"><span class="icon">🚌</span> Transport</div>
+    <div class="nav-item" onclick="showPage('health',this)"><span class="icon">🏥</span> Health</div>
+    <div class="nav-item" onclick="showPage('cafeteria',this)"><span class="icon">🍽️</span> Cafeteria</div>
+    <div class="nav-item" onclick="showPage('inventory',this)"><span class="icon">📦</span> Inventory</div>
+    <div class="nav-section">Communication</div>
+    <div class="nav-item" onclick="showPage('noticeboard',this)"><span class="icon">📢</span> Notice Board</div>
+    <div class="nav-item" onclick="showPage('events',this)"><span class="icon">🎉</span> Events</div>
+    <div class="nav-item" onclick="showPage('announcements',this)"><span class="icon">📣</span> Announcements</div>
+    <div class="nav-section">More</div>
+    <div class="nav-item" onclick="showPage('digiguide',this)"><span class="icon">🎯</span> DigiGuide</div>
+    <div class="nav-item" onclick="showPage('alumni',this)"><span class="icon">🎓</span> Alumni</div>
+    <div class="nav-item" onclick="showPage('discipline',this)"><span class="icon">⚖️</span> Discipline</div>
+    <div class="nav-item" onclick="showPage('achievements',this)"><span class="icon">🥇</span> Achievements</div>
+    <div class="nav-item" onclick="showPage('mentorship',this)"><span class="icon">🤝</span> Mentorship</div>
+    <div class="nav-item" onclick="showPage('analytics',this)"><span class="icon">📊</span> Analytics</div>
+    <div class="nav-item" onclick="showPage('nemis',this)"><span class="icon">🗄️</span> NEMIS</div>
+    <div class="nav-section">Reports</div>
+    <div class="nav-item" onclick="showPage('reports',this)"><span class="icon">📄</span> All Reports</div>
+    <div class="nav-section">System</div>
+    <div class="nav-item" onclick="showPage('users',this)"><span class="icon">👥</span> Users</div>
+  </nav>
+  <div class="sidebar-footer">openEMIS v1.0.0</div>
+</aside>
+
+<div class="main">
+  <header class="topbar">
+    <h1 id="pageTitle">Dashboard</h1>
+    <div class="topbar-right">
+      <div class="user-badge">
+        <div class="avatar" id="avatarInitial">A</div>
+        <span class="user-name" id="userName">Admin</span>
+      </div>
+      <button class="logout-btn" onclick="logout()">Sign out</button>
+    </div>
+  </header>
+  <div class="content" id="content"><div id="loading">Loading…</div></div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal" id="modalBox" onclick="event.stopPropagation()">
+    <h2 id="modalTitle">Add Record</h2>
+    <div id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal()">Cancel</button>
+      <button class="btn" id="modalSaveBtn" onclick="submitModal()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API = '/api/v1';
+let token = localStorage.getItem('openemis_token');
+if (!token) window.location.href = '/';
+let _modalCallback = null;
+
+async function api(path, opts = {}) {
+  const res = await fetch(API + path, {
+    ...opts,
+    headers: { Authorization: 'Bearer ' + token, 'Content-Type': 'application/json', ...(opts.headers||{}) }
+  });
+  if (res.status === 401) { logout(); return null; }
+  if (res.status === 204) return {};
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.detail || JSON.stringify(data));
+  return data;
+}
+
+function logout() { localStorage.removeItem('openemis_token'); window.location.href = '/'; }
+
+function openModal(title, bodyHtml, onSave) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  _modalCallback = onSave;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function closeModal() { document.getElementById('modalOverlay').classList.remove('open'); _modalCallback = null; }
+async function submitModal() {
+  if (_modalCallback) {
+    const btn = document.getElementById('modalSaveBtn');
+    btn.textContent = 'Saving…'; btn.disabled = true;
+    try { await _modalCallback(); closeModal(); }
+    catch(e) { showAlert(e.message, 'error'); }
+    finally { btn.textContent = 'Save'; btn.disabled = false; }
+  }
+}
+function formVal(id) { return document.getElementById(id)?.value?.trim() || null; }
+function formNum(id) { const v = formVal(id); return v ? Number(v) : null; }
+
+function showAlert(msg, type='error') {
+  const a = document.createElement('div');
+  a.className = `alert alert-${type}`;
+  a.textContent = msg;
+  const c = document.getElementById('content');
+  c.prepend(a);
+  setTimeout(() => a.remove(), 4000);
+}
+
+const PAGE_TITLES = {
+  dashboard:'Dashboard', students:'Students', teachers:'Teachers', courses:'Courses',
+  subjects:'Subjects', batches:'Batches', timetable:'Timetable', attendance:'Attendance',
+  exams:'Exams', assignments:'Assignments', admissions:'Admissions', fees:'Fees',
+  scholarships:'Scholarships', library:'Library', hostel:'Hostel', transport:'Transport',
+  health:'Health', cafeteria:'Cafeteria', noticeboard:'Notice Board', events:'Events',
+  announcements:'Announcements', lms:'LMS', digiguide:'DigiGuide', alumni:'Alumni',
+  inventory:'Inventory', discipline:'Discipline', achievements:'Achievements',
+  mentorship:'Mentorship', analytics:'Analytics', nemis:'NEMIS', hr:'HR / Staff',
+  cbc:'CBC Curriculum', reports:'Reports', users:'Users'
+};
+const PAGE_FNS = {};
+
+function showPage(page, navEl) {
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+  if (navEl) navEl.classList.add('active');
+  document.getElementById('pageTitle').textContent = PAGE_TITLES[page] || page;
+  const fn = PAGE_FNS[page];
+  if (fn) fn(); else renderComingSoon(PAGE_TITLES[page] || page);
+}
+
+function renderComingSoon(name) {
+  document.getElementById('content').innerHTML = `
+    <div class="panel" style="text-align:center;padding:60px 20px">
+      <div style="font-size:52px;margin-bottom:14px">🚧</div>
+      <h2 style="color:#1a237e;margin-bottom:8px">${name}</h2>
+      <p style="color:#888;font-size:13px">API endpoints are live — explore at
+        <a href="/api/docs" target="_blank" style="color:#0d47a1">/api/docs</a>.</p>
+    </div>`;
+}
+
+function listPage({ title, cols, rowFn, addLabel, onAdd, data, extraHeader='' }) {
+  const rows = data.length === 0
+    ? `<tr><td colspan="${cols.length+1}"><div class="empty-state"><div class="e-icon">📭</div>No ${title.toLowerCase()} yet.</div></td></tr>`
+    : data.map(r => `<tr>${rowFn(r)}<td><button class="action-btn" title="Delete" onclick="delRec(${r.id},'${title}')">🗑️</button></td></tr>`).join('');
+  document.getElementById('content').innerHTML = `
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">${title} <span style="color:#888;font-weight:400">(${data.length})</span></span>
+        <div class="btn-group">${extraHeader}<button class="btn" onclick="${onAdd}">+ Add ${addLabel}</button></div>
+      </div>
+      <table><thead><tr>${cols.map(c=>`<th>${c}</th>`).join('')}<th></th></tr></thead>
+      <tbody>${rows}</tbody></table>
+    </div>`;
+}
+
+const _delPaths = {
+  Students:'/students/', Teachers:'/people/teachers/', Courses:'/core/courses/',
+  Subjects:'/core/subjects/', Batches:'/core/batches/', Admissions:'/admissions/',
+  Exams:'/exams/', Assignments:'/assignments/', Library:'/library/', Users:'/users/'
+};
+async function delRec(id, label) {
+  if (!confirm(`Delete this ${label.toLowerCase().replace(/s$/,'')}?`)) return;
+  try {
+    await api((_delPaths[label]||'/'+label.toLowerCase()+'/')+id, {method:'DELETE'});
+    PAGE_FNS[label.toLowerCase()]?.();
+  } catch(e) { showAlert(e.message); }
+}
+
+// Download helper — opens report URL with auth token
+function dlReport(path) {
+  const url = API + path + (path.includes('?') ? '&' : '?') + '_t=' + encodeURIComponent(token);
+  window.open(url, '_blank');
+}
+
+async function loadUser() {
+  try {
+    const u = await api('/users/me');
+    if (!u) return;
+    document.getElementById('userName').textContent = u.first_name || u.username;
+    document.getElementById('avatarInitial').textContent = (u.first_name || u.username)[0].toUpperCase();
+  } catch {}
+}
+</script>
+
+<script>
+// ── DASHBOARD ──────────────────────────────────────────────────────────────
+PAGE_FNS.dashboard = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading dashboard…</div>';
+  const [students, teachers, courses, users, analytics, fees] = await Promise.allSettled([
+    api('/students/?limit=1'), api('/people/teachers/?limit=1'),
+    api('/core/courses/?limit=1'), api('/users/?limit=1'),
+    api('/analytics/summary'), api('/finance/summary')
+  ]);
+  const sc = students.value?.total ?? students.value?.length ?? '—';
+  const tc = teachers.value?.total ?? teachers.value?.length ?? '—';
+  const cc = courses.value?.total ?? courses.value?.length ?? '—';
+  const uc = users.value?.total ?? users.value?.length ?? '—';
+  const an = analytics.value || {};
+  const fn = fees.value || {};
+  c.innerHTML = `
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-icon" style="background:#e3f2fd">👨‍🎓</div><div class="stat-info"><h3>${sc}</h3><p>Total Students</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#e8f5e9">👩‍🏫</div><div class="stat-info"><h3>${tc}</h3><p>Teachers</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#fff3e0">📚</div><div class="stat-info"><h3>${cc}</h3><p>Courses</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#e0f7fa">👥</div><div class="stat-info"><h3>${uc}</h3><p>System Users</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#f3e5f5">📊</div><div class="stat-info"><h3>${an.overall_attendance_rate ?? '—'}%</h3><p>Attendance Rate</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#e8f5e9">💰</div><div class="stat-info"><h3>${fn.collection_rate_pct ?? '—'}%</h3><p>Fee Collection</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#fce4ec">📋</div><div class="stat-info"><h3>${an.report_cards_issued ?? '—'}</h3><p>Report Cards</p></div></div>
+      <div class="stat-card"><div class="stat-icon" style="background:#e8eaf6">🎓</div><div class="stat-info"><h3>${an.current_enrollment ?? '—'}</h3><p>Enrolled</p></div></div>
+    </div>
+    <div class="section-title">All Modules</div>
+    <div class="modules-grid">
+      ${[['👨‍🎓','Students','Manage student records','students'],['👩‍🏫','Teachers','Faculty management','teachers'],
+         ['📚','Courses','Course catalogue','courses'],['📖','Subjects','Subject management','subjects'],
+         ['🏫','Batches','Class batches','batches'],['🎟️','Admissions','Admission workflow','admissions'],
+         ['✅','Attendance','Daily attendance','attendance'],['📝','Exams','Exams & results','exams'],
+         ['📋','Assignments','Assignments & grading','assignments'],['📅','Timetable','Class scheduling','timetable'],
+         ['🎯','CBC','CBC curriculum','cbc'],['💻','LMS','Online learning','lms'],
+         ['💰','Fees','Fee management','fees'],['🏆','Scholarships','Scholarship awards','scholarships'],
+         ['👔','HR','Staff management','hr'],['📗','Library','Books & resources','library'],
+         ['🏠','Hostel','Room allocation','hostel'],['🚌','Transport','Routes & vehicles','transport'],
+         ['🏥','Health','Medical records','health'],['🍽️','Cafeteria','Daily menu','cafeteria'],
+         ['📦','Inventory','Stock management','inventory'],['📢','Notice Board','Announcements','noticeboard'],
+         ['🎉','Events','School events','events'],['📣','Announcements','Broadcast messages','announcements'],
+         ['🤝','Mentorship','Mentor matching','mentorship'],['🎯','DigiGuide','Career guidance','digiguide'],
+         ['🎓','Alumni','Graduate tracking','alumni'],['⚖️','Discipline','Discipline records','discipline'],
+         ['🥇','Achievements','Student achievements','achievements'],['📊','Analytics','School analytics','analytics'],
+         ['🗄️','NEMIS','NEMIS integration','nemis'],['📄','Reports','All reports','reports'],
+         ['👥','Users','System users','users']
+      ].map(([icon,name,desc,page])=>`
+        <div class="module-card" onclick="showPage('${page}',null)">
+          <div class="m-icon">${icon}</div><div class="m-name">${name}</div><div class="m-desc">${desc}</div>
+        </div>`).join('')}
+    </div>`;
+};
+</script>
+
+<script>
+// ── REPORTS PAGE ───────────────────────────────────────────────────────────
+PAGE_FNS.reports = function() {
+  const sections = [
+    { title:'📄 Student Reports', color:'#1565c0', reports:[
+      {name:'Student Master List',desc:'All enrolled students with details',xl:'/reports/students/list/excel',pdf:'/reports/students/list/pdf'},
+      {name:'CBC Performance',desc:'Student performance levels (EE/ME/AE/BE)',xl:'/reports/students/performance/excel',pdf:'/reports/students/performance/pdf'},
+      {name:'Attendance Summary',desc:'Students below 75% attendance threshold',xl:'/reports/students/attendance/excel'},
+      {name:'Health Records',desc:'Student medical and health history',xl:'/reports/students/health/excel',pdf:'/reports/students/health/pdf'},
+    ]},
+    { title:'👔 Staff Reports', color:'#2e7d32', reports:[
+      {name:'Teacher Directory',desc:'All teachers with qualifications',xl:'/reports/staff/teachers/excel',pdf:'/reports/staff/teachers/pdf'},
+      {name:'Staff HR Profiles',desc:'Employment details, salary, bank info',xl:'/reports/staff/profiles/excel'},
+      {name:'TPAD Appraisals',desc:'Teacher performance appraisal data',xl:'/reports/staff/tpad/excel',pdf:'/reports/staff/tpad/pdf'},
+      {name:'Leave Requests',desc:'Staff leave applications and status',xl:'/reports/staff/leave/excel'},
+      {name:'Payroll Report',desc:'Staff payroll and deductions',xl:'/reports/staff/payroll/excel',pdf:'/reports/staff/payroll/pdf'},
+    ]},
+    { title:'💰 Finance Reports', color:'#e65100', reports:[
+      {name:'Fee Collection',desc:'Invoiced vs collected fees',xl:'/reports/finance/fees/excel',pdf:'/reports/finance/fees/pdf'},
+      {name:'Outstanding Balances',desc:'Students with unpaid fee balances',xl:'/reports/finance/outstanding/excel'},
+      {name:'Payment Methods',desc:'M-Pesa, cash, bank breakdown',xl:'/reports/finance/payment-methods/excel'},
+    ]},
+    { title:'📝 Academic Reports', color:'#6a1b9a', reports:[
+      {name:'Exam Results',desc:'Marks and grades per exam session',xl:'/reports/academic/exams/excel',pdf:'/reports/academic/exams/pdf'},
+      {name:'CBC Report Cards',desc:'Competency-based report cards',xl:'/reports/academic/report-cards/excel'},
+      {name:'LMS Submissions',desc:'Assignment submission records',xl:'/reports/academic/lms-submissions/excel'},
+      {name:'Quiz Attempts',desc:'Quiz scores and attempt history',xl:'/reports/academic/quiz-attempts/excel'},
+      {name:'Lesson Plans',desc:'Teacher lesson plan records',xl:'/reports/academic/lesson-plans/excel'},
+    ]},
+    { title:'📗 Library Reports', color:'#00695c', reports:[
+      {name:'Book Catalogue',desc:'All books and media in library',xl:'/reports/library/catalogue/excel'},
+      {name:'Borrowing Records',desc:'Book issue and return history',xl:'/reports/library/movements/excel'},
+      {name:'Overdue Books',desc:'Books not returned on time',pdf:'/reports/library/overdue/pdf'},
+    ]},
+    { title:'🏠 Hostel Reports', color:'#4527a0', reports:[
+      {name:'Room Occupancy',desc:'Block and room occupancy rates',xl:'/reports/hostel/occupancy/excel'},
+      {name:'Boarder Allocations',desc:'Student room assignments',xl:'/reports/hostel/allocations/excel',pdf:'/reports/hostel/allocations/pdf'},
+    ]},
+    { title:'🚌 Transport Reports', color:'#1565c0', reports:[
+      {name:'Route Manifest',desc:'All routes, stops and students',xl:'/reports/transport/manifest/excel',pdf:'/reports/transport/manifest/pdf'},
+    ]},
+    { title:'🏥 Health Reports', color:'#c62828', reports:[
+      {name:'Clinic Visits',desc:'Student clinic visit records',xl:'/reports/health/clinic-visits/excel',pdf:'/reports/health/clinic-visits/pdf'},
+      {name:'Vaccinations',desc:'Student vaccination records',xl:'/reports/health/vaccinations/excel'},
+    ]},
+    { title:'📊 Trend Reports', color:'#2e7d32', reports:[
+      {name:'Attendance Trend',desc:'Monthly attendance rate over time',xl:'/reports/trends/attendance/excel',pdf:'/reports/trends/attendance/pdf'},
+      {name:'Fee Collection Trend',desc:'Fee collection per term',xl:'/reports/trends/fees/excel',pdf:'/reports/trends/fees/pdf'},
+      {name:'CBC Level Distribution',desc:'EE/ME/AE/BE trend per term',xl:'/reports/trends/cbc-levels/excel'},
+      {name:'Exam Score Trend',desc:'Average scores per subject per session',xl:'/reports/trends/exam-scores/excel'},
+      {name:'LMS Engagement',desc:'Monthly submissions and quiz attempts',xl:'/reports/trends/lms-engagement/excel'},
+      {name:'Health Visit Trend',desc:'Monthly clinic visits by type',xl:'/reports/trends/health-visits/excel'},
+      {name:'Library Usage',desc:'Monthly book issues and returns',xl:'/reports/trends/library-usage/excel'},
+      {name:'Staff Leave Trend',desc:'Monthly approved leave by type',xl:'/reports/trends/staff-leave/excel'},
+    ]},
+    { title:'📋 Result Slips', color:'#e65100', reports:[
+      {name:'Bulk Result Slips',desc:'All students — one sheet each',xl:'/reports/result-slips/bulk/excel'},
+    ]},
+  ];
+
+  document.getElementById('content').innerHTML = `
+    <div class="panel" style="margin-bottom:16px">
+      <div class="panel-header"><span class="panel-title">📄 Reports Centre</span></div>
+      <p style="color:#888;font-size:13px">Download Excel (.xlsx) or PDF reports for every module. All reports use live data from the database.</p>
+    </div>
+    ${sections.map(s => `
+      <div class="panel" style="margin-bottom:14px;border-left:4px solid ${s.color}">
+        <div class="panel-title" style="margin-bottom:14px;color:${s.color}">${s.title}</div>
+        <div class="report-grid">
+          ${s.reports.map(r => `
+            <div class="report-card" style="border-left-color:${s.color}">
+              <h4>${r.name}</h4>
+              <p>${r.desc}</p>
+              <div class="btn-group">
+                ${r.xl ? `<button class="btn btn-sm btn-green" onclick="dlReport('${r.xl}')">⬇ Excel</button>` : ''}
+                ${r.pdf ? `<button class="btn btn-sm btn-orange" onclick="dlReport('${r.pdf}')">⬇ PDF</button>` : ''}
+              </div>
+            </div>`).join('')}
+        </div>
+      </div>`).join('')}`;
+};
+</script>
+
+<script>
+// ── ANALYTICS PAGE ─────────────────────────────────────────────────────────
+PAGE_FNS.analytics = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading analytics…</div>';
+  const [summary, attSummary, feeColl, lowAtt, trends] = await Promise.allSettled([
+    api('/analytics/summary'), api('/analytics/attendance/summary'),
+    api('/analytics/fees/collection'), api('/analytics/attendance/low-attenders'),
+    api('/analytics/enrollment/trends')
+  ]);
+  const s = summary.value || {}; const att = attSummary.value || {}; const fee = feeColl.value || {};
+  const low = lowAtt.value || []; const tr = trends.value || [];
+  c.innerHTML = `
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv">${s.total_students??'—'}</div><div class="kl">Total Students</div></div>
+      <div class="kpi"><div class="kv">${s.total_teachers??'—'}</div><div class="kl">Teachers</div></div>
+      <div class="kpi"><div class="kv">${s.current_enrollment??'—'}</div><div class="kl">Enrolled</div></div>
+      <div class="kpi"><div class="kv">${att.attendance_rate??'—'}%</div><div class="kl">Attendance Rate</div></div>
+      <div class="kpi"><div class="kv">${fee.collection_rate??'—'}%</div><div class="kl">Fee Collection</div></div>
+      <div class="kpi"><div class="kv">${s.report_cards_issued??'—'}</div><div class="kl">Report Cards</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">📈 Enrollment Trends</span>
+        <button class="btn btn-sm btn-green" onclick="dlReport('/reports/trends/attendance/excel')">⬇ Attendance Trend Excel</button>
+      </div>
+      <table><thead><tr><th>Academic Year</th><th>Enrolled</th></tr></thead>
+      <tbody>${tr.map(r=>`<tr><td>${r.year}</td><td>${r.enrolled}</td></tr>`).join('')||'<tr><td colspan="2" style="text-align:center;color:#aaa">No data</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">⚠️ Low Attendance Students (below 75%)</span>
+        <button class="btn btn-sm btn-green" onclick="dlReport('/reports/students/attendance/excel')">⬇ Excel</button>
+      </div>
+      <table><thead><tr><th>Name</th><th>Adm No</th><th>Rate</th><th>Present</th><th>Total</th></tr></thead>
+      <tbody>${low.map(r=>`<tr><td>${r.name}</td><td>${r.admission_number}</td>
+        <td><span class="badge ${r.attendance_rate<50?'badge-red':'badge-orange'}">${r.attendance_rate}%</span></td>
+        <td>${r.days_present}</td><td>${r.days_total}</td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No at-risk students</td></tr>'}</tbody></table>
+    </div>`;
+};
+
+// ── FEES PAGE ──────────────────────────────────────────────────────────────
+PAGE_FNS.fees = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [summary, invoices] = await Promise.allSettled([
+    api('/finance/summary'), api('/fees/invoices?limit=200')
+  ]);
+  const s = summary.value || {}; const data = invoices.value || [];
+  const stateColor = {draft:'badge-orange',confirmed:'badge-blue',paid:'badge-green',partial:'badge-purple',cancelled:'badge-red'};
+  c.innerHTML = `
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv">KES ${(s.total_invoiced_kes||0).toLocaleString()}</div><div class="kl">Total Invoiced</div></div>
+      <div class="kpi"><div class="kv">KES ${(s.total_collected_kes||0).toLocaleString()}</div><div class="kl">Collected</div></div>
+      <div class="kpi"><div class="kv">KES ${(s.outstanding_kes||0).toLocaleString()}</div><div class="kl">Outstanding</div></div>
+      <div class="kpi"><div class="kv">${s.collection_rate_pct??'—'}%</div><div class="kl">Collection Rate</div></div>
+      <div class="kpi"><div class="kv">${s.total_invoices??'—'}</div><div class="kl">Total Invoices</div></div>
+      <div class="kpi"><div class="kv">${s.paid_invoices??'—'}</div><div class="kl">Paid</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-title">Fee Invoices (${data.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/finance/fees/excel')">⬇ Excel</button>
+          <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/finance/fees/pdf')">⬇ PDF</button>
+          <button class="btn btn-sm" onclick="dlReport('/reports/finance/outstanding/excel')">⬇ Outstanding</button>
+        </div>
+      </div>
+      <table><thead><tr><th>ID</th><th>Student ID</th><th>Total</th><th>Paid</th><th>Due Date</th><th>State</th></tr></thead>
+      <tbody>${data.map(r=>`<tr><td>${r.id}</td><td>${r.student_id}</td>
+        <td>KES ${(r.total_amount||0).toLocaleString()}</td>
+        <td>KES ${(r.paid_amount||0).toLocaleString()}</td>
+        <td>${r.due_date||'—'}</td>
+        <td><span class="badge ${stateColor[r.state]||'badge-orange'}">${r.state}</span></td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No invoices</td></tr>'}</tbody></table>
+    </div>`;
+};
+</script>
+
+<script>
+// ── STUDENTS ───────────────────────────────────────────────────────────────
+async function renderStudents() {
+  document.getElementById('content').innerHTML = '<div id="loading">Loading…</div>';
+  try {
+    const data = await api('/students/?limit=500') || [];
+    const items = Array.isArray(data) ? data : (data.items || []);
+    const extra = `<button class="btn btn-sm btn-green" onclick="dlReport('/reports/students/list/excel')">⬇ Excel</button>
+      <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/students/list/pdf')">⬇ PDF</button>`;
+    listPage({ title:'Students', addLabel:'Student', onAdd:'addStudent()', extraHeader:extra,
+      cols:['Adm No','Name','Gender','Phone','Email','Status'],
+      rowFn:(r)=>`<td><strong>${r.admission_number}</strong></td>
+        <td>${r.first_name} ${r.last_name||''}</td>
+        <td>${r.gender||'—'}</td><td>${r.phone||'—'}</td><td>${r.email||'—'}</td>
+        <td><span class="badge badge-green">Active</span></td>`, data:items });
+  } catch(e) { document.getElementById('content').innerHTML=`<div class="panel" style="color:#c62828">${e.message}</div>`; }
+}
+PAGE_FNS.students = renderStudents;
+
+function addStudent() {
+  openModal('Add Student', `
+    <div class="form-grid">
+      <div class="form-group"><label>Admission No.*</label><input id="f_adm" placeholder="KEN2024/001"></div>
+      <div class="form-group"><label>First Name*</label><input id="f_fn"></div>
+      <div class="form-group"><label>Last Name*</label><input id="f_ln"></div>
+      <div class="form-group"><label>Gender</label><select id="f_gen"><option value="">—</option><option>male</option><option>female</option><option>other</option></select></div>
+      <div class="form-group"><label>Date of Birth</label><input id="f_dob" type="date"></div>
+      <div class="form-group"><label>Phone</label><input id="f_ph" placeholder="+254..."></div>
+      <div class="form-group"><label>Email</label><input id="f_em" type="email"></div>
+      <div class="form-group"><label>NEMIS UPI</label><input id="f_upi" placeholder="NEMIS UPI number"></div>
+    </div>`, async () => {
+    const adm=formVal('f_adm'),fn=formVal('f_fn'),ln=formVal('f_ln');
+    if(!adm||!fn||!ln) throw new Error('Admission number, first name and last name are required');
+    await api('/students/', {method:'POST', body:JSON.stringify({
+      admission_number:adm, first_name:fn, last_name:ln,
+      gender:formVal('f_gen'), date_of_birth:formVal('f_dob'),
+      phone:formVal('f_ph'), email:formVal('f_em'), nemis_upi:formVal('f_upi')
+    })});
+    renderStudents();
+  });
+}
+
+// ── TEACHERS ───────────────────────────────────────────────────────────────
+async function renderTeachers() {
+  document.getElementById('content').innerHTML = '<div id="loading">Loading…</div>';
+  try {
+    const data = await api('/people/teachers/?limit=500') || [];
+    const extra = `<button class="btn btn-sm btn-green" onclick="dlReport('/reports/staff/teachers/excel')">⬇ Excel</button>
+      <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/staff/teachers/pdf')">⬇ PDF</button>`;
+    listPage({ title:'Teachers', addLabel:'Teacher', onAdd:'addTeacher()', extraHeader:extra,
+      cols:['Employee ID','Name','Email','Phone','Qualification','Specialization'],
+      rowFn:(r)=>`<td><strong>${r.employee_id}</strong></td>
+        <td>${r.first_name} ${r.last_name||''}</td>
+        <td>${r.email||'—'}</td><td>${r.phone||'—'}</td>
+        <td>${r.qualification||'—'}</td><td>${r.specialization||'—'}</td>`, data });
+  } catch(e) { document.getElementById('content').innerHTML=`<div class="panel" style="color:#c62828">${e.message}</div>`; }
+}
+PAGE_FNS.teachers = renderTeachers;
+
+function addTeacher() {
+  openModal('Add Teacher', `
+    <div class="form-grid">
+      <div class="form-group"><label>Employee ID*</label><input id="t_eid" placeholder="EMP-001"></div>
+      <div class="form-group"><label>First Name*</label><input id="t_fn"></div>
+      <div class="form-group"><label>Last Name*</label><input id="t_ln"></div>
+      <div class="form-group"><label>Gender</label><select id="t_gen"><option value="">—</option><option>male</option><option>female</option><option>other</option></select></div>
+      <div class="form-group"><label>Email</label><input id="t_em" type="email"></div>
+      <div class="form-group"><label>Phone</label><input id="t_ph"></div>
+      <div class="form-group"><label>Qualification</label><input id="t_qual" placeholder="e.g. M.Ed"></div>
+      <div class="form-group"><label>Specialization</label><input id="t_spec" placeholder="e.g. Mathematics"></div>
+    </div>`, async () => {
+    const eid=formVal('t_eid'),fn=formVal('t_fn'),ln=formVal('t_ln');
+    if(!eid||!fn||!ln) throw new Error('Employee ID, first name and last name are required');
+    await api('/people/teachers/', {method:'POST', body:JSON.stringify({
+      employee_id:eid, first_name:fn, last_name:ln, gender:formVal('t_gen'),
+      email:formVal('t_em'), phone:formVal('t_ph'), qualification:formVal('t_qual'),
+      specialization:formVal('t_spec')
+    })});
+    renderTeachers();
+  });
+}
+</script>
+
+<script>
+// ── HR ─────────────────────────────────────────────────────────────────────
+PAGE_FNS.hr = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [staff, leave, payroll] = await Promise.allSettled([
+    api('/hr/staff?limit=200'), api('/leave/?limit=200'), api('/payroll/runs?limit=10')
+  ]);
+  const sd = staff.value || []; const ld = leave.value || []; const pd = payroll.value || [];
+  const stateColor = {active:'badge-green',terminated:'badge-red',suspended:'badge-orange',probation:'badge-blue'};
+  c.innerHTML = `
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">Staff Profiles (${sd.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/staff/profiles/excel')">⬇ HR Profiles</button>
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/staff/tpad/excel')">⬇ TPAD</button>
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/staff/payroll/excel')">⬇ Payroll</button>
+        </div>
+      </div>
+      <table><thead><tr><th>ID</th><th>TSC No</th><th>Job Title</th><th>Type</th><th>Hire Date</th><th>Status</th></tr></thead>
+      <tbody>${sd.map(r=>`<tr><td>${r.id}</td><td>${r.tsc_number||'—'}</td>
+        <td>${r.job_title||'—'}</td><td>${r.employment_type}</td>
+        <td>${r.hire_date||'—'}</td>
+        <td><span class="badge ${stateColor[r.employment_status]||'badge-blue'}">${r.employment_status}</span></td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No staff profiles</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Leave Requests (${ld.length})</span>
+        <button class="btn btn-sm btn-green" onclick="dlReport('/reports/staff/leave/excel')">⬇ Excel</button>
+      </div>
+      <table><thead><tr><th>ID</th><th>Staff ID</th><th>Type</th><th>From</th><th>To</th><th>Status</th></tr></thead>
+      <tbody>${ld.map(r=>`<tr><td>${r.id}</td><td>${r.staff_id}</td>
+        <td>${r.leave_type||'—'}</td><td>${r.start_date||'—'}</td><td>${r.end_date||'—'}</td>
+        <td><span class="badge ${r.state==='approved'?'badge-green':r.state==='rejected'?'badge-red':'badge-orange'}">${r.state||'draft'}</span></td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No leave requests</td></tr>'}</tbody></table>
+    </div>`;
+};
+
+// ── LIBRARY ────────────────────────────────────────────────────────────────
+PAGE_FNS.library = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [books, movements] = await Promise.allSettled([
+    api('/library/media/?limit=200'), api('/library/movements/?limit=200')
+  ]);
+  const bd = books.value?.items || books.value || [];
+  const md = movements.value?.items || movements.value || [];
+  const issued = md.filter(m=>m.state==='issued').length;
+  c.innerHTML = `
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv">${bd.length}</div><div class="kl">Total Books</div></div>
+      <div class="kpi"><div class="kv">${issued}</div><div class="kl">Currently Issued</div></div>
+      <div class="kpi"><div class="kv">${md.length}</div><div class="kl">Total Movements</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">Books / Media (${bd.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/library/catalogue/excel')">⬇ Catalogue</button>
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/library/movements/excel')">⬇ Movements</button>
+          <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/library/overdue/pdf')">⬇ Overdue PDF</button>
+        </div>
+      </div>
+      <table><thead><tr><th>Title</th><th>ISBN</th><th>Author</th><th>Available</th><th>Total</th></tr></thead>
+      <tbody>${bd.map(r=>`<tr><td><strong>${r.name}</strong></td><td>${r.isbn||'—'}</td>
+        <td>${r.author||'—'}</td>
+        <td><span class="badge ${r.available_copies>0?'badge-green':'badge-red'}">${r.available_copies}</span></td>
+        <td>${r.total_copies}</td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No books</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Borrowing Records (${md.length})</span></div>
+      <table><thead><tr><th>Book</th><th>Student</th><th>Issued</th><th>Returned</th><th>Status</th></tr></thead>
+      <tbody>${md.map(r=>`<tr><td>${r.media_name||'—'}</td><td>${r.student_name||r.student_id||'—'}</td>
+        <td>${r.issue_date||'—'}</td><td>${r.return_date||'—'}</td>
+        <td><span class="badge ${r.state==='returned'?'badge-green':'badge-orange'}">${r.state}</span></td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No movements</td></tr>'}</tbody></table>
+    </div>`;
+};
+</script>
+
+<script>
+// ── HOSTEL ─────────────────────────────────────────────────────────────────
+PAGE_FNS.hostel = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [summary, rooms, allocs] = await Promise.allSettled([
+    api('/hostel/summary'), api('/hostel/rooms/?limit=200'), api('/hostel/allocations/?limit=200')
+  ]);
+  const s = summary.value || {}; const rd = rooms.value || []; const ad = allocs.value || [];
+  c.innerHTML = `
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv">${s.total_rooms??'—'}</div><div class="kl">Total Rooms</div></div>
+      <div class="kpi"><div class="kv">${s.total_capacity??'—'}</div><div class="kl">Capacity</div></div>
+      <div class="kpi"><div class="kv">${s.occupied??'—'}</div><div class="kl">Occupied</div></div>
+      <div class="kpi"><div class="kv">${s.available_beds??'—'}</div><div class="kl">Available Beds</div></div>
+      <div class="kpi"><div class="kv">${s.occupancy_rate??'—'}%</div><div class="kl">Occupancy Rate</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">Rooms (${rd.length})</span>
+        <button class="btn btn-sm btn-green" onclick="dlReport('/reports/hostel/occupancy/excel')">⬇ Occupancy Excel</button>
+      </div>
+      <table><thead><tr><th>Room</th><th>Capacity</th><th>Status</th></tr></thead>
+      <tbody>${rd.map(r=>`<tr><td><strong>${r.name}</strong></td><td>${r.capacity}</td>
+        <td><span class="badge ${r.state==='available'?'badge-green':r.state==='occupied'?'badge-orange':'badge-red'}">${r.state}</span></td></tr>`).join('')||'<tr><td colspan="3" style="text-align:center;color:#aaa">No rooms</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Allocations (${ad.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/hostel/allocations/excel')">⬇ Excel</button>
+          <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/hostel/allocations/pdf')">⬇ PDF</button>
+        </div>
+      </div>
+      <table><thead><tr><th>Student ID</th><th>Room ID</th><th>Check-in</th><th>Check-out</th><th>Fee/mo</th><th>State</th></tr></thead>
+      <tbody>${ad.map(r=>`<tr><td>${r.student_id}</td><td>${r.room_id}</td>
+        <td>${r.check_in_date||'—'}</td><td>${r.check_out_date||'—'}</td>
+        <td>${r.monthly_fee?'KES '+r.monthly_fee:'—'}</td>
+        <td><span class="badge ${r.state==='confirmed'?'badge-green':'badge-orange'}">${r.state}</span></td></tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:#aaa">No allocations</td></tr>'}</tbody></table>
+    </div>`;
+};
+
+// ── TRANSPORT ──────────────────────────────────────────────────────────────
+PAGE_FNS.transport = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [summary, routes, vehicles] = await Promise.allSettled([
+    api('/transport/summary'), api('/transport/routes/?limit=200'), api('/transport/vehicles/?limit=200')
+  ]);
+  const s = summary.value || {}; const rd = routes.value || []; const vd = vehicles.value || [];
+  c.innerHTML = `
+    <div class="kpi-row">
+      <div class="kpi"><div class="kv">${s.total_vehicles??'—'}</div><div class="kl">Vehicles</div></div>
+      <div class="kpi"><div class="kv">${s.total_routes??'—'}</div><div class="kl">Routes</div></div>
+      <div class="kpi"><div class="kv">${s.students_using_transport??'—'}</div><div class="kl">Students</div></div>
+      <div class="kpi"><div class="kv">${s.utilization_rate??'—'}%</div><div class="kl">Utilization</div></div>
+    </div>
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">Routes (${rd.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/transport/manifest/excel')">⬇ Manifest Excel</button>
+          <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/transport/manifest/pdf')">⬇ Manifest PDF</button>
+        </div>
+      </div>
+      <table><thead><tr><th>Route</th><th>From</th><th>To</th><th>Status</th></tr></thead>
+      <tbody>${rd.map(r=>`<tr><td><strong>${r.name}</strong></td><td>${r.start_point||'—'}</td>
+        <td>${r.end_point||'—'}</td>
+        <td><span class="badge ${r.active?'badge-green':'badge-red'}">${r.active?'Active':'Inactive'}</span></td></tr>`).join('')||'<tr><td colspan="4" style="text-align:center;color:#aaa">No routes</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Vehicles (${vd.length})</span></div>
+      <table><thead><tr><th>Vehicle</th><th>Reg No</th><th>Capacity</th><th>Driver</th><th>Status</th></tr></thead>
+      <tbody>${vd.map(r=>`<tr><td><strong>${r.name}</strong></td><td>${r.registration_number}</td>
+        <td>${r.capacity||'—'}</td><td>${r.driver_name||'—'}</td>
+        <td><span class="badge ${r.active?'badge-green':'badge-red'}">${r.active?'Active':'Inactive'}</span></td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No vehicles</td></tr>'}</tbody></table>
+    </div>`;
+};
+
+// ── HEALTH ─────────────────────────────────────────────────────────────────
+PAGE_FNS.health = async function() {
+  const c = document.getElementById('content');
+  c.innerHTML = '<div id="loading">Loading…</div>';
+  const [visits, vaccinations] = await Promise.allSettled([
+    api('/health/clinic-visits?limit=200'), api('/health/vaccinations?limit=200')
+  ]);
+  const vd = visits.value?.items || visits.value || [];
+  const vacd = vaccinations.value?.items || vaccinations.value || [];
+  c.innerHTML = `
+    <div class="panel" style="margin-bottom:14px">
+      <div class="panel-header"><span class="panel-title">Clinic Visits (${vd.length})</span>
+        <div class="btn-group">
+          <button class="btn btn-sm btn-green" onclick="dlReport('/reports/health/clinic-visits/excel')">⬇ Excel</button>
+          <button class="btn btn-sm btn-orange" onclick="dlReport('/reports/health/clinic-visits/pdf')">⬇ PDF</button>
+        </div>
+      </div>
+      <table><thead><tr><th>Student ID</th><th>Date</th><th>Complaint</th><th>Treatment</th><th>Status</th></tr></thead>
+      <tbody>${vd.map(r=>`<tr><td>${r.student_id}</td><td>${r.visit_date||r.date||'—'}</td>
+        <td>${r.complaint||r.diagnosis||'—'}</td><td>${r.treatment||'—'}</td>
+        <td><span class="badge badge-green">${r.state||'done'}</span></td></tr>`).join('')||'<tr><td colspan="5" style="text-align:center;color:#aaa">No clinic visits</td></tr>'}</tbody></table>
+    </div>
+    <div class="panel">
+      <div class="panel-header"><span class="panel-title">Vaccinations (${vacd.length})</span>
+        <button class="btn btn-sm btn-green" onclick="dlReport('/reports/health/vaccinations/excel')">⬇ Excel</button>
+      </div>
+      <table><thead><tr><th>Student ID</th><th>Vaccine</th><th>Date</th><th>Dose</th></tr></thead>
+      <tbody>${vacd.map(r=>`<tr><td>${r.student_id}</td><td>${r.vaccine_name||'—'}</td>
+        <td>${r.date||'—'}</td><td>${r.dose_number||'—'}</td></tr>`).join('')||'<tr><td colspan="4" style="text-align:center;color:#aaa">No vaccination records</td></tr>'}</tbody></table>
+    </div>`;
+};
+</script>

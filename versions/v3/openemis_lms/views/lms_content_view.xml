@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_op_lms_content_list" model="ir.ui.view">
+        <field name="name">op.lms.content.list</field>
+        <field name="model">op.lms.content</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="LMS Content">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="lms_section_id"/>
+                <field name="content_type"/>
+                <field name="duration"/>
+                <field name="url" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_op_lms_content_form" model="ir.ui.view">
+        <field name="name">op.lms.content.form</field>
+        <field name="model">op.lms.content</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="LMS Content">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Content Title"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="lms_section_id"/>
+                            <field name="content_type"/>
+                            <field name="sequence"/>
+                            <field name="duration"/>
+                        </group>
+                        <group>
+                            <field name="url"
+                                   invisible="content_type not in ['video', 'link']"/>
+                            <field name="document"
+                                   invisible="content_type != 'document'"
+                                   filename="document_name"/>
+                            <field name="document_name"
+                                   invisible="content_type != 'document'"/>
+                        </group>
+                    </group>
+                    <separator string="Description"/>
+                    <field name="description" nolabel="1"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_op_lms_content_search" model="ir.ui.view">
+        <field name="name">op.lms.content.search</field>
+        <field name="model">op.lms.content</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="LMS Content">
+                <field name="name"/>
+                <field name="lms_section_id"/>
+                <field name="content_type"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <newline/>
+                <group expand="0" string="Group By...">
+                    <filter string="Section" name="group_by_section"
+                            domain="[]" context="{'group_by': 'lms_section_id'}"/>
+                    <filter string="Content Type" name="group_by_content_type"
+                            domain="[]" context="{'group_by': 'content_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="act_open_op_lms_content_view">
+        <field name="name">LMS Content</field>
+        <field name="path">lms-content</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.lms.content</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_lms_content_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_content_view_list">
+        <field name="act_window_id" ref="act_open_op_lms_content_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_lms_content_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_content_view_form">
+        <field name="act_window_id" ref="act_open_op_lms_content_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_lms_content_form"/>
+    </record>
+</odoo>

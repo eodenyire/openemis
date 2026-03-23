@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- LMS top-level menu under SIS root -->
+    <menuitem id="menu_op_lms_main"
+              name="LMS"
+              parent="openemis_core.menu_op_school_root"
+              sequence="25"
+              groups="openemis_lms.group_lms_manager,openemis_lms.group_lms_user,openemis_lms.group_lms_student"/>
+
+    <menuitem id="menu_op_lms_courses"
+              name="Courses"
+              parent="openemis_lms.menu_op_lms_main"
+              sequence="10"
+              action="act_open_op_lms_course_view"
+              groups="openemis_lms.group_lms_manager,openemis_lms.group_lms_user,openemis_lms.group_lms_student"/>
+
+    <menuitem id="menu_op_lms_enrollments"
+              name="Enrollments"
+              parent="openemis_lms.menu_op_lms_main"
+              sequence="20"
+              action="act_open_op_lms_enrollment_view"
+              groups="openemis_lms.group_lms_manager,openemis_lms.group_lms_user"/>
+
+    <!-- Configuration sub-menus -->
+    <menuitem id="menu_op_lms_config"
+              name="LMS"
+              parent="openemis_core.menu_op_school_config"
+              sequence="45"
+              groups="openemis_lms.group_lms_manager"/>
+
+    <menuitem id="menu_op_lms_sections_config"
+              name="LMS Sections"
+              parent="openemis_lms.menu_op_lms_config"
+              sequence="10"
+              action="act_open_op_lms_section_view"
+              groups="openemis_lms.group_lms_manager"/>
+
+    <menuitem id="menu_op_lms_content_config"
+              name="LMS Content"
+              parent="openemis_lms.menu_op_lms_config"
+              sequence="20"
+              action="act_open_op_lms_content_view"
+              groups="openemis_lms.group_lms_manager"/>
+</odoo>

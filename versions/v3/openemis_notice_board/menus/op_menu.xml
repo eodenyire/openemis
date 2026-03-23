@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="menu_op_notice_board"
+              name="Notice Board"
+              parent="openemis_core.menu_op_school_root"
+              sequence="15"
+              action="openemis_notice_board.act_open_op_notice_board_view"
+              groups="openemis_notice_board.group_notice_board_manager,openemis_notice_board.group_notice_board_user"/>
+</odoo>

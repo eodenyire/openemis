@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_op_event_type_user,name_op_event_type_user,model_op_event_type,openemis_event.group_event_user,1,0,0,0
+access_op_event_type_manager,name_op_event_type_manager,model_op_event_type,openemis_event.group_event_manager,1,1,1,1
+access_op_event_user,name_op_event_user,model_op_event,openemis_event.group_event_user,1,1,0,0
+access_op_event_manager,name_op_event_manager,model_op_event,openemis_event.group_event_manager,1,1,1,1
+access_op_event_registration_user,name_op_event_registration_user,model_op_event_registration,openemis_event.group_event_user,1,1,1,0
+access_op_event_registration_manager,name_op_event_registration_manager,model_op_event_registration,openemis_event.group_event_manager,1,1,1,1

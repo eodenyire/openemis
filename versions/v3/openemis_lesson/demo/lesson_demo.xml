@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_lesson_1" model="op.lesson">
+            <field name="name">Introduction to Programming Concepts</field>
+            <field name="topic">Variables, Data Types and Operators</field>
+            <field name="faculty_id" ref="openemis_core.op_faculty_1"/>
+            <field name="course_id" ref="openemis_core.op_course_1"/>
+            <field name="batch_id" ref="openemis_core.op_batch_1"/>
+            <field name="subject_id" ref="openemis_core.op_subject_1"/>
+            <field name="academic_term_id" ref="openemis_core.academic_term_1"/>
+            <field name="lesson_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+            <field name="duration">1.5</field>
+            <field name="lesson_number">1</field>
+            <field name="teaching_method">lecture</field>
+            <field name="learning_objectives">Students will understand variables, basic data types (int, float, char, bool) and arithmetic/logical operators.</field>
+            <field name="teaching_materials">Whiteboard, projector, sample C code handouts</field>
+            <field name="homework">Write a C program that takes two integers as input and prints their sum, difference, product and quotient.</field>
+            <field name="state">planned</field>
+        </record>
+
+        <record id="op_lesson_2" model="op.lesson">
+            <field name="name">Control Flow in C Programming</field>
+            <field name="topic">If-Else, Switch and Loops</field>
+            <field name="faculty_id" ref="openemis_core.op_faculty_1"/>
+            <field name="course_id" ref="openemis_core.op_course_1"/>
+            <field name="batch_id" ref="openemis_core.op_batch_1"/>
+            <field name="subject_id" ref="openemis_core.op_subject_1"/>
+            <field name="academic_term_id" ref="openemis_core.academic_term_1"/>
+            <field name="lesson_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+            <field name="duration">2.0</field>
+            <field name="lesson_number">2</field>
+            <field name="teaching_method">demonstration</field>
+            <field name="learning_objectives">Students will be able to use conditional statements and loops to control program flow.</field>
+            <field name="teaching_materials">Computer lab, IDE installed on each machine</field>
+            <field name="homework">Implement a program to print the multiplication table for a user-supplied number using a for loop.</field>
+            <field name="state">completed</field>
+        </record>
+
+        <record id="op_lesson_3" model="op.lesson">
+            <field name="name">Introduction to Data Structures</field>
+            <field name="topic">Arrays and Pointers</field>
+            <field name="faculty_id" ref="openemis_core.op_faculty_2"/>
+            <field name="course_id" ref="openemis_core.op_course_2"/>
+            <field name="batch_id" ref="openemis_core.op_batch_2"/>
+            <field name="subject_id" ref="openemis_core.op_subject_5"/>
+            <field name="academic_term_id" ref="openemis_core.academic_term_2"/>
+            <field name="lesson_date" eval="(DateTime.today()).strftime('%Y-%m-%d')"/>
+            <field name="duration">1.5</field>
+            <field name="lesson_number">1</field>
+            <field name="teaching_method">lecture</field>
+            <field name="learning_objectives">Students will understand arrays, pointer arithmetic and the relationship between arrays and pointers.</field>
+            <field name="teaching_materials">Projector, whiteboard, printed reference sheets</field>
+            <field name="state">draft</field>
+        </record>
+
+        <record id="openemis_core.op_user_faculty" model="res.users">
+            <field name="groups_id"
+                   eval="[(4, ref('openemis_lesson.group_lesson_user'))]"/>
+        </record>
+</odoo>

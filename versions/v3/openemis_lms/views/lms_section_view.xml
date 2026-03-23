@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_op_lms_section_list" model="ir.ui.view">
+        <field name="name">op.lms.section.list</field>
+        <field name="model">op.lms.section</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="LMS Sections">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="lms_course_id"/>
+                <field name="description" optional="hide"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_op_lms_section_form" model="ir.ui.view">
+        <field name="name">op.lms.section.form</field>
+        <field name="model">op.lms.section</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="LMS Section">
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Section Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="lms_course_id"/>
+                            <field name="sequence"/>
+                        </group>
+                    </group>
+                    <separator string="Description"/>
+                    <field name="description" nolabel="1"/>
+                    <separator string="Contents"/>
+                    <field name="content_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="content_type"/>
+                            <field name="duration"/>
+                            <field name="url"
+                                   invisible="content_type not in ['video', 'link']"/>
+                            <field name="document"
+                                   invisible="content_type != 'document'"
+                                   filename="document_name"/>
+                            <field name="document_name" invisible="1"/>
+                        </list>
+                    </field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_op_lms_section_search" model="ir.ui.view">
+        <field name="name">op.lms.section.search</field>
+        <field name="model">op.lms.section</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="LMS Sections">
+                <field name="name"/>
+                <field name="lms_course_id"/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <newline/>
+                <group expand="0" string="Group By...">
+                    <filter string="Course" name="group_by_course"
+                            domain="[]" context="{'group_by': 'lms_course_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="act_open_op_lms_section_view">
+        <field name="name">LMS Sections</field>
+        <field name="path">lms-sections</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.lms.section</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_lms_section_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_section_view_list">
+        <field name="act_window_id" ref="act_open_op_lms_section_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_lms_section_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_section_view_form">
+        <field name="act_window_id" ref="act_open_op_lms_section_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_lms_section_form"/>
+    </record>
+</odoo>

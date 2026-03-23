@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_op_notice_board_list" model="ir.ui.view">
+        <field name="name">op.notice.board.list</field>
+        <field name="model">op.notice.board</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="Notice Board" decoration-danger="notice_type == 'urgent'"
+                  decoration-warning="notice_type == 'exam'"
+                  decoration-info="notice_type == 'event'">
+                <field name="title"/>
+                <field name="notice_type" widget="badge"
+                       decoration-danger="notice_type == 'urgent'"
+                       decoration-warning="notice_type == 'exam'"
+                       decoration-info="notice_type == 'event'"
+                       decoration-success="notice_type == 'general'"/>
+                <field name="target_audience"/>
+                <field name="start_date"/>
+                <field name="end_date" optional="show"/>
+                <field name="published_by" optional="show"/>
+                <field name="state" widget="badge"
+                       decoration-success="state == 'published'"
+                       decoration-warning="state == 'draft'"
+                       decoration-danger="state == 'cancelled'"
+                       decoration-muted="state == 'expired'"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_op_notice_board_form" model="ir.ui.view">
+        <field name="name">op.notice.board.form</field>
+        <field name="model">op.notice.board</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="Notice Board">
+                <header>
+                    <button name="action_publish" string="Publish"
+                            type="object" class="oe_highlight"
+                            invisible="state != 'draft'"
+                            groups="openemis_notice_board.group_notice_board_manager"/>
+                    <button name="action_expire" string="Mark as Expired"
+                            type="object"
+                            invisible="state != 'published'"
+                            groups="openemis_notice_board.group_notice_board_manager"/>
+                    <button name="action_cancel" string="Cancel"
+                            type="object"
+                            invisible="state in ('cancelled', 'expired')"
+                            groups="openemis_notice_board.group_notice_board_manager"/>
+                    <button name="action_reset_draft" string="Reset to Draft"
+                            type="object"
+                            invisible="state == 'draft'"
+                            groups="openemis_notice_board.group_notice_board_manager"/>
+                    <field name="state" widget="statusbar"
+                           statusbar_visible="draft,published,expired"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <div class="oe_title">
+                        <label for="title"/>
+                        <h1>
+                            <field name="title" placeholder="Notice Title..."/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="notice_type"/>
+                            <field name="target_audience"/>
+                            <field name="course_ids" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="published_by"
+                                   groups="openemis_notice_board.group_notice_board_manager"/>
+                            <field name="published_date"
+                                   groups="openemis_notice_board.group_notice_board_manager"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" widget="html"/>
+                        </page>
+                        <page string="Attachments" name="attachments">
+                            <field name="attachment_ids" widget="many2many_binary"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_op_notice_board_search" model="ir.ui.view">
+        <field name="name">op.notice.board.search</field>
+        <field name="model">op.notice.board</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="Notice Board">
+                <field name="title"/>
+                <field name="notice_type"/>
+                <field name="target_audience"/>
+                <field name="published_by"/>
+                <separator/>
+                <filter string="Published" name="published"
+                        domain="[('state', '=', 'published')]"/>
+                <filter string="Draft" name="draft"
+                        domain="[('state', '=', 'draft')]"/>
+                <filter string="Urgent" name="urgent"
+                        domain="[('notice_type', '=', 'urgent')]"/>
+                <filter string="Academic" name="academic"
+                        domain="[('notice_type', '=', 'academic')]"/>
+                <filter string="Event" name="event"
+                        domain="[('notice_type', '=', 'event')]"/>
+                <separator/>
+                <filter string="For Students" name="students"
+                        domain="['|', ('target_audience', '=', 'students'), ('target_audience', '=', 'all')]"/>
+                <filter string="For Faculty" name="faculty"
+                        domain="['|', ('target_audience', '=', 'faculty'), ('target_audience', '=', 'all')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Notice Type" name="group_notice_type"
+                            context="{'group_by': 'notice_type'}"/>
+                    <filter string="Target Audience" name="group_target_audience"
+                            context="{'group_by': 'target_audience'}"/>
+                    <filter string="State" name="group_state"
+                            context="{'group_by': 'state'}"/>
+                    <filter string="Start Date" name="group_start_date"
+                            context="{'group_by': 'start_date'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="act_open_op_notice_board_view">
+        <field name="name">Notice Board</field>
+        <field name="path">notice-board</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.notice.board</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_notice_board_search"/>
+        <field name="context">{'search_default_published': 1}</field>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_notice_board_view_list">
+        <field name="act_window_id" ref="act_open_op_notice_board_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_notice_board_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_notice_board_view_form">
+        <field name="act_window_id" ref="act_open_op_notice_board_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_notice_board_form"/>
+    </record>
+</odoo>

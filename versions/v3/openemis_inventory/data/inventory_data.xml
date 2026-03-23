@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_inventory_category_1" model="op.inventory.category">
+        <field name="name">Stationery</field>
+    </record>
+    <record id="op_inventory_category_2" model="op.inventory.category">
+        <field name="name">Sports Equipment</field>
+    </record>
+    <record id="op_inventory_category_3" model="op.inventory.category">
+        <field name="name">Laboratory Equipment</field>
+    </record>
+    <record id="op_inventory_category_4" model="op.inventory.category">
+        <field name="name">IT Equipment</field>
+    </record>
+    <record id="op_inventory_category_5" model="op.inventory.category">
+        <field name="name">Furniture</field>
+    </record>
+    <record id="op_inventory_category_6" model="op.inventory.category">
+        <field name="name">Cleaning Supplies</field>
+    </record>
+    <record id="op_inventory_category_7" model="op.inventory.category">
+        <field name="name">Books &amp; Publications</field>
+    </record>
+    <record id="op_inventory_category_8" model="op.inventory.category">
+        <field name="name">Medical Supplies</field>
+    </record>
+</odoo>

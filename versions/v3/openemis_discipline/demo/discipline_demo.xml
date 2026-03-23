@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_discipline_1" model="op.discipline">
+            <field name="student_id" ref="openemis_core.op_student_1"/>
+            <field name="faculty_id" ref="openemis_core.op_faculty_1"/>
+            <field name="misbehaviour_category_id"
+                   ref="openemis_discipline.op_misbehaviour_category_1"/>
+            <field name="discipline_action_id"
+                   ref="openemis_discipline.op_discipline_action_1"/>
+            <field name="date" eval="fields.Date.today()"/>
+            <field name="description">Student arrived 45 minutes late without a valid reason.</field>
+            <field name="state">reported</field>
+        </record>
+
+        <record id="op_discipline_2" model="op.discipline">
+            <field name="student_id" ref="openemis_core.op_student_2"/>
+            <field name="faculty_id" ref="openemis_core.op_faculty_2"/>
+            <field name="misbehaviour_category_id"
+                   ref="openemis_discipline.op_misbehaviour_category_3"/>
+            <field name="discipline_action_id"
+                   ref="openemis_discipline.op_discipline_action_2"/>
+            <field name="date" eval="fields.Date.today()"/>
+            <field name="description">Student was repeatedly disruptive during the class lecture.</field>
+            <field name="state">under_review</field>
+        </record>
+
+        <record id="openemis_core.op_user_faculty" model="res.users">
+            <field name="groups_id"
+                   eval="[(4, ref('openemis_discipline.group_discipline_user'))]"/>
+        </record>
+</odoo>

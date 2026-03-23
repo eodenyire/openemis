@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.module.category" id="module_category_all_op_cbc">
+        <field name="name">CBC Curriculum</field>
+        <field name="description">Kenya Competency Based Curriculum management.</field>
+        <field name="sequence">102</field>
+        <field name="parent_id" eval="False"/>
+    </record>
+
+    <record id="module_category_openemis_cbc" model="ir.module.category">
+        <field name="name">CBC Curriculum</field>
+        <field name="description">Kenya Competency Based Curriculum management.</field>
+        <field name="parent_id" ref="openemis_cbc.module_category_all_op_cbc"/>
+        <field name="sequence">1</field>
+    </record>
+
+    <record id="group_cbc_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="category_id" ref="module_category_openemis_cbc"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_cbc_teacher" model="res.groups">
+        <field name="name">Teacher</field>
+        <field name="category_id" ref="module_category_openemis_cbc"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="implied_ids"
+               eval="[(4, ref('openemis_cbc.group_cbc_user'))]"/>
+    </record>
+
+    <record id="group_cbc_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_openemis_cbc"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        <field name="implied_ids"
+               eval="[(4, ref('openemis_cbc.group_cbc_teacher'))]"/>
+    </record>
+</odoo>

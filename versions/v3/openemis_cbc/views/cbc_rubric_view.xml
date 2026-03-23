@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cbc_rubric_list" model="ir.ui.view">
+        <field name="name">cbc.rubric.list</field>
+        <field name="model">cbc.rubric</field>
+        <field name="arch" type="xml">
+            <list string="Rubric Levels">
+                <field name="outcome_id"/>
+                <field name="level"/>
+                <field name="level_code"/>
+                <field name="score"/>
+                <field name="descriptor"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_cbc_rubric_form" model="ir.ui.view">
+        <field name="name">cbc.rubric.form</field>
+        <field name="model">cbc.rubric</field>
+        <field name="arch" type="xml">
+            <form string="Rubric Level">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="outcome_id"/>
+                            <field name="level"/>
+                            <field name="level_code"/>
+                            <field name="score"/>
+                        </group>
+                    </group>
+                    <field name="descriptor" placeholder="Describe what this performance level looks like…"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_cbc_rubric_view">
+        <field name="name">Rubric Levels</field>
+        <field name="path">cbc-rubrics</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">cbc.rubric</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

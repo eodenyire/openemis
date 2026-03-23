@@ -1,0 +1,22 @@
+# =============================================================================
+# openEMIS – Heroku Procfile
+# =============================================================================
+# Heroku uses this file to know how to start each process type.
+#
+# openEMIS is built on Odoo 18.0 (Python/PostgreSQL), which is not natively
+# supported by Heroku's standard buildpacks.  The recommended deployment path
+# is the Heroku Container Registry using the repository Dockerfile.
+#
+# Deploy steps (Heroku Container Registry):
+#   heroku login
+#   heroku create <your-app-name>
+#   heroku addons:create heroku-postgresql:mini --app <your-app-name>
+#   heroku stack:set container --app <your-app-name>
+#   heroku container:push web --app <your-app-name>
+#   heroku container:release web --app <your-app-name>
+#   heroku open --app <your-app-name>
+#
+# The DATABASE_URL config var supplied by Heroku Postgres is split into
+# individual environment variables by the entrypoint below.
+# =============================================================================
+web: odoo --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons --db_host=$DB_HOST --db_user=$DB_USER --db_password=$DB_PASSWORD --database=$DB_NAME --http-port=$PORT --proxy-mode

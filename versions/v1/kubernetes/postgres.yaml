@@ -1,0 +1,96 @@
+---
+# Persistent storage for PostgreSQL data
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: openemis
+  labels:
+    app: postgres
+    app.kubernetes.io/part-of: openemis
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+---
+# Secret holding database credentials
+# WARNING: For production, replace stringData with base64-encoded data fields
+# or use an external secrets manager (Sealed Secrets, External Secrets Operator).
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+  namespace: openemis
+  labels:
+    app: postgres
+    app.kubernetes.io/part-of: openemis
+type: Opaque
+stringData:
+  POSTGRES_DB: openemis_db
+  POSTGRES_USER: openemis
+  POSTGRES_PASSWORD: openemis   # TODO: replace with a strong password before deploying to production
+---
+# PostgreSQL Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: openemis
+  labels:
+    app: postgres
+    app.kubernetes.io/part-of: openemis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:15
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - secretRef:
+                name: postgres-secret
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/data
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"
+          readinessProbe:
+            exec:
+              command: ["pg_isready", "-U", "openemis", "-d", "openemis_db"]
+            initialDelaySeconds: 10
+            periodSeconds: 5
+      volumes:
+        - name: postgres-data
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+---
+# PostgreSQL Service (ClusterIP – reachable only within the cluster)
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: openemis
+  labels:
+    app: postgres
+    app.kubernetes.io/part-of: openemis
+spec:
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432

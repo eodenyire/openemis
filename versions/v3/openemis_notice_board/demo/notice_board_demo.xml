@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_notice_board_1" model="op.notice.board">
+        <field name="title">Welcome Back - New Academic Year</field>
+        <field name="notice_type">general</field>
+        <field name="target_audience">all</field>
+        <field name="start_date" eval="fields.Date.today()"/>
+        <field name="description">&lt;p&gt;We welcome all students and staff to the new academic year. Please check the timetable and report to your respective classrooms.&lt;/p&gt;</field>
+        <field name="state">published</field>
+        <field name="published_date" eval="fields.Datetime.now()"/>
+    </record>
+
+    <record id="op_notice_board_2" model="op.notice.board">
+        <field name="title">Mid-Term Examination Schedule</field>
+        <field name="notice_type">exam</field>
+        <field name="target_audience">students</field>
+        <field name="start_date" eval="fields.Date.today()"/>
+        <field name="description">&lt;p&gt;Mid-term examinations will commence next week. All students are requested to carry their hall tickets. Late arrivals will not be permitted.&lt;/p&gt;</field>
+        <field name="state">published</field>
+        <field name="published_date" eval="fields.Datetime.now()"/>
+    </record>
+
+    <record id="op_notice_board_3" model="op.notice.board">
+        <field name="title">Annual Sports Day - Registration Open</field>
+        <field name="notice_type">sports</field>
+        <field name="target_audience">students</field>
+        <field name="start_date" eval="fields.Date.today()"/>
+        <field name="description">&lt;p&gt;Registrations are now open for the Annual Sports Day. Interested students should submit their names to the sports coordinator before the deadline.&lt;/p&gt;</field>
+        <field name="state">draft</field>
+    </record>
+
+    <record id="op_notice_board_4" model="op.notice.board">
+        <field name="title">URGENT: Campus Closure Due to Weather</field>
+        <field name="notice_type">urgent</field>
+        <field name="target_audience">all</field>
+        <field name="start_date" eval="fields.Date.today()"/>
+        <field name="description">&lt;p&gt;&lt;strong&gt;Important:&lt;/strong&gt; The campus will remain closed tomorrow due to severe weather conditions. All classes and examinations are postponed. Further notice will be issued shortly.&lt;/p&gt;</field>
+        <field name="state">published</field>
+        <field name="published_date" eval="fields.Datetime.now()"/>
+    </record>
+</odoo>

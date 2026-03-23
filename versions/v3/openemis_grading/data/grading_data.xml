@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="op_grading_config_standard" model="op.grading.config">
+        <field name="name">Standard Grade Scale</field>
+    </record>
+
+    <record id="op_grading_rule_aplus" model="op.grading.rule">
+        <field name="name">A+</field>
+        <field name="min_marks">90.0</field>
+        <field name="max_marks">100.0</field>
+        <field name="gpa_point">4.0</field>
+        <field name="description">Excellent</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_a" model="op.grading.rule">
+        <field name="name">A</field>
+        <field name="min_marks">80.0</field>
+        <field name="max_marks">89.99</field>
+        <field name="gpa_point">3.7</field>
+        <field name="description">Very Good</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_bplus" model="op.grading.rule">
+        <field name="name">B+</field>
+        <field name="min_marks">75.0</field>
+        <field name="max_marks">79.99</field>
+        <field name="gpa_point">3.3</field>
+        <field name="description">Good Plus</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_b" model="op.grading.rule">
+        <field name="name">B</field>
+        <field name="min_marks">70.0</field>
+        <field name="max_marks">74.99</field>
+        <field name="gpa_point">3.0</field>
+        <field name="description">Good</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_cplus" model="op.grading.rule">
+        <field name="name">C+</field>
+        <field name="min_marks">65.0</field>
+        <field name="max_marks">69.99</field>
+        <field name="gpa_point">2.3</field>
+        <field name="description">Average Plus</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_c" model="op.grading.rule">
+        <field name="name">C</field>
+        <field name="min_marks">60.0</field>
+        <field name="max_marks">64.99</field>
+        <field name="gpa_point">2.0</field>
+        <field name="description">Average</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_d" model="op.grading.rule">
+        <field name="name">D</field>
+        <field name="min_marks">50.0</field>
+        <field name="max_marks">59.99</field>
+        <field name="gpa_point">1.0</field>
+        <field name="description">Below Average</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+
+    <record id="op_grading_rule_f" model="op.grading.rule">
+        <field name="name">F</field>
+        <field name="min_marks">0.0</field>
+        <field name="max_marks">49.99</field>
+        <field name="gpa_point">0.0</field>
+        <field name="description">Fail</field>
+        <field name="grading_config_id" ref="op_grading_config_standard"/>
+    </record>
+</odoo>

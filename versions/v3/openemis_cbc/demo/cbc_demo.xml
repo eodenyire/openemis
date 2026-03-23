@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- =====================================================================
+         Sub-strands for Communication and Collaboration
+    ===================================================================== -->
+    <record id="substrand_listening" model="cbc.substrand">
+        <field name="name">Listening and Speaking</field>
+        <field name="code">CC-LS</field>
+        <field name="sequence">10</field>
+        <field name="strand_id" ref="openemis_cbc.strand_communication"/>
+    </record>
+
+    <record id="substrand_reading" model="cbc.substrand">
+        <field name="name">Reading</field>
+        <field name="code">CC-RD</field>
+        <field name="sequence">20</field>
+        <field name="strand_id" ref="openemis_cbc.strand_communication"/>
+    </record>
+
+    <record id="substrand_writing" model="cbc.substrand">
+        <field name="name">Writing</field>
+        <field name="code">CC-WR</field>
+        <field name="sequence">30</field>
+        <field name="strand_id" ref="openemis_cbc.strand_communication"/>
+    </record>
+
+    <!-- =====================================================================
+         Sub-strands for Critical Thinking and Problem Solving
+    ===================================================================== -->
+    <record id="substrand_analysis" model="cbc.substrand">
+        <field name="name">Analysis and Evaluation</field>
+        <field name="code">CT-AE</field>
+        <field name="sequence">10</field>
+        <field name="strand_id" ref="openemis_cbc.strand_critical_thinking"/>
+    </record>
+
+    <record id="substrand_problem_solving" model="cbc.substrand">
+        <field name="name">Problem Solving and Decision Making</field>
+        <field name="code">CT-PS</field>
+        <field name="sequence">20</field>
+        <field name="strand_id" ref="openemis_cbc.strand_critical_thinking"/>
+    </record>
+
+    <!-- =====================================================================
+         Sub-strands for Creativity and Imagination
+    ===================================================================== -->
+    <record id="substrand_creative_arts" model="cbc.substrand">
+        <field name="name">Creative Arts Expression</field>
+        <field name="code">CI-CA</field>
+        <field name="sequence">10</field>
+        <field name="strand_id" ref="openemis_cbc.strand_creativity"/>
+    </record>
+
+    <record id="substrand_innovation" model="cbc.substrand">
+        <field name="name">Innovation and Entrepreneurship</field>
+        <field name="code">CI-IE</field>
+        <field name="sequence">20</field>
+        <field name="strand_id" ref="openemis_cbc.strand_creativity"/>
+    </record>
+
+    <!-- =====================================================================
+         Sub-strands for Digital Literacy
+    ===================================================================== -->
+    <record id="substrand_ict_skills" model="cbc.substrand">
+        <field name="name">ICT and Computing Skills</field>
+        <field name="code">DL-IC</field>
+        <field name="sequence">10</field>
+        <field name="strand_id" ref="openemis_cbc.strand_digital_literacy"/>
+    </record>
+
+    <record id="substrand_online_safety" model="cbc.substrand">
+        <field name="name">Online Safety and Ethics</field>
+        <field name="code">DL-OS</field>
+        <field name="sequence">20</field>
+        <field name="strand_id" ref="openemis_cbc.strand_digital_literacy"/>
+    </record>
+
+    <!-- =====================================================================
+         Learning Outcomes – Grade 1 (Lower Primary)
+    ===================================================================== -->
+    <record id="lo_g1_listening_1" model="cbc.learning.outcome">
+        <field name="name">Listen attentively and respond to stories, songs and rhymes</field>
+        <field name="code">CC-LS-G1-01</field>
+        <field name="grade_level">g1</field>
+        <field name="substrand_id" ref="openemis_cbc.substrand_listening"/>
+    </record>
+
+    <record id="lo_g1_reading_1" model="cbc.learning.outcome">
+        <field name="name">Recognise and read familiar words in simple sentences</field>
+        <field name="code">CC-RD-G1-01</field>
+        <field name="grade_level">g1</field>
+        <field name="substrand_id" ref="openemis_cbc.substrand_reading"/>
+    </record>
+
+    <record id="lo_g4_writing_1" model="cbc.learning.outcome">
+        <field name="name">Write a short paragraph using correct grammar and punctuation</field>
+        <field name="code">CC-WR-G4-01</field>
+        <field name="grade_level">g4</field>
+        <field name="substrand_id" ref="openemis_cbc.substrand_writing"/>
+    </record>
+
+    <record id="lo_g7_analysis_1" model="cbc.learning.outcome">
+        <field name="name">Analyse data from experiments and draw evidence-based conclusions</field>
+        <field name="code">CT-AE-G7-01</field>
+        <field name="grade_level">g7</field>
+        <field name="substrand_id" ref="openemis_cbc.substrand_analysis"/>
+    </record>
+
+    <record id="lo_g10_innovation_1" model="cbc.learning.outcome">
+        <field name="name">Design and prototype a solution to a community problem</field>
+        <field name="code">CI-IE-G10-01</field>
+        <field name="grade_level">g10</field>
+        <field name="substrand_id" ref="openemis_cbc.substrand_innovation"/>
+    </record>
+
+    <!-- =====================================================================
+         Rubric levels for lo_g1_listening_1
+    ===================================================================== -->
+    <record id="rubric_g1_ls_em" model="cbc.rubric">
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="level">em</field>
+        <field name="score">4.0</field>
+        <field name="descriptor">
+            Listens attentively, responds enthusiastically, and asks
+            insightful questions about stories, songs and rhymes.
+        </field>
+    </record>
+
+    <record id="rubric_g1_ls_me" model="cbc.rubric">
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="level">me</field>
+        <field name="score">3.0</field>
+        <field name="descriptor">
+            Listens attentively and responds appropriately to stories,
+            songs and rhymes with minimal prompting.
+        </field>
+    </record>
+
+    <record id="rubric_g1_ls_ap" model="cbc.rubric">
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="level">ap</field>
+        <field name="score">2.0</field>
+        <field name="descriptor">
+            Partially listens and responds to stories and songs with
+            teacher support.
+        </field>
+    </record>
+
+    <record id="rubric_g1_ls_be" model="cbc.rubric">
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="level">be</field>
+        <field name="score">1.0</field>
+        <field name="descriptor">
+            Rarely listens attentively; needs significant support to
+            engage with stories, songs and rhymes.
+        </field>
+    </record>
+
+    <!-- =====================================================================
+         Demo formative assessments (refer to demo students via XML IDs
+         from openemis_core)
+    ===================================================================== -->
+    <record id="fa_demo_1" model="cbc.formative.assessment">
+        <field name="name">Term 1 Listening Observation – Grade 1A</field>
+        <field name="date">2025-02-14</field>
+        <field name="assessment_type">observation</field>
+        <field name="grade_level">g1</field>
+        <field name="student_id" ref="openemis_core.op_student_1"/>
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="performance_level">me</field>
+        <field name="score">3.0</field>
+        <field name="term">term1</field>
+        <field name="observations">
+            Student listens well during story time but needs encouragement
+            to share responses verbally.
+        </field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <record id="fa_demo_2" model="cbc.formative.assessment">
+        <field name="name">Term 1 Reading Assessment – Grade 1A</field>
+        <field name="date">2025-02-21</field>
+        <field name="assessment_type">written</field>
+        <field name="grade_level">g1</field>
+        <field name="student_id" ref="openemis_core.op_student_2"/>
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_reading_1"/>
+        <field name="performance_level">ap</field>
+        <field name="score">2.0</field>
+        <field name="term">term1</field>
+        <field name="observations">
+            Recognises most letters but struggles with blending sounds into
+            words. Recommend phonics intervention.
+        </field>
+        <field name="state">confirmed</field>
+    </record>
+
+    <!-- =====================================================================
+         Demo portfolio
+    ===================================================================== -->
+    <record id="portfolio_demo_1" model="cbc.portfolio">
+        <field name="name">Grade 1 Term 1 Portfolio – Demo Student 1</field>
+        <field name="student_id" ref="openemis_core.op_student_1"/>
+        <field name="grade_level">g1</field>
+        <field name="term">term1</field>
+        <field name="description">
+            A collection of evidence from Term 1 demonstrating progress in
+            communication and literacy skills.
+        </field>
+        <field name="teacher_comment">
+            Excellent effort throughout the term. Noticeable improvement in
+            listening and participation.
+        </field>
+        <field name="state">submitted</field>
+    </record>
+
+    <!-- =====================================================================
+         Demo CBC report card
+    ===================================================================== -->
+    <record id="report_card_demo_1" model="cbc.report.card">
+        <field name="student_id" ref="openemis_core.op_student_1"/>
+        <field name="grade_level">g1</field>
+        <field name="academic_year_id" ref="openemis_core.academic_year_1"/>
+        <field name="term">term1</field>
+        <field name="class_teacher_comment">
+            A bright and enthusiastic learner showing great potential.
+        </field>
+        <field name="state">published</field>
+    </record>
+
+    <record id="report_card_line_demo_1" model="cbc.report.card.line">
+        <field name="report_card_id" ref="openemis_cbc.report_card_demo_1"/>
+        <field name="strand_id" ref="openemis_cbc.strand_communication"/>
+        <field name="outcome_id" ref="openemis_cbc.lo_g1_listening_1"/>
+        <field name="performance_level">me</field>
+        <field name="score">3.0</field>
+        <field name="teacher_remark">Good listener. Responds well in class.</field>
+    </record>
+
+    <record id="report_card_line_demo_2" model="cbc.report.card.line">
+        <field name="report_card_id" ref="openemis_cbc.report_card_demo_1"/>
+        <field name="strand_id" ref="openemis_cbc.strand_critical_thinking"/>
+        <field name="outcome_id" ref="openemis_cbc.lo_g7_analysis_1"/>
+        <field name="performance_level">ap</field>
+        <field name="score">2.0</field>
+        <field name="teacher_remark">Developing analytical skills. Continue to encourage.</field>
+    </record>
+</odoo>

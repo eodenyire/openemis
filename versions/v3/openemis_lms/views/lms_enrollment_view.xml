@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- List View -->
+    <record id="view_op_lms_enrollment_list" model="ir.ui.view">
+        <field name="name">op.lms.enrollment.list</field>
+        <field name="model">op.lms.enrollment</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <list string="LMS Enrollments">
+                <field name="student_id"/>
+                <field name="lms_course_id"/>
+                <field name="enrollment_date"/>
+                <field name="completion_percentage"
+                       widget="progressbar"
+                       options="{'max_value': 100, 'editable': false}"/>
+                <field name="completion_date" optional="hide"/>
+                <field name="status"
+                       decoration-info="status == 'enrolled'"
+                       decoration-warning="status == 'in_progress'"
+                       decoration-success="status == 'completed'"
+                       decoration-danger="status == 'dropped'"
+                       widget="badge"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_op_lms_enrollment_form" model="ir.ui.view">
+        <field name="name">op.lms.enrollment.form</field>
+        <field name="model">op.lms.enrollment</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="LMS Enrollment">
+                <header>
+                    <field name="status" widget="statusbar"
+                           statusbar_visible="enrolled,in_progress,completed"/>
+                </header>
+                <sheet>
+                    <field name="active" invisible="1"/>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger"
+                            invisible="active == True"/>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="lms_course_id"/>
+                            <field name="enrollment_date"/>
+                        </group>
+                        <group>
+                            <field name="status"/>
+                            <field name="completion_date"
+                                   invisible="status != 'completed'"/>
+                            <field name="completion_percentage"/>
+                        </group>
+                    </group>
+                    <div class="o_field_progressbar mt-2">
+                        <label for="completion_percentage" string="Progress" class="fw-bold o_form_label"/>
+                        <field name="completion_percentage"
+                               widget="progressbar"
+                               options="{'max_value': 100, 'editable': true}"/>
+                    </div>
+                </sheet>
+                <chatter/>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_op_lms_enrollment_search" model="ir.ui.view">
+        <field name="name">op.lms.enrollment.search</field>
+        <field name="model">op.lms.enrollment</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <search string="LMS Enrollments">
+                <field name="student_id"/>
+                <field name="lms_course_id"/>
+                <filter string="Enrolled" name="filter_enrolled"
+                        domain="[('status', '=', 'enrolled')]"/>
+                <filter string="In Progress" name="filter_in_progress"
+                        domain="[('status', '=', 'in_progress')]"/>
+                <filter string="Completed" name="filter_completed"
+                        domain="[('status', '=', 'completed')]"/>
+                <filter string="Dropped" name="filter_dropped"
+                        domain="[('status', '=', 'dropped')]"/>
+                <separator/>
+                <filter string="Archived" name="inactive"
+                        domain="[('active', '=', False)]"/>
+                <newline/>
+                <group expand="0" string="Group By...">
+                    <filter string="Course" name="group_by_course"
+                            domain="[]" context="{'group_by': 'lms_course_id'}"/>
+                    <filter string="Status" name="group_by_status"
+                            domain="[]" context="{'group_by': 'status'}"/>
+                    <filter string="Student" name="group_by_student"
+                            domain="[]" context="{'group_by': 'student_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record model="ir.actions.act_window" id="act_open_op_lms_enrollment_view">
+        <field name="name">LMS Enrollments</field>
+        <field name="path">lms-enrollments</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">op.lms.enrollment</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_op_lms_enrollment_search"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_enrollment_view_list">
+        <field name="act_window_id" ref="act_open_op_lms_enrollment_view"/>
+        <field name="sequence" eval="10"/>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_op_lms_enrollment_list"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_open_op_lms_enrollment_view_form">
+        <field name="act_window_id" ref="act_open_op_lms_enrollment_view"/>
+        <field name="sequence" eval="20"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_op_lms_enrollment_form"/>
+    </record>
+</odoo>

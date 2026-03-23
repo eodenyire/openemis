@@ -1,0 +1,140 @@
+# =============================================================================
+# openEMIS – Per-Module Functional & Regression Tests
+# =============================================================================
+# Runs Odoo's built-in unit-test runner for each openEMIS module individually,
+# uploads per-module logs as workflow artifacts, and reports a pass/fail
+# summary in the workflow UI.
+#
+# Triggered on pushes/PRs to any branch.  Each module test runs in a separate
+# job so results are visible individually in the GitHub Actions UI.
+# =============================================================================
+name: Module Tests – Functional & Regression
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch: {}
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Matrix job – one job per openEMIS module
+  # ---------------------------------------------------------------------------
+  module-test:
+    name: "Test: ${{ matrix.module }}"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false   # Continue testing other modules even if one fails
+      matrix:
+        module:
+          - openemis_core
+          - openemis_admission
+          - openemis_activity
+          - openemis_assignment
+          - openemis_attendance
+          - openemis_blog
+          - openemis_classroom
+          - openemis_digiguide
+          - openemis_exam
+          - openemis_facility
+          - openemis_fees
+          - openemis_library
+          - openemis_mentorship
+          - openemis_parent
+          - openemis_timetable
+
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: postgres
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U odoo -d postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Pull Odoo image
+        run: docker pull odoo:18.0
+
+      - name: Run ${{ matrix.module }} tests
+        id: run-tests
+        run: |
+          MODULE="${{ matrix.module }}"
+          LOG="/tmp/test_${MODULE}.log"
+
+          docker run --rm \
+            --network host \
+            -v "${{ github.workspace }}:/mnt/extra-addons" \
+            -e HOST=localhost \
+            -e USER=odoo \
+            -e PASSWORD=odoo \
+            odoo:18.0 \
+            odoo \
+              --db_host=localhost \
+              --db_port=5432 \
+              --db_user=odoo \
+              --db_password=odoo \
+              --database="test_${MODULE}" \
+              --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons \
+              --init="${MODULE}" \
+              --load-language=en_US \
+              --without-demo=False \
+              --test-enable \
+              --stop-after-init \
+              --log-level=test \
+            2>&1 | tee "${LOG}" || true
+
+          # Extract test result lines for the summary
+          echo "### Test Results – ${MODULE}" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          grep -E "TEST|PASS|FAIL|ERROR|At least|tests" "${LOG}" \
+            | tail -30 >> "$GITHUB_STEP_SUMMARY" || echo "(no test output)" >> "$GITHUB_STEP_SUMMARY"
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+
+          # Fail if any error detected
+          if grep -qE "ERROR|CRITICAL|At least one test failed" "${LOG}" 2>/dev/null; then
+            echo "::error::Tests FAILED for module ${MODULE}"
+            exit 1
+          fi
+          echo "Module ${MODULE}: all tests passed ✓"
+
+      - name: Upload test log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-log-${{ matrix.module }}
+          path: /tmp/test_${{ matrix.module }}.log
+          if-no-files-found: ignore
+
+  # ---------------------------------------------------------------------------
+  # Aggregate summary job
+  # ---------------------------------------------------------------------------
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: module-test
+    if: always()
+    permissions: {}
+
+    steps:
+      - name: Check overall result
+        run: |
+          STATUS="${{ needs.module-test.result }}"
+          echo "Module test matrix result: ${STATUS}"
+          if [ "$STATUS" = "failure" ]; then
+            echo "::error::One or more module tests failed – see individual job logs above."
+            exit 1
+          fi
+          echo "All module tests passed ✓"

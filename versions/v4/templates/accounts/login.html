@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - School Management System{% endblock %}
+
+{% block auth_content %}
+<div class="login-container">
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <div class="col-md-6 d-flex align-items-center justify-content-center bg-primary">
+                <div class="text-center text-white">
+                    <h1 class="display-4 mb-4">
+                        <i class="fas fa-graduation-cap"></i>
+                        School Management System
+                    </h1>
+                    <p class="lead">Manage your school efficiently with our comprehensive system</p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                <div class="login-form-container">
+                    <div class="card shadow-lg border-0">
+                        <div class="card-body p-5">
+                            <div class="text-center mb-4">
+                                <h3 class="card-title">Welcome Back</h3>
+                                <p class="text-muted">Please sign in to your account</p>
+                            </div>
+                            
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            
+                            <form method="post" action="{% url 'login' %}">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">
+                                        <i class="fas fa-user me-2"></i>Username
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           id="username" name="username" required>
+                                </div>
+                                
+                                <div class="mb-4">
+                                    <label for="password" class="form-label">
+                                        <i class="fas fa-lock me-2"></i>Password
+                                    </label>
+                                    <input type="password" class="form-control form-control-lg" 
+                                           id="password" name="password" required>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-primary btn-lg">
+                                        <i class="fas fa-sign-in-alt me-2"></i>Sign In
+                                    </button>
+                                </div>
+                            </form>
+                            
+                            <div class="text-center mt-4">
+                                <a href="#" class="text-decoration-none">Forgot your password?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.login-container {
+    min-height: 100vh;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 400px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.form-control-lg {
+    border-radius: 10px;
+    padding: 12px 16px;
+}
+
+.btn-lg {
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.bg-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Focus on username field
+    $('#username').focus();
+    
+    // Form validation
+    $('form').on('submit', function(e) {
+        var username = $('#username').val().trim();
+        var password = $('#password').val().trim();
+        
+        if (!username || !password) {
+            e.preventDefault();
+            alert('Please fill in all fields');
+            return false;
+        }
+    });
+});
+</script>
+{% endblock %}

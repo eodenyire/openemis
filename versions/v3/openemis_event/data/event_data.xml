@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="op_event_type_1" model="op.event.type">
+            <field name="name">Academic Seminar</field>
+        </record>
+        <record id="op_event_type_2" model="op.event.type">
+            <field name="name">Sports Day</field>
+        </record>
+        <record id="op_event_type_3" model="op.event.type">
+            <field name="name">Cultural Fest</field>
+        </record>
+        <record id="op_event_type_4" model="op.event.type">
+            <field name="name">Parent-Teacher Meeting</field>
+        </record>
+        <record id="op_event_type_5" model="op.event.type">
+            <field name="name">Graduation Ceremony</field>
+        </record>
+        <record id="op_event_type_6" model="op.event.type">
+            <field name="name">Science Fair</field>
+        </record>
+        <record id="op_event_type_7" model="op.event.type">
+            <field name="name">Art Exhibition</field>
+        </record>
+        <record id="op_event_type_8" model="op.event.type">
+            <field name="name">Workshop</field>
+        </record>
+        <record id="op_event_type_9" model="op.event.type">
+            <field name="name">Orientation Day</field>
+        </record>
+        <record id="op_event_type_10" model="op.event.type">
+            <field name="name">Annual Day</field>
+        </record>
+</odoo>

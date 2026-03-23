@@ -1,0 +1,95 @@
+# =============================================================================
+# openEMIS – Kubernetes Smoke Tests
+# =============================================================================
+# Deploys the openEMIS stack to a local kind cluster and verifies the
+# FastAPI health endpoint responds correctly.
+# =============================================================================
+name: Kubernetes – Smoke Tests
+
+on:
+  push:
+    branches: ["main", "master"]
+    paths:
+      - "kubernetes/**"
+      - ".github/workflows/kubernetes.yml"
+      - "Dockerfile"
+  pull_request:
+    branches: ["main", "master"]
+    paths:
+      - "kubernetes/**"
+      - ".github/workflows/kubernetes.yml"
+      - "Dockerfile"
+  workflow_dispatch: {}
+
+jobs:
+  k8s-smoke:
+    name: kind Cluster Smoke Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create kind cluster
+        uses: helm/kind-action@v1
+        with:
+          cluster_name: openemis-ci
+          config: |
+            kind: Cluster
+            apiVersion: kind.x-k8s.io/v1alpha4
+            nodes:
+              - role: control-plane
+                extraPortMappings:
+                  - containerPort: 30080
+                    hostPort: 8000
+                    protocol: TCP
+
+      - name: Build Docker image
+        run: docker build -t openemis:latest .
+
+      - name: Load image into kind
+        run: kind load docker-image openemis:latest --name openemis-ci
+
+      - name: Apply Kubernetes manifests
+        run: kubectl apply -k kubernetes/
+
+      - name: Patch openEMIS service to NodePort
+        run: |
+          kubectl -n openemis patch svc openemis \
+            --type='json' \
+            -p='[
+              {"op":"replace","path":"/spec/type","value":"NodePort"},
+              {"op":"add","path":"/spec/ports/0/nodePort","value":30080}
+            ]' || true
+
+      - name: Wait for PostgreSQL
+        run: kubectl -n openemis rollout status deployment/postgres --timeout=120s
+
+      - name: Wait for openEMIS API
+        run: kubectl -n openemis rollout status deployment/openemis --timeout=300s
+
+      - name: Health check
+        run: |
+          echo "Waiting for API health endpoint..."
+          for i in $(seq 1 30); do
+            HTTP=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health 2>/dev/null || echo "000")
+            if [ "$HTTP" = "200" ]; then echo "API responded with HTTP $HTTP"; break; fi
+            echo "  Attempt $i/30 – HTTP $HTTP – sleeping 10s..."; sleep 10
+          done
+          HTTP=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health 2>/dev/null || echo "000")
+          if [ "$HTTP" != "200" ]; then
+            echo "::error::Health check failed (HTTP=$HTTP)"
+            kubectl -n openemis get pods
+            kubectl -n openemis logs -l app=openemis --tail=50 || true
+            exit 1
+          fi
+
+      - name: Collect logs on failure
+        if: failure()
+        run: |
+          kubectl -n openemis get all
+          kubectl -n openemis describe pods || true
+          kubectl -n openemis logs -l app=openemis --tail=100 || true
+          kubectl -n openemis logs -l app=postgres --tail=50 || true
